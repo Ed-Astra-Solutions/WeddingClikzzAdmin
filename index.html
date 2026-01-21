@@ -161,6 +161,53 @@
             color: var(--text-muted);
         }
 
+        /* Password Toggle */
+        .password-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-input-wrapper input {
+            padding-right: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+        }
+
+        .password-toggle:hover {
+            color: var(--gold);
+        }
+
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .password-toggle .eye-off {
+            display: none;
+        }
+
+        .password-toggle.showing .eye-on {
+            display: none;
+        }
+
+        .password-toggle.showing .eye-off {
+            display: block;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -210,6 +257,42 @@
             color: var(--gold-light);
         }
 
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-icon:hover {
+            background: rgba(201, 169, 98, 0.1);
+            border-color: var(--gold-dark);
+            color: var(--gold);
+        }
+
+        .btn-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        .btn-icon.loading svg {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .btn-danger {
             background: linear-gradient(135deg, var(--danger) 0%, #A83232 100%);
             color: var(--white);
@@ -242,6 +325,334 @@
         /* Admin Layout */
         .admin-layout {
             display: none;
+        }
+
+        /* App Bar */
+        .app-bar {
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(180deg, #111111 0%, #0A0A0A 100%);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .menu-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .app-bar-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .app-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .app-bar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .app-bar-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0A0A0A;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .app-bar-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.2);
+        }
+
+        .app-bar-user-info {
+            display: none;
+        }
+
+        .app-bar-user-name {
+            color: var(--text-bright);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .app-bar-user-role {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .app-bar-logout {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .app-bar-logout:hover {
+            background: rgba(201, 169, 98, 0.1);
+            border-color: var(--gold);
+        }
+
+        .app-bar-logout svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* User Dropdown Menu */
+        .user-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 240px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .user-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 12px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--border-gold);
+        }
+
+        .user-dropdown::after {
+            content: '';
+            position: absolute;
+            top: -7px;
+            right: 13px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid var(--bg-secondary);
+        }
+
+        .user-dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 12px;
+        }
+
+        .user-dropdown-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .user-dropdown-info {
+            flex: 1;
+        }
+
+        .user-dropdown-name {
+            color: var(--text-bright);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .user-dropdown-role {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .user-dropdown-email {
+            color: var(--gold);
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(201, 169, 98, 0.08);
+            border-radius: 6px;
+            word-break: break-all;
+        }
+
+        /* User Dropdown Menu */
+        .user-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 240px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .user-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 12px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--border-gold);
+        }
+
+        .user-dropdown::after {
+            content: '';
+            position: absolute;
+            top: -7px;
+            right: 13px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid var(--bg-secondary);
+        }
+
+        .user-dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 12px;
+        }
+
+        .user-dropdown-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .user-dropdown-info {
+            flex: 1;
+        }
+
+        .user-dropdown-name {
+            color: var(--text-bright);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .user-dropdown-role {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .user-dropdown-email {
+            color: var(--gold);
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(201, 169, 98, 0.08);
+            border-radius: 6px;
+            word-break: break-all;
         }
 
         .sidebar {
@@ -336,8 +747,9 @@
 
         .main-content {
             margin-left: 260px;
+            margin-top: 70px;
             padding: 36px 44px;
-            min-height: 100vh;
+            min-height: calc(100vh - 70px);
             background: 
                 radial-gradient(ellipse at 80% 10%, rgba(201, 169, 98, 0.03) 0%, transparent 40%),
                 linear-gradient(180deg, #0A0A0A 0%, #0E0E0E 100%);
@@ -348,32 +760,18 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
-            padding-bottom: 28px;
-            border-bottom: 1px solid var(--border-subtle);
         }
 
         .header h1 {
             font-family: 'Playfair Display', serif;
-            color: var(--gold);
-            font-size: 28px;
+            color: var(--text-bright);
+            font-size: 24px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .user-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .user-info span {
-            color: var(--text-bright);
-            font-size: 14px;
-            padding: 10px 18px;
-            background: rgba(201, 169, 98, 0.06);
-            border-radius: 8px;
-            border: 1px solid var(--border-subtle);
-            letter-spacing: 0.5px;
+            display: none;
         }
 
         /* Dashboard Cards */
@@ -393,6 +791,7 @@
             transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .stat-card::before {
@@ -457,6 +856,275 @@
             border: 1px solid var(--border-subtle);
             overflow: hidden;
             box-shadow: var(--shadow-card);
+        }
+
+        /* Offerings Subtabs */
+        .offerings-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 20px 26px;
+            background: linear-gradient(180deg, rgba(201, 169, 98, 0.04) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .offerings-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .offerings-tab:hover {
+            background: rgba(201, 169, 98, 0.08);
+            border-color: var(--gold-dark);
+            color: var(--gold-light);
+        }
+
+        .offerings-tab.active {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-color: var(--gold);
+            color: #0A0A0A;
+            font-weight: 600;
+        }
+
+        .offerings-tab svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .offerings-tab.active svg {
+            stroke: #0A0A0A;
+        }
+
+        .offerings-content {
+            display: none;
+        }
+
+        .offerings-content.active {
+            display: block;
+        }
+
+        /* Offerings Header with Info */
+        .offerings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 26px;
+            background: linear-gradient(180deg, rgba(201, 169, 98, 0.06) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .offerings-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .offerings-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .info-icon-wrapper {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .info-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(201, 169, 98, 0.15);
+            border: 1px solid var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--gold);
+        }
+
+        .info-icon:hover {
+            background: var(--gold);
+            color: #0A0A0A;
+        }
+
+        .info-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .info-tooltip {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 420px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .info-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--border-gold);
+        }
+
+        .info-tooltip::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid #1a1a1a;
+        }
+
+        .info-icon-wrapper:hover .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .info-tooltip-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-tooltip-title svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .info-tooltip-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-tooltip-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .info-tooltip-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-tooltip-list li strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .info-tooltip-bullet {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #0A0A0A;
+            margin-top: 1px;
+        }
+
+        .info-tooltip-section {
+            margin-bottom: 14px;
+        }
+
+        .info-tooltip-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-tooltip-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+
+        .info-tooltip-section p {
+            margin: 0 0 0 30px;
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .info-tooltip-section em {
+            color: var(--gold);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .info-tooltip-sublist {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0 30px;
+        }
+
+        .info-tooltip-sublist li {
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 3px 0;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .info-tooltip-sublist li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .info-tooltip-sublist li strong {
+            color: var(--gold-light);
+            font-weight: 600;
         }
 
         .table-header {
@@ -698,6 +1366,188 @@
             color: #E57373;
         }
 
+        /* Quote Details Invoice Styling */
+        .quote-invoice {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .quote-invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .quote-invoice-logo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            margin-bottom: 0.25rem;
+        }
+
+        .quote-invoice-logo h2 span {
+            color: var(--gold);
+        }
+
+        .quote-invoice-logo p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .quote-invoice-badge {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quote-invoice-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .quote-invoice-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quote-invoice-meta-item label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .quote-invoice-meta-item span {
+            font-size: 1rem;
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .quote-invoice-parties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--cream);
+            border-radius: 8px;
+        }
+
+        .quote-invoice-party h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .quote-invoice-party p {
+            margin: 0.25rem 0;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+
+        .quote-invoice-party strong {
+            color: var(--gold-dark);
+        }
+
+        .quote-invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .quote-invoice-table thead {
+            background: var(--cream);
+        }
+
+        .quote-invoice-table th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            font-weight: 600;
+            border-bottom: 2px solid var(--gold-light);
+        }
+
+        .quote-invoice-table th:last-child {
+            text-align: right;
+        }
+
+        .quote-invoice-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .quote-invoice-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--gold-dark);
+        }
+
+        .quote-invoice-table .event-row {
+            background: rgba(201, 168, 124, 0.05);
+            font-weight: 600;
+        }
+
+        .quote-invoice-table .event-row td {
+            color: var(--charcoal);
+        }
+
+        .quote-invoice-table .service-row td:first-child {
+            padding-left: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .quote-invoice-totals {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+        }
+
+        .quote-invoice-totals-box {
+            min-width: 300px;
+        }
+
+        .quote-invoice-totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .quote-invoice-totals-row.total {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .quote-invoice-totals-row.total span:last-child {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
         .modal-body {
             padding: 26px;
         }
@@ -846,6 +1696,151 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(201, 169, 98, 0.02);
+        }
+
+        .pagination-info {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .pagination-info span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-subtle);
+            background: var(--card-bg);
+            border-radius: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .pagination-pages {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pagination-page {
+            min-width: 36px;
+            height: 36px;
+            padding: 0 8px;
+            border: 1px solid transparent;
+            background: transparent;
+            border-radius: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-smooth);
+        }
+
+        .pagination-page:hover:not(.active):not(.ellipsis) {
+            border-color: var(--border-subtle);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .pagination-page.active {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #0A0A0A;
+            font-weight: 600;
+            border-color: var(--gold);
+        }
+
+        .pagination-page.ellipsis {
+            cursor: default;
+            color: var(--text-muted);
+        }
+
+        .pagination-per-page {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid var(--border-subtle);
+        }
+
+        .pagination-per-page label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .pagination-per-page select {
+            padding: 6px 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--card-bg);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .pagination-per-page select:hover {
+            border-color: var(--gold);
+        }
+
+        .pagination-per-page select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .pagination-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .pagination-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pagination-per-page {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .sidebar {
@@ -889,6 +1884,58 @@
                 margin: 16px;
                 max-width: calc(100% - 32px);
             }
+
+            /* App Bar responsive */
+            .app-bar {
+                left: 0;
+                padding: 0 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .app-bar-user-info {
+                display: none;
+            }
+
+            .app-bar-logout span {
+                display: none;
+            }
+
+            .app-bar-logout {
+                padding: 10px;
+            }
+
+            /* Sidebar overlay for mobile */
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 200;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 150;
+                backdrop-filter: blur(4px);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -909,7 +1956,18 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                    <div class="password-input-wrapper">
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                        <button type="button" class="password-toggle" id="togglePassword" onclick="togglePasswordVisibility()">
+                            <svg class="eye-on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <svg class="eye-off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
@@ -918,21 +1976,60 @@
 
     <!-- Admin Layout -->
     <div class="admin-layout" id="adminLayout">
+        <!-- Sidebar Overlay (for mobile) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+        <!-- App Bar -->
+        <div class="app-bar">
+            <div class="app-bar-left">
+                <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h1 class="app-bar-title" id="appBarTitle">Dashboard</h1>
+            </div>
+            <div class="app-bar-right">
+                <div class="app-bar-user">
+                    <div class="app-bar-avatar" id="appBarAvatar">A</div>
+                    <div class="app-bar-user-info">
+                        <span class="app-bar-user-name" id="appBarUserName">Admin</span>
+                        <span class="app-bar-user-role">Administrator</span>
+                    </div>
+                    <!-- User Dropdown Menu -->
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-dropdown-avatar" id="dropdownAvatar">A</div>
+                            <div class="user-dropdown-info">
+                                <div class="user-dropdown-name" id="dropdownName">Admin</div>
+                                <div class="user-dropdown-role">Administrator</div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-email" id="dropdownEmail">admin@example.com</div>
+                    </div>
+                </div>
+                <button class="app-bar-logout" id="appBarLogout">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <h2>WeddingClikz</h2>
                 <span>Admin Console</span>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item active" data-section="dashboard">Dashboard</li>
-                <li class="nav-item" data-section="events">Events</li>
-                <li class="nav-item" data-section="services">Services</li>
-                <li class="nav-item" data-section="additionalServices">Additional Services</li>
+                <li class="nav-item" data-section="offerings">Offerings</li>
                 <li class="nav-item" data-section="quotes">Quotes</li>
-                <li class="nav-item" data-section="users">Users</li>
+                <li class="nav-item" data-section="users">Customers</li>
                 <li class="nav-item" data-section="admins">Admins</li>
-                <li class="nav-item" data-section="settings">Settings</li>
+                <li class="nav-item" data-section="settings">Email Notifications</li>
             </ul>
         </aside>
 
@@ -948,12 +2045,21 @@
 
             <!-- Dashboard Section -->
             <section class="section active" id="dashboardSection">
+                <div class="table-header" style="margin-bottom: 2rem;">
+                    <h2>Statistics</h2>
+                    <button class="btn-icon" id="refreshDashboardBtn" title="Refresh Dashboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </button>
+                </div>
                 <div class="stats-grid" id="statsGrid">
                     <div class="loading"><div class="spinner"></div></div>
                 </div>
                 <div class="table-container">
                     <div class="table-header">
                         <h2>Recent Quotes</h2>
+                        <button class="btn btn-secondary btn-sm" onclick="navigateToSection('quotes')">View All</button>
                     </div>
                     <table>
                         <thead>
@@ -963,91 +2069,177 @@
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recentQuotesTable">
-                            <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Events Section -->
-            <section class="section" id="eventsSection">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2>Events</h2>
-                        <div class="search-box">
-                            <button class="btn btn-primary btn-sm" onclick="openModal('event')">+ Add Event</button>
-                        </div>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Icon</th>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Category</th>
-                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="eventsTable">
+                        <tbody id="recentQuotesTable">
                             <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- Services Section -->
-            <section class="section" id="servicesSection">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2>Services</h2>
-                        <div class="search-box">
-                            <button class="btn btn-primary btn-sm" onclick="openModal('service')">+ Add Service</button>
+            <!-- Offerings Section (Combined Events, Services, Additional Services) -->
+            <section class="section" id="offeringsSection">
+                <!-- Header with Info Icon -->
+                <div class="offerings-header">
+                    <div class="offerings-header-left">
+                        <h2>Manage Offerings</h2>
+                        <div class="info-icon-wrapper">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class="info-tooltip">
+                                <div class="info-tooltip-title">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                    How to Manage Offerings
+                                </div>
+                                <div class="info-tooltip-section">
+                                    <div class="info-tooltip-section-title">
+                                        <span class="info-tooltip-bullet">1</span>
+                                        <strong>Events</strong> – Occasion Types
+                                    </div>
+                                    <p>Events represent the types of occasions you cover (e.g., Wedding, Engagement, Pre-Wedding, Birthday). Each event is assigned a <em>pricing category</em> (Category A, B, or C) which determines how services are priced for that event.</p>
+                                    <ul class="info-tooltip-sublist">
+                                        <li><strong>Category A:</strong> Premium events with highest service rates</li>
+                                        <li><strong>Category B:</strong> Standard events with mid-tier pricing</li>
+                                        <li><strong>Category C:</strong> Budget-friendly events with lower rates</li>
+                                    </ul>
+                                </div>
+                                <div class="info-tooltip-section">
+                                    <div class="info-tooltip-section-title">
+                                        <span class="info-tooltip-bullet">2</span>
+                                        <strong>Services</strong> – What You Offer
+                                    </div>
+                                    <p>Services are your core offerings (e.g., Photography, Videography, Drone Coverage). Each service has <em>three different prices</em> – one for each pricing category. When a customer selects an event, the quote automatically uses the correct price based on that event's category.</p>
+                                    <p style="margin-top: 6px; color: var(--gold);"><strong>Example:</strong> If Photography costs ₹50,000 for Category A and a customer books a Wedding (Category A event), they'll see the ₹50,000 price.</p>
+                                </div>
+                                <div class="info-tooltip-section">
+                                    <div class="info-tooltip-section-title">
+                                        <span class="info-tooltip-bullet">3</span>
+                                        <strong>Add-ons</strong> – Optional Extras
+                                    </div>
+                                    <p>Add-ons are supplementary items customers can include with any event (e.g., Extra Album, Drone Footage, Same-Day Edit). Unlike services, add-ons have a <em>flat price</em> that remains the same regardless of the event category.</p>
+                                </div>
+                                <div class="info-tooltip-section">
+                                    <div class="info-tooltip-section-title">
+                                        <span class="info-tooltip-bullet">4</span>
+                                        <strong>Active/Inactive</strong> – Visibility Control
+                                    </div>
+                                    <p>Toggle items as Active or Inactive to control what customers see. Inactive items are <em>hidden</em> from the quote builder but remain in your system – perfect for seasonal offerings or temporarily unavailable services.</p>
+                                </div>
+                                <div class="info-tooltip-section" style="border-top: 1px solid rgba(201, 169, 98, 0.2); padding-top: 12px; margin-top: 8px;">
+                                    <p style="margin: 0; font-size: 11px; color: var(--text-muted);"><strong>💡 Tip:</strong> Start by creating your Events first, then add Services with category-based pricing, and finally add any optional Add-ons.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Pricing</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="servicesTable">
-                            <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
-                        </tbody>
-                    </table>
                 </div>
-            </section>
 
-            <!-- Additional Services Section -->
-            <section class="section" id="additionalServicesSection">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2>Additional Services</h2>
-                        <div class="search-box">
-                            <button class="btn btn-primary btn-sm" onclick="openModal('additionalService')">+ Add Additional Service</button>
+                <!-- Subtabs -->
+                <div class="offerings-tabs">
+                    <button class="offerings-tab active" data-subtab="events">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Events
+                    </button>
+                    <button class="offerings-tab" data-subtab="services">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Services
+                    </button>
+                    <button class="offerings-tab" data-subtab="additionalServices">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Add-ons
+                    </button>
+                </div>
+
+                <!-- Events Content -->
+                <div class="offerings-content active" id="eventsContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Events</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openModal('event')">+ Add Event</button>
+                            </div>
                         </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Icon</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventsTable">
+                                <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="additionalServicesTable">
-                            <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
-                        </tbody>
-                    </table>
+                </div>
+
+                <!-- Services Content -->
+                <div class="offerings-content" id="servicesContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Services</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openModal('service')">+ Add Service</button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Pricing</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="servicesTable">
+                                <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Additional Services Content -->
+                <div class="offerings-content" id="additionalServicesContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Additional Services</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openModal('additionalService')">+ Add Add-on</button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="additionalServicesTable">
+                                <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -1085,16 +2277,46 @@
                             <tr><td colspan="7" class="loading"><div class="spinner"></div></td></tr>
                         </tbody>
                     </table>
+                    <!-- Pagination -->
+                    <div class="pagination-container" id="quotesPagination">
+                        <div class="pagination-info">
+                            Showing <span id="quotesShowingStart">0</span>-<span id="quotesShowingEnd">0</span> of <span id="quotesTotalCount">0</span> quotes
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="quotesPrevBtn" onclick="changeQuotesPage(-1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <div class="pagination-pages" id="quotesPaginationPages">
+                                <!-- Page numbers will be rendered here -->
+                            </div>
+                            <button class="pagination-btn" id="quotesNextBtn" onclick="changeQuotesPage(1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                            <div class="pagination-per-page">
+                                <label>Per page:</label>
+                                <select id="quotesPerPage" onchange="changeQuotesPerPage()">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Users Section -->
+            <!-- Customers Section -->
             <section class="section" id="usersSection">
                 <div class="table-container">
                     <div class="table-header">
-                        <h2>Users</h2>
+                        <h2>Customers</h2>
                         <div class="search-box">
-                            <input type="text" id="userSearch" placeholder="Search users...">
+                            <input type="text" id="userSearch" placeholder="Search customers...">
                         </div>
                     </div>
                     <table>
@@ -1111,6 +2333,33 @@
                             <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
                         </tbody>
                     </table>
+                    
+                    <!-- Customers Pagination Controls -->
+                    <div class="pagination-container" id="customersPaginationContainer" style="display: none;">
+                        <div class="pagination-info">
+                            <span id="customersPageInfo">Showing 0 of 0 customers</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="customersPrevBtn" onclick="changeCustomersPage('prev')" disabled>
+                                ← Previous
+                            </button>
+                            <div class="pagination-pages" id="customersPaginationPages">
+                                <!-- Page numbers will be inserted here -->
+                            </div>
+                            <button class="pagination-btn" id="customersNextBtn" onclick="changeCustomersPage('next')" disabled>
+                                Next →
+                            </button>
+                        </div>
+                        <div class="pagination-per-page">
+                            <label for="customersPerPage">Per page:</label>
+                            <select id="customersPerPage" onchange="changeCustomersPerPage()">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1141,11 +2390,11 @@
                 </div>
             </section>
 
-            <!-- Settings Section -->
+            <!-- Email Notifications Section -->
             <section class="section" id="settingsSection">
                 <div class="table-container">
                     <div class="table-header">
-                        <h2>Notification Settings</h2>
+                        <h2>Email Notifications</h2>
                     </div>
                     <div class="modal-body">
                         <p style="color: var(--text-muted); margin-bottom: 20px;">Configure email addresses that will receive a copy of customer quotes. Maximum 3 emails allowed.</p>
@@ -1369,6 +2618,22 @@
         </div>
     </div>
 
+    <!-- Quote Details Modal -->
+    <div class="modal-overlay" id="quoteDetailsModal">
+        <div class="modal" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>Quote Details</h2>
+                <button class="modal-close" onclick="closeQuoteDetailsModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="quoteDetailsContent" style="max-height: 70vh; overflow-y: auto;">
+                <div class="loading"><div class="spinner"></div></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeQuoteDetailsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // CONFIGURATION - Backend API URL
@@ -1429,6 +2694,80 @@
             }).format(amount);
         }
 
+        // Password visibility toggle
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('loginPassword');
+            const toggleBtn = document.getElementById('togglePassword');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.classList.add('showing');
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.classList.remove('showing');
+            }
+        }
+
+        // Sidebar toggle for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Close sidebar when nav item is clicked (mobile)
+        function closeSidebarOnMobile() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Update app bar title
+        function updateAppBarTitle(title) {
+            const appBarTitle = document.getElementById('appBarTitle');
+            if (appBarTitle) {
+                appBarTitle.textContent = title;
+            }
+        }
+
+        // Update app bar user info
+        function updateAppBarUser(name, email) {
+            const appBarAvatar = document.getElementById('appBarAvatar');
+            const dropdownAvatar = document.getElementById('dropdownAvatar');
+            const dropdownName = document.getElementById('dropdownName');
+            const dropdownEmail = document.getElementById('dropdownEmail');
+            
+            // Get admin data from localStorage or use currentAdmin
+            let adminData = currentAdmin;
+            if (!adminData) {
+                const storedData = localStorage.getItem('adminData');
+                if (storedData) {
+                    try {
+                        adminData = JSON.parse(storedData);
+                    } catch (e) {
+                        console.error('Error parsing admin data:', e);
+                    }
+                }
+            }
+            
+            // Use provided name or fall back to admin data
+            const displayName = name || (adminData ? adminData.name : 'Admin');
+            const displayEmail = email || (adminData ? adminData.email : 'admin@example.com');
+            
+            if (appBarAvatar && displayName) {
+                const initial = displayName.charAt(0).toUpperCase();
+                appBarAvatar.textContent = initial;
+                if (dropdownAvatar) dropdownAvatar.textContent = initial;
+            }
+            
+            if (dropdownName) dropdownName.textContent = displayName;
+            if (dropdownEmail) dropdownEmail.textContent = displayEmail;
+        }
+
         // Authentication
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1478,6 +2817,7 @@
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('adminLayout').style.display = 'block';
             document.getElementById('adminName').textContent = currentAdmin.name || 'Admin';
+            updateAppBarUser(currentAdmin.name, currentAdmin.email);
             loadDashboard();
         }
 
@@ -1488,20 +2828,136 @@
                 item.classList.add('active');
                 
                 const section = item.dataset.section;
+                const title = item.textContent.trim();
                 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
                 document.getElementById(`${section}Section`).classList.add('active');
-                document.getElementById('pageTitle').textContent = item.textContent.trim();
+                document.getElementById('pageTitle').textContent = title;
+                updateAppBarTitle(title);
+                
+                // Close sidebar on mobile after navigation
+                closeSidebarOnMobile();
                 
                 loadSection(section);
             });
         });
 
-        function loadSection(section) {
-            switch(section) {
-                case 'dashboard': loadDashboard(); break;
+        // Offerings subtabs navigation
+        document.querySelectorAll('.offerings-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                document.querySelectorAll('.offerings-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const subtab = tab.dataset.subtab;
+                document.querySelectorAll('.offerings-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(`${subtab}Content`).classList.add('active');
+                
+                // Load data for the subtab
+                loadOfferingsSubtab(subtab);
+            });
+        });
+
+        // Navigate to section programmatically (used by dashboard cards)
+        function navigateToSection(section, subtab = null) {
+            // Update sidebar navigation
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            const navItem = document.querySelector(`.nav-item[data-section="${section}"]`);
+            if (navItem) {
+                navItem.classList.add('active');
+                const title = navItem.textContent.trim();
+                document.getElementById('pageTitle').textContent = title;
+                updateAppBarTitle(title);
+            }
+            
+            // Show section
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`${section}Section`).classList.add('active');
+            
+            // Handle offerings subtab if specified
+            if (section === 'offerings' && subtab) {
+                setTimeout(() => {
+                    document.querySelectorAll('.offerings-tab').forEach(t => t.classList.remove('active'));
+                    const tab = document.querySelector(`.offerings-tab[data-subtab="${subtab}"]`);
+                    if (tab) {
+                        tab.classList.add('active');
+                        document.querySelectorAll('.offerings-content').forEach(c => c.classList.remove('active'));
+                        document.getElementById(`${subtab}Content`).classList.add('active');
+                        loadOfferingsSubtab(subtab);
+                    }
+                }, 100);
+            } else {
+                // Load section data
+                loadSection(section);
+            }
+            
+            // Close sidebar on mobile
+            closeSidebarOnMobile();
+        }
+
+        // Refresh Dashboard
+        document.getElementById('refreshDashboardBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('refreshDashboardBtn');
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            try {
+                await loadDashboard();
+            } catch (error) {
+                showToast('Failed to refresh dashboard', 'error');
+            } finally {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        });
+
+        function loadOfferingsSubtab(subtab) {
+            switch(subtab) {
                 case 'events': loadEvents(); break;
                 case 'services': loadServices(); break;
                 case 'additionalServices': loadAdditionalServices(); break;
+            }
+        }
+
+        // App bar logout handler
+        document.getElementById('appBarLogout').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminData');
+            currentAdmin = null;
+            document.getElementById('adminLayout').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+            showToast('Logged out successfully', 'success');
+        });
+
+        // User dropdown toggle functionality
+        document.getElementById('appBarAvatar').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('userDropdown');
+            const userContainer = document.querySelector('.app-bar-user');
+            
+            if (dropdown && !userContainer.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function loadSection(section) {
+            switch(section) {
+                case 'dashboard': loadDashboard(); break;
+                case 'offerings': 
+                    // Load the currently active subtab
+                    const activeSubtab = document.querySelector('.offerings-tab.active');
+                    if (activeSubtab) {
+                        loadOfferingsSubtab(activeSubtab.dataset.subtab);
+                    } else {
+                        loadEvents(); // Default to events
+                    }
+                    break;
                 case 'quotes': loadQuotes(); break;
                 case 'users': loadUsers(); break;
                 case 'admins': loadAdmins(); break;
@@ -1516,22 +2972,21 @@
                 const data = result.data;
                 
                 document.getElementById('statsGrid').innerHTML = `
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="navigateToSection('offerings')">
                         <h3>Total Events</h3>
                         <div class="value">${data.events.total}</div>
                         <div class="change positive">${data.events.active} active</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="navigateToSection('offerings', 'services')">
                         <h3>Total Services</h3>
                         <div class="value">${data.services.total}</div>
                         <div class="change positive">${data.services.active} active</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="navigateToSection('quotes')">
                         <h3>Total Quotes</h3>
                         <div class="value">${data.quotes.total}</div>
-                        <div class="change">${data.quotes.byStatus.accepted || 0} accepted</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="navigateToSection('users')">
                         <h3>Total Users</h3>
                         <div class="value">${data.users.total}</div>
                     </div>
@@ -1544,8 +2999,11 @@
                         <td>${formatCurrency(q.total)}</td>
                         <td><span class="status-badge status-${q.status}">${q.status}</span></td>
                         <td>${formatDate(q.createdAt)}</td>
+                        <td class="actions">
+                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details">👁️</button>
+                        </td>
                     </tr>
-                `).join('') || '<tr><td colspan="5">No quotes yet</td></tr>';
+                `).join('') || '<tr><td colspan="6">No quotes yet</td></tr>';
             } catch (error) {
                 showToast(error.message, 'error');
             }
@@ -1828,17 +3286,40 @@
             }
         });
 
+        // Quotes Pagination State
+        let quotesCurrentPage = 1;
+        let quotesPerPage = 10;
+        let quotesTotalPages = 1;
+        let quotesTotalCount = 0;
+
+        // Customers Pagination State
+        let customersCurrentPage = 1;
+        let customersPerPage = 10;
+        let customersTotalPages = 1;
+        let customersTotalCount = 0;
+
         // Quotes
-        async function loadQuotes() {
+        async function loadQuotes(resetPage = false) {
+            if (resetPage) quotesCurrentPage = 1;
+            
             try {
                 const search = document.getElementById('quoteSearch').value;
                 const status = document.getElementById('quoteStatusFilter').value;
-                let query = '?';
-                if (search) query += `search=${encodeURIComponent(search)}&`;
-                if (status) query += `status=${status}`;
+                let query = `?page=${quotesCurrentPage}&limit=${quotesPerPage}`;
+                if (search) query += `&search=${encodeURIComponent(search)}`;
+                if (status) query += `&status=${status}`;
                 
                 const result = await apiCall(`/quotes${query}`);
-                document.getElementById('quotesTable').innerHTML = result.data.map(q => `
+                
+                // Handle pagination data from response
+                const quotes = result.data || [];
+                quotesTotalCount = result.total || result.pagination?.total || quotes.length;
+                quotesTotalPages = result.totalPages || result.pagination?.pages || Math.ceil(quotesTotalCount / quotesPerPage);
+                
+                // Update pagination UI
+                updateQuotesPagination();
+                
+                document.getElementById('quotesTable').innerHTML = quotes.map(q => `
                     <tr>
                         <td>${q.quoteNumber}</td>
                         <td>${q.customerName || '-'}<br><small>${q.customerEmail}</small></td>
@@ -1847,8 +3328,8 @@
                         <td><span class="status-badge status-${q.status}">${q.status}</span></td>
                         <td>${formatDate(q.createdAt)}</td>
                         <td class="actions">
-                            <button class="action-btn edit" onclick="viewQuote('${q._id}')">👁️</button>
-                            <button class="action-btn delete" onclick="deleteQuote('${q._id}')">🗑️</button>
+                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details">👁️</button>
+                            <button class="action-btn delete" onclick="deleteQuote('${q._id}')" title="Delete">🗑️</button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="7">No quotes found</td></tr>';
@@ -1857,8 +3338,86 @@
             }
         }
 
-        document.getElementById('quoteSearch').addEventListener('input', debounce(loadQuotes, 300));
-        document.getElementById('quoteStatusFilter').addEventListener('change', loadQuotes);
+        // Update quotes pagination UI
+        function updateQuotesPagination() {
+            const startItem = quotesTotalCount === 0 ? 0 : (quotesCurrentPage - 1) * quotesPerPage + 1;
+            const endItem = Math.min(quotesCurrentPage * quotesPerPage, quotesTotalCount);
+            
+            document.getElementById('quotesShowingStart').textContent = startItem;
+            document.getElementById('quotesShowingEnd').textContent = endItem;
+            document.getElementById('quotesTotalCount').textContent = quotesTotalCount;
+            
+            // Update prev/next buttons
+            document.getElementById('quotesPrevBtn').disabled = quotesCurrentPage <= 1;
+            document.getElementById('quotesNextBtn').disabled = quotesCurrentPage >= quotesTotalPages;
+            
+            // Render page numbers
+            renderQuotesPaginationPages();
+        }
+
+        // Render pagination page numbers
+        function renderQuotesPaginationPages() {
+            const container = document.getElementById('quotesPaginationPages');
+            let html = '';
+            
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, quotesCurrentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(quotesTotalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            // First page + ellipsis
+            if (startPage > 1) {
+                html += `<button class="pagination-page" onclick="goToQuotesPage(1)">1</button>`;
+                if (startPage > 2) {
+                    html += `<span class="pagination-page ellipsis">...</span>`;
+                }
+            }
+            
+            // Page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="pagination-page ${i === quotesCurrentPage ? 'active' : ''}" onclick="goToQuotesPage(${i})">${i}</button>`;
+            }
+            
+            // Ellipsis + last page
+            if (endPage < quotesTotalPages) {
+                if (endPage < quotesTotalPages - 1) {
+                    html += `<span class="pagination-page ellipsis">...</span>`;
+                }
+                html += `<button class="pagination-page" onclick="goToQuotesPage(${quotesTotalPages})">${quotesTotalPages}</button>`;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Change page
+        function changeQuotesPage(delta) {
+            const newPage = quotesCurrentPage + delta;
+            if (newPage >= 1 && newPage <= quotesTotalPages) {
+                quotesCurrentPage = newPage;
+                loadQuotes();
+            }
+        }
+
+        // Go to specific page
+        function goToQuotesPage(page) {
+            if (page >= 1 && page <= quotesTotalPages && page !== quotesCurrentPage) {
+                quotesCurrentPage = page;
+                loadQuotes();
+            }
+        }
+
+        // Change per page
+        function changeQuotesPerPage() {
+            quotesPerPage = parseInt(document.getElementById('quotesPerPage').value);
+            quotesCurrentPage = 1;
+            loadQuotes();
+        }
+
+        document.getElementById('quoteSearch').addEventListener('input', debounce(() => loadQuotes(true), 300));
+        document.getElementById('quoteStatusFilter').addEventListener('change', () => loadQuotes(true));
 
         async function viewQuote(id) {
             try {
@@ -1900,13 +3459,212 @@
             }
         }
 
+        // View Quote Details
+        async function viewQuoteDetails(id) {
+            const modal = document.getElementById('quoteDetailsModal');
+            const content = document.getElementById('quoteDetailsContent');
+            
+            modal.classList.add('active');
+            content.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+            
+            try {
+                const result = await apiCall(`/quotes/${id}`);
+                const quote = result.data;
+                
+                // Format date
+                const formatDateLocal = (date) => {
+                    if (!date) return '';
+                    return new Date(date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                };
+                
+                // Format currency
+                const formatCurrencyLocal = (amount) => {
+                    return `₹${(amount || 0).toLocaleString('en-IN')}`;
+                };
+                
+                // Group items by event
+                const eventGroups = {};
+                if (quote.items && quote.items.length > 0) {
+                    quote.items.forEach(item => {
+                        const eventKey = item.eventName || 'Other';
+                        if (!eventGroups[eventKey]) {
+                            eventGroups[eventKey] = {
+                                eventName: item.eventName,
+                                eventDate: item.eventDate,
+                                services: []
+                            };
+                        }
+                        eventGroups[eventKey].services.push({
+                            name: item.serviceName,
+                            price: item.price
+                        });
+                    });
+                }
+                
+                // Group additional services by event
+                if (quote.additionalServices && quote.additionalServices.length > 0) {
+                    quote.additionalServices.forEach(addon => {
+                        const eventKey = addon.event || addon.eventSlug || 'Other';
+                        // Find matching event group or create "Add-ons" group
+                        let targetGroup = Object.values(eventGroups).find(g => 
+                            g.eventName === eventKey || 
+                            g.eventName?.toLowerCase().replace(/\s+/g, '-') === eventKey
+                        );
+                        if (!targetGroup) {
+                            if (!eventGroups['Add-ons']) {
+                                eventGroups['Add-ons'] = { eventName: 'Additional Services', services: [] };
+                            }
+                            targetGroup = eventGroups['Add-ons'];
+                        }
+                        if (!targetGroup.addons) targetGroup.addons = [];
+                        targetGroup.addons.push({
+                            name: addon.name,
+                            price: addon.price
+                        });
+                    });
+                }
+                
+                // Build invoice HTML
+                let invoiceHTML = `
+                    <div class="quote-invoice">
+                        <div class="quote-invoice-header">
+                            <div class="quote-invoice-logo">
+                                <h2>Wedding<span>Clickz</span></h2>
+                                <p>Professional Wedding Photography</p>
+                            </div>
+                            <div class="quote-invoice-badge">
+                                ${quote.quoteNumber}
+                            </div>
+                        </div>
+                        
+                        <div class="quote-invoice-meta">
+                            <div class="quote-invoice-meta-item">
+                                <label>Quote Date</label>
+                                <span>${formatDateLocal(quote.createdAt)}</span>
+                            </div>
+                            <div class="quote-invoice-meta-item">
+                                <label>Status</label>
+                                <span class="status-badge status-${quote.status}">${quote.status.toUpperCase()}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-invoice-parties">
+                            <div class="quote-invoice-party">
+                                <h4>From</h4>
+                                <p><strong>WeddingClickz</strong></p>
+                                <p>Email: contact@weddingclickz.com</p>
+                                <p>Phone: +91 XXX XXX XXXX</p>
+                            </div>
+                            <div class="quote-invoice-party">
+                                <h4>To</h4>
+                                <p><strong>${quote.customerName || 'N/A'}</strong></p>
+                                <p>Email: ${quote.customerEmail}</p>
+                                ${quote.customerPhone ? `<p>Phone: ${quote.customerPhone}</p>` : ''}
+                            </div>
+                        </div>
+                        
+                        <table class="quote-invoice-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th style="text-align: right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                // Add items grouped by event
+                Object.values(eventGroups).forEach(group => {
+                    // Event header
+                    invoiceHTML += `
+                        <tr class="event-row">
+                            <td colspan="2">
+                                <strong>${group.eventName}</strong>
+                                ${group.eventDate ? ` - ${formatDateLocal(group.eventDate)}` : ''}
+                            </td>
+                        </tr>
+                    `;
+                    
+                    // Services
+                    if (group.services && group.services.length > 0) {
+                        group.services.forEach(service => {
+                            invoiceHTML += `
+                                <tr class="service-row">
+                                    <td>${service.name}</td>
+                                    <td>${formatCurrencyLocal(service.price)}</td>
+                                </tr>
+                            `;
+                        });
+                    }
+                    
+                    // Additional services for this event
+                    if (group.addons && group.addons.length > 0) {
+                        group.addons.forEach(addon => {
+                            invoiceHTML += `
+                                <tr class="service-row">
+                                    <td>${addon.name} (Add-on)</td>
+                                    <td>${formatCurrencyLocal(addon.price)}</td>
+                                </tr>
+                            `;
+                        });
+                    }
+                });
+                
+                invoiceHTML += `
+                            </tbody>
+                        </table>
+                        
+                        <div class="quote-invoice-totals">
+                            <div class="quote-invoice-totals-box">
+                                <div class="quote-invoice-totals-row total">
+                                    <span>Total Amount</span>
+                                    <span>${formatCurrencyLocal(quote.total)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ${quote.notes ? `
+                            <div style="margin-top: 2rem; padding: 1rem; background: var(--cream); border-radius: 8px;">
+                                <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 0.5rem;">Notes</h4>
+                                <p style="color: var(--charcoal); margin: 0;">${quote.notes}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                content.innerHTML = invoiceHTML;
+            } catch (error) {
+                content.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--error);">
+                    <p>Failed to load quote details</p>
+                    <p style="font-size: 0.9rem;">${error.message}</p>
+                </div>`;
+            }
+        }
+        
+        function closeQuoteDetailsModal() {
+            document.getElementById('quoteDetailsModal').classList.remove('active');
+        }
+
         // Users
         async function loadUsers() {
             try {
                 const search = document.getElementById('userSearch').value;
-                const query = search ? `?search=${encodeURIComponent(search)}` : '';
+                let query = `?page=${customersCurrentPage}&limit=${customersPerPage}`;
+                if (search) {
+                    query += `&search=${encodeURIComponent(search)}`;
+                }
                 
                 const result = await apiCall(`/users${query}`);
+                
+                // Update pagination state
+                customersTotalCount = result.total || 0;
+                customersTotalPages = result.totalPages || 1;
+                customersCurrentPage = result.currentPage || 1;
+                
                 document.getElementById('usersTable').innerHTML = result.data.map(u => `
                     <tr>
                         <td>${u.name || '-'}</td>
@@ -1917,13 +3675,118 @@
                             <button class="action-btn delete" onclick="deleteUser('${u._id}')">🗑️</button>
                         </td>
                     </tr>
-                `).join('') || '<tr><td colspan="5">No users found</td></tr>';
+                `).join('') || '<tr><td colspan="5">No customers found</td></tr>';
+                
+                updateCustomersPagination();
             } catch (error) {
                 showToast(error.message, 'error');
             }
         }
+        
+        function updateCustomersPagination() {
+            const container = document.getElementById('customersPaginationContainer');
+            const pageInfo = document.getElementById('customersPageInfo');
+            const prevBtn = document.getElementById('customersPrevBtn');
+            const nextBtn = document.getElementById('customersNextBtn');
+            
+            if (customersTotalCount === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.style.display = 'flex';
+            
+            const start = (customersCurrentPage - 1) * customersPerPage + 1;
+            const end = Math.min(customersCurrentPage * customersPerPage, customersTotalCount);
+            pageInfo.textContent = `Showing ${start}-${end} of ${customersTotalCount} customers`;
+            
+            prevBtn.disabled = customersCurrentPage === 1;
+            nextBtn.disabled = customersCurrentPage === customersTotalPages;
+            
+            renderCustomersPaginationPages();
+        }
+        
+        function renderCustomersPaginationPages() {
+            const pagesContainer = document.getElementById('customersPaginationPages');
+            pagesContainer.innerHTML = '';
+            
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, customersCurrentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(customersTotalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'pagination-page';
+                firstBtn.textContent = '1';
+                firstBtn.onclick = () => goToCustomersPage(1);
+                pagesContainer.appendChild(firstBtn);
+                
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pagesContainer.appendChild(dots);
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-page';
+                if (i === customersCurrentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => goToCustomersPage(i);
+                pagesContainer.appendChild(pageBtn);
+            }
+            
+            if (endPage < customersTotalPages) {
+                if (endPage < customersTotalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pagesContainer.appendChild(dots);
+                }
+                
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'pagination-page';
+                lastBtn.textContent = customersTotalPages;
+                lastBtn.onclick = () => goToCustomersPage(customersTotalPages);
+                pagesContainer.appendChild(lastBtn);
+            }
+        }
+        
+        function changeCustomersPage(direction) {
+            if (direction === 'prev' && customersCurrentPage > 1) {
+                customersCurrentPage--;
+                loadUsers();
+            } else if (direction === 'next' && customersCurrentPage < customersTotalPages) {
+                customersCurrentPage++;
+                loadUsers();
+            }
+        }
+        
+        function goToCustomersPage(page) {
+            if (page >= 1 && page <= customersTotalPages && page !== customersCurrentPage) {
+                customersCurrentPage = page;
+                loadUsers();
+            }
+        }
+        
+        function changeCustomersPerPage() {
+            customersPerPage = parseInt(document.getElementById('customersPerPage').value);
+            customersCurrentPage = 1;
+            loadUsers();
+        }
 
-        document.getElementById('userSearch').addEventListener('input', debounce(loadUsers, 300));
+        document.getElementById('userSearch').addEventListener('input', debounce(() => {
+            customersCurrentPage = 1; // Reset to first page on search
+            loadUsers();
+        }, 300));
 
         async function deleteUser(id) {
             if (!confirm('Are you sure you want to delete this user?')) return;
@@ -2150,6 +4013,9 @@
                 .catch(() => {
                     logout();
                 });
+        } else {
+            // If no token but have admin data, clear it
+            localStorage.removeItem('adminData');
         }
     </script>
 </body>
