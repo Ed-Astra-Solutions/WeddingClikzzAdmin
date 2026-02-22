@@ -3763,6 +3763,7 @@
                 <li class="nav-item" data-section="users">Customers</li>
                 <li class="nav-item" data-section="admins">Admins</li>
                 <li class="nav-item" data-section="settings">Email Notifications</li>
+                <li class="nav-item" data-section="subscribers">Subscribers</li>
             </ul>
         </aside>
 
@@ -3982,6 +3983,7 @@
                     <div class="table-header">
                         <h2>Quotes</h2>
                         <div class="search-box">
+                            <button class="btn btn-secondary btn-sm" onclick="exportQuotesCsv()" title="Export CSV">⬇ Export</button>
                             <input type="text" id="quoteSearch" placeholder="Search quotes...">
                             <select id="quoteStatusFilter">
                                 <option value="">All Status</option>
@@ -4049,6 +4051,7 @@
                     <div class="table-header">
                         <h2>Customers</h2>
                         <div class="search-box">
+                            <button class="btn btn-secondary btn-sm" onclick="exportCustomersCsv()" title="Export CSV">⬇ Export</button>
                             <input type="text" id="userSearch" placeholder="Search customers...">
                         </div>
                     </div>
@@ -4146,6 +4149,63 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Save Settings</button>
                         </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscribers Section -->
+            <section class="section" id="subscribersSection">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2>Newsletter Subscribers</h2>
+                        <div class="search-box">
+                            <button class="btn btn-secondary btn-sm" onclick="exportSubscribersCsv()" title="Export CSV">⬇ Export</button>
+                            <input type="text" id="subscriberSearch" placeholder="Search subscribers...">
+                            <select id="subscriberStatusFilter">
+                                <option value="">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Source</th>
+                                <th>Status</th>
+                                <th>Subscribed</th>
+                                <th>Welcome Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscribersTable">
+                            <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
+                        </tbody>
+                    </table>
+                    <!-- Subscribers Pagination Controls -->
+                    <div class="pagination-container" id="subscribersPaginationContainer" style="display: none;">
+                        <div class="pagination-info">
+                            <span id="subscribersPageInfo">Showing 0 of 0 subscribers</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="subscribersPrevBtn" onclick="changeSubscribersPage('prev')" disabled>
+                                ← Previous
+                            </button>
+                            <div class="pagination-pages" id="subscribersPaginationPages"></div>
+                            <button class="pagination-btn" id="subscribersNextBtn" onclick="changeSubscribersPage('next')" disabled>
+                                Next →
+                            </button>
+                        </div>
+                        <div class="pagination-per-page">
+                            <label for="subscribersPerPage">Per page:</label>
+                            <select id="subscribersPerPage" onchange="changeSubscribersPerPage()">
+                                <option value="10">10</option>
+                                <option value="20" selected>20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -8914,6 +8974,7 @@
                 case 'users': loadUsers(); break;
                 case 'admins': loadAdmins(); break;
                 case 'settings': loadSettings(); break;
+                case 'subscribers': loadSubscribers(); break;
             }
         }
 
@@ -8941,6 +9002,11 @@
                     <div class="stat-card" onclick="navigateToSection('users')">
                         <h3>Total Users</h3>
                         <div class="value">${data.users.total}</div>
+                    </div>
+                    <div class="stat-card" onclick="navigateToSection('subscribers')">
+                        <h3>Subscribers</h3>
+                        <div class="value">${data.subscribers ? data.subscribers.total : '-'}</div>
+                        ${data.subscribers ? `<div class="change positive">${data.subscribers.active} active</div>` : ''}
                     </div>
                 `;
                 
@@ -9749,6 +9815,187 @@
             } catch (error) {
                 showToast(error.message, 'error');
             }
+        }
+
+        // ==========================================
+        // Subscribers
+        // ==========================================
+        let subscribersCurrentPage = 1;
+        let subscribersPerPage = 20;
+        let subscribersTotalPages = 1;
+        let subscribersTotalCount = 0;
+
+        async function loadSubscribers(resetPage = false) {
+            if (resetPage) subscribersCurrentPage = 1;
+            try {
+                const search = document.getElementById('subscriberSearch').value;
+                const status = document.getElementById('subscriberStatusFilter').value;
+                let query = `?page=${subscribersCurrentPage}&limit=${subscribersPerPage}`;
+                if (search) query += `&search=${encodeURIComponent(search)}`;
+                if (status) query += `&status=${status}`;
+
+                const result = await apiCall(`/subscribers${query}`);
+                const subscribers = result.data || [];
+                subscribersTotalCount = result.total || 0;
+                subscribersTotalPages = result.totalPages || 1;
+                subscribersCurrentPage = result.currentPage || 1;
+
+                document.getElementById('subscribersTable').innerHTML = subscribers.map(s => `
+                    <tr>
+                        <td>${s.email}</td>
+                        <td>${s.name || '-'}</td>
+                        <td>${s.source || 'website'}</td>
+                        <td><span class="status-badge status-${s.isActive ? 'active' : 'inactive'}">${s.isActive ? 'Active' : 'Inactive'}</span></td>
+                        <td>${formatDate(s.subscribedAt || s.createdAt)}</td>
+                        <td>${s.welcomeEmailSent ? '✅' : '❌'}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="6">No subscribers found</td></tr>';
+
+                updateSubscribersPagination();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function updateSubscribersPagination() {
+            const container = document.getElementById('subscribersPaginationContainer');
+            const pageInfo = document.getElementById('subscribersPageInfo');
+            const prevBtn = document.getElementById('subscribersPrevBtn');
+            const nextBtn = document.getElementById('subscribersNextBtn');
+
+            if (subscribersTotalCount === 0) { container.style.display = 'none'; return; }
+            container.style.display = 'flex';
+
+            const start = (subscribersCurrentPage - 1) * subscribersPerPage + 1;
+            const end = Math.min(subscribersCurrentPage * subscribersPerPage, subscribersTotalCount);
+            pageInfo.textContent = `Showing ${start}-${end} of ${subscribersTotalCount} subscribers`;
+            prevBtn.disabled = subscribersCurrentPage === 1;
+            nextBtn.disabled = subscribersCurrentPage === subscribersTotalPages;
+            renderSubscribersPaginationPages();
+        }
+
+        function renderSubscribersPaginationPages() {
+            const pagesContainer = document.getElementById('subscribersPaginationPages');
+            pagesContainer.innerHTML = '';
+            const maxVisible = 5;
+            let startPage = Math.max(1, subscribersCurrentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(subscribersTotalPages, startPage + maxVisible - 1);
+            if (endPage - startPage + 1 < maxVisible) startPage = Math.max(1, endPage - maxVisible + 1);
+
+            if (startPage > 1) {
+                const first = document.createElement('button');
+                first.className = 'pagination-page';
+                first.textContent = '1';
+                first.onclick = () => goToSubscribersPage(1);
+                pagesContainer.appendChild(first);
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pagesContainer.appendChild(dots);
+                }
+            }
+            for (let i = startPage; i <= endPage; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'pagination-page' + (i === subscribersCurrentPage ? ' active' : '');
+                btn.textContent = i;
+                btn.onclick = () => goToSubscribersPage(i);
+                pagesContainer.appendChild(btn);
+            }
+            if (endPage < subscribersTotalPages) {
+                if (endPage < subscribersTotalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pagesContainer.appendChild(dots);
+                }
+                const last = document.createElement('button');
+                last.className = 'pagination-page';
+                last.textContent = subscribersTotalPages;
+                last.onclick = () => goToSubscribersPage(subscribersTotalPages);
+                pagesContainer.appendChild(last);
+            }
+        }
+
+        function changeSubscribersPage(direction) {
+            if (direction === 'prev' && subscribersCurrentPage > 1) { subscribersCurrentPage--; loadSubscribers(); }
+            else if (direction === 'next' && subscribersCurrentPage < subscribersTotalPages) { subscribersCurrentPage++; loadSubscribers(); }
+        }
+
+        function goToSubscribersPage(page) {
+            if (page >= 1 && page <= subscribersTotalPages && page !== subscribersCurrentPage) {
+                subscribersCurrentPage = page;
+                loadSubscribers();
+            }
+        }
+
+        function changeSubscribersPerPage() {
+            subscribersPerPage = parseInt(document.getElementById('subscribersPerPage').value);
+            subscribersCurrentPage = 1;
+            loadSubscribers();
+        }
+
+        document.getElementById('subscriberSearch').addEventListener('input', debounce(() => {
+            subscribersCurrentPage = 1;
+            loadSubscribers();
+        }, 300));
+
+        document.getElementById('subscriberStatusFilter').addEventListener('change', () => {
+            subscribersCurrentPage = 1;
+            loadSubscribers();
+        });
+
+        // ==========================================
+        // CSV Export Download Helpers
+        // ==========================================
+        function triggerCsvDownload(url) {
+            const link = document.createElement('a');
+            link.href = `${API_BASE}${url}`;
+            link.setAttribute('download', '');
+            // Need auth header - use fetch instead
+            fetch(`${API_BASE}${url}`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Export failed');
+                const disposition = response.headers.get('Content-Disposition');
+                let filename = 'export.csv';
+                if (disposition) {
+                    const match = disposition.match(/filename="?([^"]+)"?/);
+                    if (match) filename = match[1];
+                }
+                return response.blob().then(blob => ({ blob, filename }));
+            })
+            .then(({ blob, filename }) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                showToast('Export downloaded successfully');
+            })
+            .catch(err => showToast(err.message, 'error'));
+        }
+
+        function exportSubscribersCsv() {
+            const status = document.getElementById('subscriberStatusFilter').value;
+            let url = '/export/subscribers';
+            if (status) url += `?status=${status}`;
+            triggerCsvDownload(url);
+        }
+
+        function exportCustomersCsv() {
+            triggerCsvDownload('/export/customers');
+        }
+
+        function exportQuotesCsv() {
+            const status = document.getElementById('quoteStatusFilter').value;
+            let url = '/export/quotes';
+            if (status) url += `?status=${status}`;
+            triggerCsvDownload(url);
         }
 
         // Admins
