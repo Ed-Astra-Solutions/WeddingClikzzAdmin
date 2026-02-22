@@ -4188,6 +4188,10 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         About
                     </button>
+                    <button class="offerings-tab" data-wstab="blogs">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+                        Blogs
+                    </button>
                 </div>
 
                 <!-- Hero Content -->
@@ -4455,6 +4459,23 @@
                         <div style="padding: 20px;">
                             <!-- Cards Grid -->
                             <div class="why-cards-grid" id="whyCardsGrid">
+                                <div class="loading"><div class="spinner"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blogs Content -->
+                <div class="offerings-content" id="blogsContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Blog Posts</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddBlogModal()">+ New Post</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="archive-entries-grid" id="blogsGrid">
                                 <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
@@ -5194,9 +5215,74 @@
         </div>
     </div>
 
+    <!-- Blog Post Modal -->
+    <div class="modal-overlay" id="blogModal">
+        <div class="modal" style="max-width: 720px;">
+            <div class="modal-header">
+                <h2 id="blogModalTitle">New Blog Post</h2>
+                <button class="modal-close" onclick="closeBlogModal()">&times;</button>
+            </div>
+            <form id="blogForm" onsubmit="saveBlog(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Title <span style="color: var(--danger);">*</span></label>
+                        <input type="text" id="blogTitle" placeholder="e.g. 10 Tips for Your Dream Wedding" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Image</label>
+                        <div id="blogCoverPreview" style="display:none; margin-bottom: 12px; position: relative; border-radius: 10px; overflow: hidden; max-height: 200px;">
+                            <img id="blogCoverPreviewImg" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                            <button type="button" onclick="clearBlogCover()" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); border: none; color: white; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;">&times;</button>
+                        </div>
+                        <input type="file" id="blogCoverFile" accept="image/*" onchange="handleBlogCoverSelect(event)" style="display: none;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('blogCoverFile').click()" id="blogCoverPickBtn" style="width: 100%;">Choose Cover Image</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="blogCategory">
+                                <option value="Wedding Tips">Wedding Tips</option>
+                                <option value="Real Weddings">Real Weddings</option>
+                                <option value="Photography">Photography</option>
+                                <option value="Inspiration">Inspiration</option>
+                                <option value="Planning">Planning</option>
+                                <option value="Behind the Scenes">Behind the Scenes</option>
+                                <option value="Destination Weddings">Destination Weddings</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Author</label>
+                            <input type="text" id="blogAuthor" placeholder="WeddingClickz Team" value="WeddingClickz Team">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Excerpt <span style="color: var(--text-muted); font-size: 11px;">(Short summary shown in listings)</span></label>
+                        <textarea id="blogExcerpt" rows="2" placeholder="A brief summary of the blog post..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Content <span style="color: var(--text-muted); font-size: 11px;">(Supports HTML)</span></label>
+                        <textarea id="blogContent" rows="12" placeholder="Write your blog post content here... You can use HTML tags for formatting." style="font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags <span style="color: var(--text-muted); font-size: 11px;">(Comma-separated)</span></label>
+                        <input type="text" id="blogTags" placeholder="wedding, photography, tips, bridal">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="blogPublished" style="width: auto; accent-color: var(--gold);">
+                            <span>Publish immediately</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="closeBlogModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm" id="blogSubmitBtn">Create Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // ============================================
-        // CONFIGURATION - Backend API URL
         // ============================================
         // Auto-detect: use localhost when running locally, production otherwise
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -5513,6 +5599,7 @@
                 case 'testimonials': loadWebsiteTestimonials(); break;
                 case 'about': loadWebsiteAbout(); break;
                 case 'whyChooseUs': loadWhyChooseUs(); break;
+                case 'blogs': loadBlogs(); break;
             }
         }
 
@@ -8532,6 +8619,243 @@
                     renderWhyCardsGrid();
                 } else {
                     loadWhyChooseUs();
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            }
+        }
+
+        // ==========================================
+        // Website Controls - Blogs
+        // ==========================================
+        
+        let currentBlogs = [];
+        let blogCoverFile = null;
+        let editingBlogId = null;
+        let existingBlogCoverS3Key = null;
+
+        async function loadBlogs() {
+            const grid = document.getElementById('blogsGrid');
+            grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+            try {
+                const result = await apiCall('/blogs');
+                if (result.success) {
+                    currentBlogs = result.data || [];
+                    renderBlogsGrid();
+                }
+            } catch (error) {
+                grid.innerHTML = '<div class="archive-empty"><p>Error loading blogs</p></div>';
+                showToast('Error loading blogs: ' + error.message, 'error');
+            }
+        }
+
+        function renderBlogsGrid() {
+            const grid = document.getElementById('blogsGrid');
+            if (!currentBlogs || currentBlogs.length === 0) {
+                grid.innerHTML = `
+                    <div class="archive-empty" style="grid-column: 1 / -1;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                        <p style="color: var(--text-muted); margin-top: 12px;">No blog posts yet</p>
+                        <button class="btn btn-secondary btn-sm" style="margin-top: 12px;" onclick="openAddBlogModal()">+ Create First Post</button>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = currentBlogs.map(blog => {
+                const date = blog.publishedAt ? new Date(blog.publishedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft';
+                const coverImg = blog.coverImageUrl || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop';
+                return `
+                <div class="archive-entry-card">
+                    <div class="archive-entry-cover">
+                        <img src="${coverImg}" alt="${blog.title}" loading="lazy">
+                        <div class="archive-entry-cover-overlay"></div>
+                        <span class="archive-entry-badge">${blog.category || 'Blog'}</span>
+                        <span class="archive-entry-status ${blog.isPublished ? 'active' : 'inactive'}">${blog.isPublished ? 'Published' : 'Draft'}</span>
+                    </div>
+                    <div class="archive-entry-info">
+                        <h3 class="archive-entry-couple" style="font-size: 14px;">${blog.title}</h3>
+                        <p class="archive-entry-place">${blog.author || 'WeddingClickz Team'} &bull; ${date}</p>
+                        ${blog.excerpt ? `<p class="archive-entry-place" style="margin-top: 4px; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;">${blog.excerpt}</p>` : ''}
+                    </div>
+                    <div class="archive-entry-actions">
+                        <button class="btn-edit" onclick="openEditBlogModal('${blog._id}')" title="Edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                        </button>
+                        <button class="btn-delete" onclick="deleteBlog('${blog._id}')" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function openAddBlogModal() {
+            editingBlogId = null;
+            blogCoverFile = null;
+            existingBlogCoverS3Key = null;
+            document.getElementById('blogModalTitle').textContent = 'New Blog Post';
+            document.getElementById('blogSubmitBtn').textContent = 'Create Post';
+            document.getElementById('blogForm').reset();
+            document.getElementById('blogAuthor').value = 'WeddingClickz Team';
+            document.getElementById('blogCoverPreview').style.display = 'none';
+            document.getElementById('blogCoverPickBtn').style.display = '';
+            document.getElementById('blogModal').classList.add('active');
+        }
+
+        async function openEditBlogModal(blogId) {
+            editingBlogId = blogId;
+            blogCoverFile = null;
+            document.getElementById('blogModalTitle').textContent = 'Edit Blog Post';
+            document.getElementById('blogSubmitBtn').textContent = 'Save Changes';
+
+            try {
+                const result = await apiCall(`/blogs/${blogId}`);
+                if (!result.success) throw new Error(result.error);
+                const blog = result.data;
+
+                document.getElementById('blogTitle').value = blog.title || '';
+                document.getElementById('blogCategory').value = blog.category || 'Wedding Tips';
+                document.getElementById('blogAuthor').value = blog.author || 'WeddingClickz Team';
+                document.getElementById('blogExcerpt').value = blog.excerpt || '';
+                document.getElementById('blogContent').value = blog.content || '';
+                document.getElementById('blogTags').value = (blog.tags || []).join(', ');
+                document.getElementById('blogPublished').checked = blog.isPublished || false;
+
+                existingBlogCoverS3Key = blog.coverImageS3Key || null;
+
+                if (blog.coverImageUrl) {
+                    document.getElementById('blogCoverPreviewImg').src = blog.coverImageUrl;
+                    document.getElementById('blogCoverPreview').style.display = 'block';
+                    document.getElementById('blogCoverPickBtn').style.display = 'none';
+                } else {
+                    document.getElementById('blogCoverPreview').style.display = 'none';
+                    document.getElementById('blogCoverPickBtn').style.display = '';
+                }
+
+                document.getElementById('blogModal').classList.add('active');
+            } catch (error) {
+                showToast('Error loading blog: ' + error.message, 'error');
+            }
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.remove('active');
+        }
+
+        function handleBlogCoverSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            blogCoverFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('blogCoverPreviewImg').src = e.target.result;
+                document.getElementById('blogCoverPreview').style.display = 'block';
+                document.getElementById('blogCoverPickBtn').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearBlogCover() {
+            blogCoverFile = null;
+            existingBlogCoverS3Key = null;
+            document.getElementById('blogCoverPreview').style.display = 'none';
+            document.getElementById('blogCoverPickBtn').style.display = '';
+            document.getElementById('blogCoverFile').value = '';
+        }
+
+        async function saveBlog(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('blogSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving...';
+
+            try {
+                let coverImageUrl = '';
+                let coverImageS3Key = existingBlogCoverS3Key || '';
+
+                // Upload cover image if new file selected
+                if (blogCoverFile) {
+                    const compressed = await compressImage(blogCoverFile, 1200, 0.85);
+                    const signedRes = await fetch(`${BACKEND_URL}/api/admin/s3/upload-url`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+                        body: JSON.stringify({
+                            folder: 'website',
+                            filename: blogCoverFile.name,
+                            mimeType: compressed.type,
+                            fileSize: compressed.size,
+                            prefix: 'blogs'
+                        })
+                    });
+                    const signedData = await signedRes.json();
+                    if (!signedData.success) throw new Error(signedData.error || 'Failed to get upload URL');
+
+                    const uploadRes = await fetch(signedData.uploadUrl, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': compressed.type },
+                        body: compressed
+                    });
+                    if (!uploadRes.ok) throw new Error('Failed to upload image');
+
+                    coverImageUrl = `https://${signedData.bucket}.s3.${signedData.region}.amazonaws.com/${signedData.key}`;
+                    coverImageS3Key = signedData.key;
+                }
+
+                const tagsStr = document.getElementById('blogTags').value;
+                const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()).filter(t => t) : [];
+
+                const blogData = {
+                    title: document.getElementById('blogTitle').value.trim(),
+                    category: document.getElementById('blogCategory').value,
+                    author: document.getElementById('blogAuthor').value.trim() || 'WeddingClickz Team',
+                    excerpt: document.getElementById('blogExcerpt').value.trim(),
+                    content: document.getElementById('blogContent').value,
+                    tags,
+                    isPublished: document.getElementById('blogPublished').checked
+                };
+
+                if (blogCoverFile) {
+                    blogData.coverImageUrl = coverImageUrl;
+                    blogData.coverImageS3Key = coverImageS3Key;
+                } else if (!existingBlogCoverS3Key) {
+                    blogData.coverImageUrl = '';
+                    blogData.coverImageS3Key = '';
+                }
+
+                let result;
+                if (editingBlogId) {
+                    result = await apiCall(`/blogs/${editingBlogId}`, 'PUT', blogData);
+                } else {
+                    result = await apiCall('/blogs', 'POST', blogData);
+                }
+
+                if (result.success) {
+                    showToast(editingBlogId ? 'Blog updated!' : 'Blog created!', 'success');
+                    closeBlogModal();
+                    loadBlogs();
+                } else {
+                    throw new Error(result.error || 'Failed to save');
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = editingBlogId ? 'Save Changes' : 'Create Post';
+            }
+        }
+
+        async function deleteBlog(blogId) {
+            if (!confirm('Delete this blog post? This cannot be undone.')) return;
+            try {
+                const result = await apiCall(`/blogs/${blogId}`, 'DELETE');
+                if (result.success) {
+                    showToast('Blog deleted', 'success');
+                    loadBlogs();
+                } else {
+                    throw new Error(result.error || 'Failed to delete');
                 }
             } catch (error) {
                 showToast('Error: ' + error.message, 'error');
