@@ -293,6 +293,11 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; width: 30%; }
+            50% { opacity: 0.7; width: 70%; }
+        }
+
         .btn-danger {
             background: linear-gradient(135deg, var(--danger) 0%, #A83232 100%);
             color: var(--white);
@@ -911,11 +916,6 @@
 
         .offerings-content.active {
             display: block;
-        }
-
-        /* Website Controls Tabs (allow wrapping) */
-        .website-controls-tabs {
-            flex-wrap: wrap;
         }
 
         /* Film Roll Grid */
@@ -1649,32 +1649,15 @@
         }
 
         .testimonial-photo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: var(--bg-card-hover);
-            flex-shrink: 0;
-            border: 2px solid var(--border-gold);
+            display: none;
         }
 
         .testimonial-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            display: none;
         }
 
         .testimonial-photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: #0A0A0A;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
+            display: none;
         }
 
         .testimonial-client-info {
@@ -1686,11 +1669,6 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             margin-bottom: 0.15rem;
-        }
-
-        .testimonial-client-role {
-            color: var(--text-muted);
-            font-size: 0.8rem;
         }
 
         .testimonial-rating {
@@ -2110,6 +2088,342 @@
             text-align: center;
             padding: 3rem;
             color: var(--text-muted);
+        }
+
+        /* Why Choose Us Cards Grid */
+        .why-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .why-card-item {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .why-card-item:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .why-card-item.featured {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.08), rgba(201, 169, 98, 0.02));
+        }
+
+        .why-card-item.inactive {
+            opacity: 0.6;
+        }
+
+        .why-card-item .why-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .why-card-item .why-card-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .why-card-item .why-card-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .why-card-item .why-card-info {
+            flex: 1;
+        }
+
+        .why-card-item .why-card-info h4 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .why-card-item .why-card-order {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .why-card-item .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .why-card-item .featured-badge {
+            background: rgba(201, 169, 98, 0.2);
+            color: var(--gold);
+        }
+
+        .why-card-item .inactive-badge {
+            background: rgba(209, 82, 82, 0.2);
+            color: var(--danger);
+            margin-left: 0.35rem;
+        }
+
+        .why-card-item .why-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .why-card-item .why-card-highlight {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card-item .why-card-destinations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .why-card-item .dest-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 12px;
+            font-size: 0.65rem;
+            color: var(--gold-light);
+        }
+
+        .why-card-item .why-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .why-card-item .why-card-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .why-card-item .why-card-actions .edit-btn {
+            background: rgba(201, 169, 98, 0.15);
+            color: var(--gold);
+        }
+
+        .why-card-item .why-card-actions .edit-btn:hover {
+            background: var(--gold);
+            color: #0A0A0A;
+        }
+
+        .why-card-item .why-card-actions .delete-btn {
+            background: rgba(209, 82, 82, 0.15);
+            color: var(--danger);
+        }
+
+        .why-card-item .why-card-actions .delete-btn:hover {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        /* Icon Picker Grid */
+        .icon-picker-container {
+            margin-top: 0.25rem;
+        }
+
+        .icon-picker-selected {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-bottom: 8px;
+        }
+
+        .icon-picker-selected:hover {
+            border-color: var(--gold);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .icon-picker-selected .selected-icon-preview {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15), rgba(201, 169, 98, 0.05));
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .icon-picker-selected .selected-icon-preview svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-picker-selected .selected-icon-label {
+            color: var(--text-light);
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .icon-picker-selected .picker-arrow {
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        .icon-picker-selected .picker-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .icon-picker-grid-wrapper {
+            display: none;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .icon-picker-grid-wrapper.open {
+            display: block;
+        }
+
+        .icon-picker-grid-wrapper::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .icon-picker-grid-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .icon-picker-grid-wrapper::-webkit-scrollbar-thumb {
+            background: var(--border-gold);
+            border-radius: 3px;
+        }
+
+        .icon-picker-category {
+            margin-bottom: 10px;
+        }
+
+        .icon-picker-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .icon-picker-category-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            padding: 4px 6px;
+            margin-bottom: 6px;
+        }
+
+        .icon-picker-icons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+            gap: 4px;
+        }
+
+        .icon-picker-item {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.03);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .icon-picker-item:hover {
+            background: rgba(201, 169, 98, 0.12);
+            border-color: var(--border-gold);
+            transform: scale(1.1);
+        }
+
+        .icon-picker-item.selected {
+            background: rgba(201, 169, 98, 0.2);
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(201, 169, 98, 0.15);
+        }
+
+        .icon-picker-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-picker-item .icon-picker-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            border: 1px solid var(--border-gold);
+            color: var(--gold-light);
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .icon-picker-item:hover .icon-picker-tooltip {
+            display: block;
         }
 
         /* Features List in Modal */
@@ -2705,36 +3019,33 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.88);
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(6px);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 10001;
+            z-index: 99999;
         }
 
         .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.25s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            display: flex !important;
         }
 
         .modal {
-            background: linear-gradient(180deg, #161616 0%, #0E0E0E 100%);
+            background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
             border-radius: 16px;
             border: 1px solid var(--border-gold);
-            width: 100%;
+            width: calc(100% - 40px);
             max-width: 500px;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
-            box-shadow: var(--shadow-elevated), 0 0 60px rgba(201, 169, 98, 0.06);
-            animation: modalSlide 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(201, 169, 98, 0.1);
+            transform: scale(1);
+            opacity: 1;
         }
 
         .modal::-webkit-scrollbar {
@@ -2748,17 +3059,6 @@
         .modal::-webkit-scrollbar-thumb {
             background: var(--border-subtle);
             border-radius: 4px;
-        }
-
-        @keyframes modalSlide {
-            from { 
-                opacity: 0;
-                transform: translateY(-24px) scale(0.96);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
 
         .modal-header {
@@ -3458,11 +3758,11 @@
             <ul class="nav-menu">
                 <li class="nav-item active" data-section="dashboard">Dashboard</li>
                 <li class="nav-item" data-section="offerings">Offerings</li>
+                <li class="nav-item" data-section="website">Website Controls</li>
                 <li class="nav-item" data-section="quotes">Quotes</li>
                 <li class="nav-item" data-section="users">Customers</li>
                 <li class="nav-item" data-section="admins">Admins</li>
                 <li class="nav-item" data-section="settings">Email Notifications</li>
-                <li class="nav-item" data-section="websiteControls">Website Controls</li>
             </ul>
         </aside>
 
@@ -3851,253 +4151,263 @@
             </section>
 
             <!-- Website Controls Section -->
-            <section class="section" id="websiteControlsSection">
-                <div class="table-container" style="border-radius: 14px; overflow: hidden;">
-                    <div class="offerings-header" style="padding: 20px 26px;">
-                        <div class="offerings-header-left">
-                            <h2>Website Controls</h2>
-                        </div>
+            <section class="section" id="websiteSection">
+                <div class="offerings-header">
+                    <div class="offerings-header-left">
+                        <h2>Website Controls</h2>
                     </div>
+                </div>
 
-                    <!-- Website Controls Subtabs -->
-                    <div class="offerings-tabs website-controls-tabs">
-                        <button class="offerings-tab website-control-tab active" data-wctab="home">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            Home
-                        </button>
-                        <button class="offerings-tab website-control-tab" data-wctab="archives">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                            </svg>
-                            Archives
-                        </button>
-                        <button class="offerings-tab website-control-tab" data-wctab="films">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
-                            </svg>
-                            Films
-                        </button>
-                        <button class="offerings-tab website-control-tab" data-wctab="wcservices">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Services
-                        </button>
-                        <button class="offerings-tab website-control-tab" data-wctab="testimonials">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                            </svg>
-                            Testimonials
-                        </button>
-                        <button class="offerings-tab website-control-tab" data-wctab="about">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            About
-                        </button>
-                    </div>
+                <!-- Subtabs -->
+                <div class="offerings-tabs" style="flex-wrap: wrap;">
+                    <button class="offerings-tab active" data-wstab="hero">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 22V12h6v10" /></svg>
+                        Hero
+                    </button>
+                    <button class="offerings-tab" data-wstab="archives">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        Archives
+                    </button>
+                    <button class="offerings-tab" data-wstab="whyChooseUs">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Why Choose Us
+                    </button>
+                    <button class="offerings-tab" data-wstab="films">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                        Films
+                    </button>
+                    <button class="offerings-tab" data-wstab="wsServices">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        Services
+                    </button>
+                    <button class="offerings-tab" data-wstab="testimonials">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        Testimonials
+                    </button>
+                    <button class="offerings-tab" data-wstab="about">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        About
+                    </button>
+                </div>
 
-                    <!-- Home Content -->
-                    <div class="offerings-content website-control-content active" id="homeContent">
-                        <div class="modal-body" style="padding: 30px;">
-                            <!-- Hero Settings -->
-                            <div class="settings-section" style="margin-bottom: 2rem;">
-                                <h3 style="color: var(--gold); margin-bottom: 1rem; font-family: 'Playfair Display', serif; font-size: 1.3rem;">Hero Section Settings</h3>
-                                <div class="form-group">
-                                    <label>Tagline</label>
-                                    <input type="text" id="heroTagline" placeholder="Premium Wedding Photography" style="max-width: 400px;">
-                                </div>
-                                <button class="btn btn-secondary btn-sm" onclick="saveHeroSettings()" style="margin-top: 0.5rem;">Save Hero Settings</button>
+                <!-- Hero Content -->
+                <div class="offerings-content active" id="heroContent">
+                    <!-- Hero Settings -->
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none; margin-bottom: 20px;">
+                        <div class="table-header">
+                            <h2>Hero Settings</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="saveHeroSettings()" id="heroSettingsSaveBtn">Save Settings</button>
                             </div>
-
-                            <!-- Film Roll Images -->
-                            <div class="settings-section">
-                                <div class="table-header" style="padding: 0; border: none; background: none; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem;">Film Roll Slider Images</h3>
-                                    <button class="btn btn-primary btn-sm" onclick="openFilmRollUploadModal()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                        Add Image
-                                    </button>
-                                </div>
-                                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
-                                    Upload images for the film roll slider on the home page. Recommended size: 600×750px. Images will be automatically compressed.
-                                </p>
-                                
-                                <!-- Film Roll Images Grid -->
-                                <div class="film-roll-grid" id="filmRollGrid">
-                                    <div class="loading"><div class="spinner"></div></div>
-                                </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Hero Tagline</label>
+                                <input type="text" id="heroTaglineInput" placeholder="Premium Wedding Photography">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Archives Content -->
-                    <div class="offerings-content website-control-content" id="archivesContent">
-                        <div class="modal-body" style="padding: 30px;">
-                            <!-- Archive Entries Section -->
-                            <div class="settings-section">
-                                <div class="table-header" style="padding: 0; border: none; background: none; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem;">Wedding Archives</h3>
-                                    <button class="btn btn-primary btn-sm" onclick="openAddArchiveModal()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                        Add Wedding
-                                    </button>
-                                </div>
-                                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
-                                    Add wedding archives with couple names, locations, cover images, and photo galleries.
-                                </p>
-                                
-                                <!-- Archive Entries Grid -->
-                                <div class="archive-entries-grid" id="archiveEntriesGrid">
-                                    <div class="loading"><div class="spinner"></div></div>
-                                </div>
+                    <!-- Film Roll Images -->
+                    <div class="table-container" style="border-radius: 14px;">
+                        <div class="table-header">
+                            <h2>Film Roll Images</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddFilmRollModal()">+ Add Image</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">These images appear in the scrolling film roll at the bottom of the hero section on the landing page.</p>
+                            <div class="film-roll-grid" id="filmRollGrid">
+                                <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Films Content -->
-                    <div class="offerings-content website-control-content" id="filmsContent">
-                        <div class="modal-body" style="padding: 30px;">
-                            <!-- Film Entries Section -->
-                            <div class="settings-section">
-                                <div class="table-header" style="padding: 0; border: none; background: none; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem;">Wedding Films</h3>
-                                    <button class="btn btn-primary btn-sm" onclick="openAddFilmModal()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                        Add Film
-                                    </button>
-                                </div>
-                                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
-                                    Add wedding films with thumbnails. Use YouTube/Vimeo URLs or upload videos directly.
-                                </p>
-                                
-                                <!-- Film Entries Grid -->
-                                <div class="film-entries-grid" id="filmEntriesGrid">
-                                    <div class="loading"><div class="spinner"></div></div>
-                                </div>
+                <!-- Archives Content -->
+                <div class="offerings-content" id="archivesContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Wedding Archives</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddArchiveModal()">+ Add Archive</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="archive-entries-grid" id="archiveEntriesGrid">
+                                <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Services Content -->
-                    <div class="offerings-content website-control-content" id="wcservicesContent">
-                        <div class="offerings-header" style="margin-bottom: 1.5rem;">
-                            <div>
-                                <h3 style="color: var(--gold); margin-bottom: 0.25rem;">Premium Services</h3>
-                                <p style="color: var(--text-muted); font-size: 0.85rem;">Manage service cards displayed on the landing page</p>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Add Service
-                                </button>
+                <!-- Films Content -->
+                <div class="offerings-content" id="filmsContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Wedding Films</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddFilmModal()">+ Add Film</button>
                             </div>
                         </div>
-                        <div class="services-entries-grid" id="servicesEntriesGrid">
-                            <!-- Dynamic service entries will be loaded here -->
-                            <div class="services-loading">
-                                <div class="spinner"></div>
-                                <p>Loading services...</p>
+                        <div style="padding: 20px;">
+                            <div class="film-entries-grid" id="filmEntriesGrid">
+                                <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Testimonials Content -->
-                    <div class="offerings-content website-control-content" id="testimonialsContent">
-                        <div class="modal-body" style="padding: 20px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                                <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">
-                                    Client Testimonials
-                                </h3>
-                                <button class="btn btn-primary btn-sm" onclick="openAddTestimonialModal()" style="width: auto;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Add Testimonial
-                                </button>
+                <!-- Website Services Content -->
+                <div class="offerings-content" id="wsServicesContent">
+                    <!-- Section Settings -->
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none; margin-bottom: 20px;">
+                        <div class="table-header">
+                            <h2>Section Settings</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="saveServicesSectionSettings()">Save Settings</button>
                             </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>Section Label</label>
+                                    <input type="text" id="servicesSectionLabel" placeholder="e.g. What We Offer">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>Section Title</label>
+                                    <input type="text" id="servicesSectionTitle" placeholder="e.g. Premium Services">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Section Subtitle</label>
+                                <input type="text" id="servicesSectionSubtitle" placeholder="Brief description of your services">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Services Grid -->
+                    <div class="table-container" style="border-radius: 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Service Cards</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Add Service</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="services-entries-grid" id="servicesEntriesGrid">
+                                <div class="loading"><div class="spinner"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Content -->
+                <div class="offerings-content" id="testimonialsContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Testimonials</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddTestimonialModal()">+ Add Testimonial</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
                             <div class="testimonials-grid" id="testimonialsGrid">
-                                <!-- Dynamic testimonials will be loaded here -->
-                                <div class="testimonials-loading">
-                                    <div class="spinner"></div>
-                                    <p>Loading testimonials...</p>
-                                </div>
+                                <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- About Content -->
-                    <div class="offerings-content website-control-content" id="aboutContent">
-                        <div class="modal-body" style="padding: 20px;">
-                            <!-- Story & Mission Section -->
-                            <div style="margin-bottom: 2rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">
-                                        Company Story & Mission
-                                    </h3>
-                                    <button class="btn btn-secondary btn-sm" onclick="openEditAboutStoryModal()" style="width: auto;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                        Edit Content
-                                    </button>
+                <!-- About Content -->
+                <div class="offerings-content" id="aboutContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>About Section</h2>
+                        </div>
+                        <div style="padding: 20px;">
+                            <!-- Story / Content Editor -->
+                            <div id="aboutStoryPreview">
+                                <div class="form-group">
+                                    <label>Section Label</label>
+                                    <input type="text" id="aboutSectionLabel" placeholder="e.g. Our Story">
                                 </div>
-                                <div class="about-story-preview" id="aboutStoryPreview">
-                                    <div class="about-story-loading">
-                                        <div class="spinner"></div>
-                                        <p>Loading content...</p>
+                                <div class="form-group">
+                                    <label>Headline</label>
+                                    <input type="text" id="aboutHeadline" placeholder="e.g. Passionate About Capturing Love">
+                                </div>
+                                <div class="form-group">
+                                    <label>Paragraph 1</label>
+                                    <textarea id="aboutParagraph1" rows="3" placeholder="First paragraph..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Paragraph 2</label>
+                                    <textarea id="aboutParagraph2" rows="3" placeholder="Second paragraph..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Paragraph 3</label>
+                                    <textarea id="aboutParagraph3" rows="3" placeholder="Third paragraph..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cover Image</label>
+                                    <input type="hidden" id="aboutCoverImageUrl">
+                                    <input type="hidden" id="aboutCoverImageS3Key">
+                                    <div id="aboutCoverImagePreview" style="display:none; margin-bottom: 12px;">
+                                        <img src="" alt="Cover" style="max-width: 300px; border-radius: 8px;">
+                                    </div>
+                                    <input type="file" accept="image/*" onchange="uploadAboutCoverImage()" id="aboutCoverInput" style="margin-bottom: 12px;">
+                                </div>
+                                <div style="display: flex; gap: 16px;">
+                                    <div class="form-group" style="flex:1;">
+                                        <label>Badge Value</label>
+                                        <input type="text" id="aboutBadgeValue" placeholder="e.g. 500+">
+                                    </div>
+                                    <div class="form-group" style="flex:1;">
+                                        <label>Badge Label</label>
+                                        <input type="text" id="aboutBadgeLabel" placeholder="e.g. Weddings Captured">
                                     </div>
                                 </div>
+                                <button class="btn btn-primary btn-sm" onclick="saveAboutContent()" style="width: auto;">Save About Content</button>
                             </div>
-                            
-                            <!-- Statistics Section -->
-                            <div style="margin-bottom: 2rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">
-                                        Statistics
-                                    </h3>
-                                    <button class="btn btn-primary btn-sm" onclick="openAddStatModal()" style="width: auto;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                        Add Stat
-                                    </button>
+
+                            <!-- Stats -->
+                            <div style="margin-top: 40px;">
+                                <div class="table-header" style="padding: 0; margin-bottom: 16px; background: none; border: none;">
+                                    <h2 style="font-size: 18px;">Statistics</h2>
+                                    <button class="btn btn-primary btn-sm" onclick="openAddStatModal()">+ Add Stat</button>
                                 </div>
                                 <div class="about-stats-grid" id="aboutStatsGrid">
-                                    <!-- Dynamic stats will be loaded here -->
+                                    <div class="loading"><div class="spinner"></div></div>
                                 </div>
                             </div>
-                            
-                            <!-- Team Members Section -->
-                            <div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                    <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0;">
-                                        Team Members
-                                    </h3>
-                                    <button class="btn btn-primary btn-sm" onclick="openAddTeamMemberModal()" style="width: auto;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                        Add Team Member
-                                    </button>
+
+                            <!-- Team Members -->
+                            <div style="margin-top: 40px;">
+                                <div class="table-header" style="padding: 0; margin-bottom: 16px; background: none; border: none;">
+                                    <h2 style="font-size: 18px;">Team Members</h2>
+                                    <button class="btn btn-primary btn-sm" onclick="openAddTeamMemberModal()">+ Add Member</button>
                                 </div>
                                 <div class="team-members-grid" id="teamMembersGrid">
-                                    <!-- Dynamic team members will be loaded here -->
-                                    <div class="team-members-loading">
-                                        <div class="spinner"></div>
-                                        <p>Loading team members...</p>
-                                    </div>
+                                    <div class="loading"><div class="spinner"></div></div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us Content -->
+                <div class="offerings-content" id="whyChooseUsContent">
+                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
+                        <div class="table-header">
+                            <h2>Why Choose Us</h2>
+                            <div class="search-box">
+                                <button class="btn btn-primary btn-sm" onclick="openAddWhyCardModal()">+ Add Card</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <!-- Cards Grid -->
+                            <div class="why-cards-grid" id="whyCardsGrid">
+                                <div class="loading"><div class="spinner"></div></div>
                             </div>
                         </div>
                     </div>
@@ -4321,130 +4631,48 @@
         </div>
     </div>
 
-    <!-- Film Roll Upload Modal -->
-    <div class="modal-overlay" id="filmRollUploadModal">
-        <div class="modal" style="max-width: 600px;">
-            <div class="modal-header">
-                <h2>Add Film Roll Image</h2>
-                <button class="modal-close" onclick="closeFilmRollUploadModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="upload-dropzone" id="filmRollDropzone">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <h4>Drop image here or click to upload</h4>
-                    <p>Recommended: 600×750px, Max 10MB, JPG/PNG/WebP</p>
-                    <input type="file" id="filmRollFileInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple>
-                </div>
-                
-                <div class="upload-preview-grid" id="filmRollPreviewGrid" style="display: none;"></div>
-                
-                <div class="upload-progress" id="filmRollUploadProgress" style="display: none;">
-                    <div class="upload-progress-bar">
-                        <div class="upload-progress-fill" id="filmRollProgressFill" style="width: 0%;"></div>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;" id="filmRollProgressText">Uploading...</p>
-                </div>
-                
-                <div class="form-group" style="margin-top: 1.5rem;">
-                    <label>Caption (Optional)</label>
-                    <input type="text" id="filmRollCaption" placeholder="e.g., Sarah & Michael">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeFilmRollUploadModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" id="filmRollUploadBtn" onclick="uploadFilmRollImages()" disabled>Upload</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Film Roll Edit Modal -->
-    <div class="modal-overlay" id="filmRollEditModal">
-        <div class="modal" style="max-width: 500px;">
-            <div class="modal-header">
-                <h2>Edit Film Roll Image</h2>
-                <button class="modal-close" onclick="closeFilmRollEditModal()">&times;</button>
-            </div>
-            <form id="filmRollEditForm" onsubmit="saveFilmRollEdit(event)">
-                <div class="modal-body">
-                    <input type="hidden" id="editFilmRollId">
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <img id="editFilmRollPreview" src="" alt="Preview" style="max-width: 200px; max-height: 250px; border-radius: 8px; object-fit: cover;">
-                    </div>
-                    <div class="form-group">
-                        <label>Caption</label>
-                        <input type="text" id="editFilmRollCaption" placeholder="e.g., Sarah & Michael">
-                    </div>
-                    <div class="form-group">
-                        <label>Alt Text</label>
-                        <input type="text" id="editFilmRollAltText" placeholder="Wedding">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="editFilmRollIsActive" checked> Active
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeFilmRollEditModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Archive Add/Edit Modal -->
+    <!-- Archive Entry Modal -->
     <div class="modal-overlay" id="archiveEntryModal">
-        <div class="modal" style="max-width: 550px;">
+        <div class="modal">
             <div class="modal-header">
                 <h2 id="archiveModalTitle">Add Wedding Archive</h2>
                 <button class="modal-close" onclick="closeArchiveEntryModal()">&times;</button>
             </div>
             <form id="archiveEntryForm" onsubmit="saveArchiveEntry(event)">
+                <input type="hidden" id="archiveEntryId">
                 <div class="modal-body">
-                    <input type="hidden" id="archiveEntryId">
-                    
-                    <!-- Cover Image Upload -->
-                    <div class="form-group">
-                        <label>Cover Image *</label>
-                        <div class="upload-dropzone" id="archiveCoverDropzone" onclick="document.getElementById('archiveCoverInput').click()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0;">Click to upload cover image</p>
-                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Recommended: 800×600px</p>
-                        </div>
-                        <input type="file" id="archiveCoverInput" accept="image/*" style="display: none;" onchange="handleArchiveCoverSelect(event)">
-                        <div id="archiveCoverPreview" style="display: none; text-align: center; margin-top: 1rem;">
-                            <img id="archiveCoverPreviewImg" src="" alt="Cover Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px; object-fit: cover;">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem;" onclick="clearArchiveCover()">Remove</button>
-                        </div>
-                    </div>
-                    
                     <div class="form-group">
                         <label>Couple Name *</label>
-                        <input type="text" id="archiveCoupleName" placeholder="e.g., Sarah & Michael" required>
+                        <input type="text" id="archiveCoupleName" placeholder="e.g. Priya & Arjun" required>
                     </div>
-                    
                     <div class="form-group">
                         <label>Wedding Place *</label>
-                        <input type="text" id="archiveWeddingPlace" placeholder="e.g., Udaipur, Rajasthan" required>
+                        <input type="text" id="archiveWeddingPlace" placeholder="e.g. Udaipur, Rajasthan" required>
                     </div>
-                    
                     <div class="form-group">
                         <label>Wedding Date</label>
                         <input type="date" id="archiveWeddingDate">
                     </div>
-                    
                     <div class="form-group">
                         <label>Description</label>
                         <textarea id="archiveDescription" rows="3" placeholder="Brief description of the wedding..."></textarea>
                     </div>
-                    
-                    <div class="form-group" id="archiveActiveField" style="display: none;">
-                        <label>
-                            <input type="checkbox" id="archiveIsActive" checked> Active (visible on website)
+                    <div class="form-group">
+                        <label>Cover Image</label>
+                        <div id="archiveCoverDropzone" class="upload-dropzone" onclick="document.getElementById('archiveCoverInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <h4>Click to upload cover image</h4>
+                            <p>JPG, PNG up to 5MB</p>
+                            <input type="file" id="archiveCoverInput" accept="image/*" onchange="handleArchiveCoverSelect(event)" style="display:none;">
+                        </div>
+                        <div id="archiveCoverPreview" style="display:none; position:relative; text-align:center;">
+                            <img id="archiveCoverPreviewImg" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearArchiveCover()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="archiveActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="archiveIsActive" checked> Active
                         </label>
                     </div>
                 </div>
@@ -4458,34 +4686,25 @@
 
     <!-- Archive Gallery Modal -->
     <div class="modal-overlay" id="archiveGalleryModal">
-        <div class="modal" style="max-width: 700px;">
+        <div class="modal" style="max-width: 800px;">
             <div class="modal-header">
                 <h2 id="galleryModalTitle">Gallery</h2>
                 <button class="modal-close" onclick="closeArchiveGalleryModal()">&times;</button>
             </div>
+            <input type="hidden" id="galleryEntryId">
             <div class="modal-body">
-                <input type="hidden" id="galleryEntryId">
-                
-                <!-- Upload Section -->
-                <div class="upload-dropzone" id="galleryDropzone" onclick="document.getElementById('galleryImagesInput').click()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p style="color: var(--text-secondary); margin: 0;">Click or drag images to upload</p>
-                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Select multiple images at once</p>
+                <div style="margin-bottom: 20px;">
+                    <label class="btn btn-primary btn-sm" style="width: auto; cursor: pointer;">
+                        Upload Images
+                        <input type="file" id="galleryImagesInput" accept="image/*" multiple onchange="handleGalleryImagesSelect(event)" style="display:none;">
+                    </label>
                 </div>
-                <input type="file" id="galleryImagesInput" accept="image/*" multiple style="display: none;" onchange="handleGalleryImagesSelect(event)">
-                
-                <!-- Upload Progress -->
-                <div id="galleryUploadProgress" style="display: none; margin-top: 1rem;">
-                    <div class="upload-progress">
-                        <div class="upload-progress-fill" id="galleryProgressFill"></div>
+                <div id="galleryUploadProgress" style="display:none; margin-bottom: 16px;">
+                    <div class="upload-progress-bar">
+                        <div class="upload-progress-fill" id="galleryProgressFill" style="width: 0%"></div>
                     </div>
-                    <p id="galleryProgressText" style="text-align: center; color: var(--text-muted); margin-top: 0.5rem; font-size: 0.85rem;"></p>
+                    <p id="galleryProgressText" style="color: var(--text-muted); font-size: 12px; margin-top: 6px;">Uploading...</p>
                 </div>
-                
-                <!-- Gallery Grid -->
-                <h4 style="color: var(--gold); margin: 1.5rem 0 0.5rem; font-size: 0.95rem;">Gallery Images</h4>
                 <div class="gallery-grid" id="galleryGrid">
                     <div class="loading"><div class="spinner"></div></div>
                 </div>
@@ -4496,130 +4715,104 @@
         </div>
     </div>
 
-    <!-- Film Add/Edit Modal -->
+    <!-- Film Entry Modal -->
     <div class="modal-overlay" id="filmEntryModal">
-        <div class="modal" style="max-width: 600px;">
+        <div class="modal" style="max-width: 700px;">
             <div class="modal-header">
                 <h2 id="filmModalTitle">Add Wedding Film</h2>
                 <button class="modal-close" onclick="closeFilmEntryModal()">&times;</button>
             </div>
             <form id="filmEntryForm" onsubmit="saveFilmEntry(event)">
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <input type="hidden" id="filmEntryId">
-                    
-                    <!-- Thumbnail Upload -->
-                    <div class="form-group">
-                        <label>Thumbnail Image *</label>
-                        <div class="upload-dropzone" id="filmThumbnailDropzone" onclick="document.getElementById('filmThumbnailInput').click()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0;">Click to upload thumbnail</p>
-                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Recommended: 1280×720px (16:9)</p>
-                        </div>
-                        <input type="file" id="filmThumbnailInput" accept="image/*" style="display: none;" onchange="handleFilmThumbnailSelect(event)">
-                        <div id="filmThumbnailPreview" style="display: none; text-align: center; margin-top: 1rem;">
-                            <img id="filmThumbnailPreviewImg" src="" alt="Thumbnail Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px; object-fit: cover;">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem;" onclick="clearFilmThumbnail()">Remove</button>
-                        </div>
-                    </div>
-                    
+                <input type="hidden" id="filmEntryId">
+                <input type="hidden" id="filmVideoS3Key">
+                <input type="hidden" id="filmVideoUrl">
+                <div class="modal-body">
                     <div class="form-group">
                         <label>Film Title *</label>
-                        <input type="text" id="filmTitle" placeholder="e.g., A Love Story in Udaipur" required>
+                        <input type="text" id="filmTitle" placeholder="e.g. A Beautiful Day" required>
                     </div>
-                    
                     <div class="form-group">
                         <label>Couple Name *</label>
-                        <input type="text" id="filmCoupleName" placeholder="e.g., Sarah & Michael" required>
+                        <input type="text" id="filmCoupleName" placeholder="e.g. Priya & Arjun" required>
                     </div>
-                    
-                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div class="form-group">
-                            <label>Wedding Place</label>
-                            <input type="text" id="filmWeddingPlace" placeholder="e.g., Udaipur, Rajasthan">
-                        </div>
-                        <div class="form-group">
-                            <label>Duration</label>
-                            <input type="text" id="filmDuration" placeholder="e.g., 5:30">
-                        </div>
+                    <div class="form-group">
+                        <label>Wedding Place</label>
+                        <input type="text" id="filmWeddingPlace" placeholder="e.g. Udaipur, Rajasthan">
                     </div>
-                    
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" id="filmDuration" placeholder="e.g. 5:30">
+                    </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea id="filmDescription" rows="2" placeholder="Brief description of the film..."></textarea>
+                        <textarea id="filmDescription" rows="3" placeholder="Brief description..."></textarea>
                     </div>
-                    
-                    <h4 style="color: var(--gold); margin: 1.5rem 0 0.5rem; font-size: 0.95rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">Video Source</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Upload a video file or provide a YouTube/Vimeo URL.</p>
-                    
-                    <!-- Video Source Type Selector -->
+
+                    <!-- Thumbnail -->
                     <div class="form-group">
-                        <label>Video Type *</label>
-                        <div class="video-source-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                        <label>Thumbnail Image *</label>
+                        <div id="filmThumbnailDropzone" class="upload-dropzone" onclick="document.getElementById('filmThumbnailInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <h4>Click to upload thumbnail</h4>
+                            <p>JPG, PNG up to 5MB</p>
+                            <input type="file" id="filmThumbnailInput" accept="image/*" onchange="handleFilmThumbnailSelect(event)" style="display:none;">
+                        </div>
+                        <div id="filmThumbnailPreview" style="display:none; position:relative; text-align:center;">
+                            <img id="filmThumbnailPreviewImg" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearFilmThumbnail()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                    </div>
+
+                    <!-- Video Source Tabs -->
+                    <div class="form-group">
+                        <label>Video Source</label>
+                        <div class="video-source-tabs">
                             <button type="button" class="video-tab active" id="videoTabUpload" onclick="switchVideoTab('upload')">Upload Video</button>
-                            <button type="button" class="video-tab" id="videoTabYoutube" onclick="switchVideoTab('youtube')">YouTube</button>
-                            <button type="button" class="video-tab" id="videoTabVimeo" onclick="switchVideoTab('vimeo')">Vimeo</button>
+                            <button type="button" class="video-tab" id="videoTabYoutube" onclick="switchVideoTab('youtube')">YouTube URL</button>
+                            <button type="button" class="video-tab" id="videoTabVimeo" onclick="switchVideoTab('vimeo')">Vimeo URL</button>
                         </div>
                     </div>
-                    
-                    <!-- S3 Video Upload -->
-                    <div id="videoUploadSection">
-                        <div class="form-group">
-                            <label>Upload Video File (MP4)</label>
-                            <div class="upload-dropzone" id="filmVideoDropzone" onclick="document.getElementById('filmVideoInput').click()">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                </svg>
-                                <p style="color: var(--text-secondary); margin: 0;">Click to upload video</p>
-                                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">MP4 format, max 500MB</p>
+
+                    <!-- Video Upload -->
+                    <div id="videoSourceUpload">
+                        <div id="filmVideoDropzone" class="upload-dropzone" onclick="document.getElementById('filmVideoInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                            <h4>Click to upload video</h4>
+                            <p>MP4, MOV up to 3GB</p>
+                            <input type="file" id="filmVideoInput" accept="video/*" onchange="handleFilmVideoSelect(event)" style="display:none;">
+                        </div>
+                        <div id="filmVideoPreview" style="display:none; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid var(--border-subtle);">
+                            <p style="color: var(--text-bright);"><span id="filmVideoFileName"></span></p>
+                            <p style="color: var(--text-muted); font-size: 12px;"><span id="filmVideoFileSize"></span></p>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearFilmVideo()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                        <div id="filmVideoUploadProgress" style="display:none; margin-top: 12px;">
+                            <div class="upload-progress-bar">
+                                <div class="upload-progress-fill" id="filmVideoProgressFill" style="width: 0%"></div>
                             </div>
-                            <input type="file" id="filmVideoInput" accept="video/mp4,video/webm,video/mov" style="display: none;" onchange="handleFilmVideoSelect(event)">
-                            <div id="filmVideoPreview" style="display: none; margin-top: 1rem; padding: 1rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-subtle);">
-                                <div style="display: flex; align-items: center; justify-content: space-between;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--gold)" style="width: 24px; height: 24px;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <div>
-                                            <p id="filmVideoFileName" style="color: var(--text-primary); margin: 0; font-weight: 500;"></p>
-                                            <p id="filmVideoFileSize" style="color: var(--text-muted); margin: 0; font-size: 0.8rem;"></p>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="clearFilmVideo()">Remove</button>
-                                </div>
-                                <div id="filmVideoUploadProgress" style="display: none; margin-top: 0.75rem;">
-                                    <div style="background: var(--border-subtle); border-radius: 4px; height: 6px; overflow: hidden;">
-                                        <div id="filmVideoProgressBar" style="background: var(--gold); height: 100%; width: 0%; transition: width 0.3s;"></div>
-                                    </div>
-                                    <p id="filmVideoProgressText" style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Uploading...</p>
-                                </div>
-                            </div>
-                            <!-- Hidden fields for S3 upload result -->
-                            <input type="hidden" id="filmVideoS3Key">
-                            <input type="hidden" id="filmVideoUrl">
+                            <p id="filmVideoProgressText" style="color: var(--text-muted); font-size: 12px; margin-top: 6px;">Uploading...</p>
                         </div>
                     </div>
-                    
+
                     <!-- YouTube URL -->
-                    <div id="videoYoutubeSection" style="display: none;">
+                    <div id="videoSourceYoutube" style="display:none;">
                         <div class="form-group">
                             <label>YouTube URL</label>
                             <input type="url" id="filmYoutubeUrl" placeholder="https://www.youtube.com/watch?v=...">
                         </div>
                     </div>
-                    
+
                     <!-- Vimeo URL -->
-                    <div id="videoVimeoSection" style="display: none;">
+                    <div id="videoSourceVimeo" style="display:none;">
                         <div class="form-group">
                             <label>Vimeo URL</label>
                             <input type="url" id="filmVimeoUrl" placeholder="https://vimeo.com/...">
+                        </div>
                     </div>
-                    
-                    <div class="form-group" id="filmActiveField" style="display: none;">
-                        <label>
-                            <input type="checkbox" id="filmIsActive" checked> Active (visible on website)
+
+                    <div class="form-group" id="filmActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="filmIsActive" checked> Active
                         </label>
                     </div>
                 </div>
@@ -4633,89 +4826,71 @@
 
     <!-- Film Preview Modal -->
     <div class="modal-overlay" id="filmPreviewModal">
-        <div class="modal" style="max-width: 900px; background: #000;">
-            <div class="modal-header" style="border-bottom: 1px solid rgba(201, 169, 98, 0.2);">
-                <h2 id="filmPreviewTitle" style="color: var(--gold);"></h2>
+        <div class="modal" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2 id="filmPreviewTitle">Film Preview</h2>
                 <button class="modal-close" onclick="closeFilmPreviewModal()">&times;</button>
             </div>
-            <div class="modal-body" style="padding: 0; background: #000;">
-                <div id="filmPreviewContainer" style="aspect-ratio: 16/9; width: 100%;">
-                    <!-- Video embed will be inserted here -->
-                </div>
+            <div class="modal-body" id="filmPreviewContent" style="text-align: center;">
+                <div class="loading"><div class="spinner"></div></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeFilmPreviewModal()">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Service Add/Edit Modal -->
+    <!-- Service Entry Modal (Website) -->
     <div class="modal-overlay" id="serviceEntryModal">
-        <div class="modal" style="max-width: 600px;">
+        <div class="modal">
             <div class="modal-header">
                 <h2 id="serviceModalTitle">Add Service</h2>
                 <button class="modal-close" onclick="closeServiceEntryModal()">&times;</button>
             </div>
             <form id="serviceEntryForm" onsubmit="saveServiceEntry(event)">
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <input type="hidden" id="serviceEntryId">
-                    
-                    <!-- Image Upload -->
+                <input type="hidden" id="serviceEntryId">
+                <div class="modal-body">
                     <div class="form-group">
-                        <label>Service Image *</label>
-                        <div class="upload-dropzone" id="serviceImageDropzone" onclick="document.getElementById('serviceImageInput').click()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0;">Click to upload image</p>
-                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Recommended: 600×400px (3:2)</p>
-                        </div>
-                        <input type="file" id="serviceImageInput" accept="image/*" style="display: none;" onchange="handleServiceImageSelect(event)">
-                        <div id="serviceImagePreview" style="display: none; text-align: center; margin-top: 1rem;">
-                            <img id="serviceImagePreviewImg" src="" alt="Service Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px; object-fit: cover;">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem;" onclick="clearServiceImage()">Remove</button>
-                        </div>
+                        <label>Badge / Tag</label>
+                        <input type="text" id="serviceBadge" placeholder="e.g. PREMIUM">
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Service Badge *</label>
-                        <input type="text" id="serviceBadge" placeholder="e.g., Photography, Cinematography, Pre-Wedding" required>
-                    </div>
-                    
                     <div class="form-group">
                         <label>Service Title *</label>
-                        <input type="text" id="serviceTitle" placeholder="e.g., Wedding Photography" required>
+                        <input type="text" id="serviceTitle" placeholder="e.g. Wedding Photography" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Description *</label>
-                        <textarea id="serviceDescription" rows="3" placeholder="Brief description of the service..." required></textarea>
+                        <label>Description</label>
+                        <textarea id="serviceDescription" rows="3" placeholder="Service description..."></textarea>
                     </div>
-                    
+                    <div class="form-group">
+                        <label>Service Image</label>
+                        <div id="serviceImageDropzone" class="upload-dropzone" onclick="document.getElementById('serviceImageInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <h4>Click to upload image</h4>
+                            <p>JPG, PNG up to 5MB</p>
+                            <input type="file" id="serviceImageInput" accept="image/*" onchange="handleServiceImageSelect(event)" style="display:none;">
+                        </div>
+                        <div id="serviceImagePreview" style="display:none; position:relative; text-align:center;">
+                            <img id="serviceImagePreviewImg" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearServiceImage()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Features</label>
-                        <div class="features-list-container" id="serviceFeaturesContainer">
-                            <!-- Features will be added dynamically -->
-                        </div>
-                        <button type="button" class="add-feature-btn" onclick="addServiceFeature()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Feature
-                        </button>
+                        <div class="features-list-container" id="serviceFeaturesContainer"></div>
+                        <button type="button" class="add-feature-btn" onclick="addServiceFeature()">+ Add Feature</button>
                     </div>
-                    
-                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div class="form-group">
-                            <label>Link Text</label>
-                            <input type="text" id="serviceLinkText" placeholder="e.g., Learn More" value="Learn More">
-                        </div>
-                        <div class="form-group">
-                            <label>Link URL</label>
-                            <input type="text" id="serviceLinkUrl" placeholder="e.g., #contact" value="#contact">
-                        </div>
+                    <div class="form-group">
+                        <label>Link Text</label>
+                        <input type="text" id="serviceLinkText" placeholder="e.g. Learn More" value="Learn More">
                     </div>
-                    
-                    <div class="form-group" id="serviceActiveField" style="display: none;">
-                        <label>
-                            <input type="checkbox" id="serviceIsActive" checked> Active (visible on website)
+                    <div class="form-group">
+                        <label>Link URL</label>
+                        <input type="text" id="serviceLinkUrl" placeholder="e.g. #contact" value="#contact">
+                    </div>
+                    <div class="form-group" id="serviceActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="serviceIsActive" checked> Active
                         </label>
                     </div>
                 </div>
@@ -4727,67 +4902,60 @@
         </div>
     </div>
 
-    <!-- Testimonial Add/Edit Modal -->
+    <!-- Testimonial Entry Modal -->
     <div class="modal-overlay" id="testimonialEntryModal">
-        <div class="modal" style="max-width: 550px;">
+        <div class="modal">
             <div class="modal-header">
                 <h2 id="testimonialModalTitle">Add Testimonial</h2>
                 <button class="modal-close" onclick="closeTestimonialEntryModal()">&times;</button>
             </div>
             <form id="testimonialEntryForm" onsubmit="saveTestimonialEntry(event)">
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <input type="hidden" id="testimonialEntryId">
-                    
-                    <!-- Photo Upload -->
-                    <div class="form-group">
-                        <label>Client Photo (Optional)</label>
-                        <div class="upload-dropzone" id="testimonialPhotoDropzone" onclick="document.getElementById('testimonialPhotoInput').click()" style="padding: 1rem;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 32px; height: 32px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">Click to upload photo</p>
-                        </div>
-                        <input type="file" id="testimonialPhotoInput" accept="image/*" style="display: none;" onchange="handleTestimonialPhotoSelect(event)">
-                        <div id="testimonialPhotoPreview" style="display: none; text-align: center; margin-top: 0.75rem;">
-                            <img id="testimonialPhotoPreviewImg" src="" alt="Photo Preview" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; display: block; margin-left: auto; margin-right: auto;" onclick="clearTestimonialPhoto()">Remove</button>
-                        </div>
-                    </div>
-                    
+                <input type="hidden" id="testimonialEntryId">
+                <div class="modal-body">
                     <div class="form-group">
                         <label>Client Name *</label>
-                        <input type="text" id="testimonialClientName" placeholder="e.g., Priya & Rahul" required>
+                        <input type="text" id="testimonialClientName" placeholder="e.g. Priya & Arjun Sharma" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Role / Description</label>
-                        <input type="text" id="testimonialClientRole" placeholder="e.g., Bride & Groom" value="Bride & Groom">
+                        <label>Wedding Date / Info</label>
+                        <input type="text" id="testimonialWeddingDate" placeholder="e.g. Destination Wedding, Udaipur">
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Wedding Date</label>
-                        <input type="text" id="testimonialWeddingDate" placeholder="e.g., December 2025">
-                    </div>
-                    
                     <div class="form-group">
                         <label>Testimonial Content *</label>
-                        <textarea id="testimonialContent" rows="4" placeholder="What the client said about your services..." required></textarea>
+                        <textarea id="testimonialContent" rows="4" placeholder="Client testimonial text..." required></textarea>
                     </div>
-                    
                     <div class="form-group">
                         <label>Rating</label>
                         <select id="testimonialRating">
-                            <option value="5">★★★★★ (5 Stars)</option>
-                            <option value="4">★★★★☆ (4 Stars)</option>
-                            <option value="3">★★★☆☆ (3 Stars)</option>
-                            <option value="2">★★☆☆☆ (2 Stars)</option>
-                            <option value="1">★☆☆☆☆ (1 Star)</option>
+                            <option value="5">★★★★★ (5)</option>
+                            <option value="4">★★★★☆ (4)</option>
+                            <option value="3">★★★☆☆ (3)</option>
+                            <option value="2">★★☆☆☆ (2)</option>
+                            <option value="1">★☆☆☆☆ (1)</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group" id="testimonialActiveField" style="display: none;">
-                        <label>
-                            <input type="checkbox" id="testimonialIsActive" checked> Active (visible on website)
+                    <div class="form-group">
+                        <label>Client Photo <span style="color: var(--gold); font-size: 12px; font-weight: normal;">(Used as background image on website)</span></label>
+                        <div style="background: rgba(201, 169, 98, 0.08); border: 1px solid rgba(201, 169, 98, 0.2); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: var(--text-light);">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px; display: inline; vertical-align: middle; margin-right: 6px; color: var(--gold);">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            This photo will be displayed as the full background with parallax scroll effect in the testimonials section
+                        </div>
+                        <div id="testimonialPhotoDropzone" class="upload-dropzone" onclick="document.getElementById('testimonialPhotoInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <h4>Click to upload photo</h4>
+                            <p>JPG, PNG up to 2MB • High quality recommended</p>
+                            <input type="file" id="testimonialPhotoInput" accept="image/*" onchange="handleTestimonialPhotoSelect(event)" style="display:none;">
+                        </div>
+                        <div id="testimonialPhotoPreview" style="display:none; position:relative; text-align:center;">
+                            <img id="testimonialPhotoPreviewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearTestimonialPhoto()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="testimonialActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="testimonialIsActive" checked> Active
                         </label>
                     </div>
                 </div>
@@ -4799,109 +4967,48 @@
         </div>
     </div>
 
-    <!-- About Story/Mission Edit Modal -->
-    <div class="modal-overlay" id="aboutStoryModal">
-        <div class="modal" style="max-width: 650px;">
-            <div class="modal-header">
-                <h2>Edit About Content</h2>
-                <button class="modal-close" onclick="closeAboutStoryModal()">&times;</button>
-            </div>
-            <form id="aboutStoryForm" onsubmit="saveAboutContent(event)">
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <!-- Cover Image Upload -->
-                    <div class="form-group">
-                        <label>Cover Image (Optional)</label>
-                        <div class="upload-dropzone" id="aboutCoverDropzone" onclick="document.getElementById('aboutCoverInput').click()" style="padding: 1.25rem;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 40px; height: 40px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Click to upload cover image</p>
-                        </div>
-                        <input type="file" id="aboutCoverInput" accept="image/*" style="display: none;" onchange="handleAboutCoverSelect(event)">
-                        <div id="aboutCoverPreview" style="display: none; text-align: center; margin-top: 0.75rem;">
-                            <img id="aboutCoverPreviewImg" src="" alt="Cover Preview" style="max-width: 100%; max-height: 180px; border-radius: 8px; object-fit: cover;">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; display: block; margin-left: auto; margin-right: auto;" onclick="clearAboutCover()">Remove</button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Story Title</label>
-                        <input type="text" id="aboutStoryTitle" placeholder="e.g., Our Story" value="Our Story">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Story Content</label>
-                        <textarea id="aboutStoryContent" rows="5" placeholder="Tell your company's story..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Mission Title</label>
-                        <input type="text" id="aboutMissionTitle" placeholder="e.g., Our Mission" value="Our Mission">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Mission Content</label>
-                        <textarea id="aboutMissionContent" rows="4" placeholder="Describe your mission..."></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeAboutStoryModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="aboutStorySubmitBtn">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Team Member Add/Edit Modal -->
+    <!-- Team Member Modal -->
     <div class="modal-overlay" id="teamMemberModal">
-        <div class="modal" style="max-width: 550px;">
+        <div class="modal">
             <div class="modal-header">
                 <h2 id="teamMemberModalTitle">Add Team Member</h2>
                 <button class="modal-close" onclick="closeTeamMemberModal()">&times;</button>
             </div>
             <form id="teamMemberForm" onsubmit="saveTeamMember(event)">
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <input type="hidden" id="teamMemberId">
-                    
-                    <!-- Photo Upload -->
-                    <div class="form-group">
-                        <label>Photo (Optional)</label>
-                        <div class="upload-dropzone" id="teamPhotoDropzone" onclick="document.getElementById('teamPhotoInput').click()" style="padding: 1rem;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 32px; height: 32px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">Click to upload photo</p>
-                        </div>
-                        <input type="file" id="teamPhotoInput" accept="image/*" style="display: none;" onchange="handleTeamPhotoSelect(event)">
-                        <div id="teamPhotoPreview" style="display: none; text-align: center; margin-top: 0.75rem;">
-                            <img id="teamPhotoPreviewImg" src="" alt="Photo Preview" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);">
-                            <button type="button" class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; display: block; margin-left: auto; margin-right: auto;" onclick="clearTeamPhoto()">Remove</button>
-                        </div>
-                    </div>
-                    
+                <input type="hidden" id="teamMemberId">
+                <div class="modal-body">
                     <div class="form-group">
                         <label>Name *</label>
-                        <input type="text" id="teamMemberName" placeholder="e.g., John Doe" required>
+                        <input type="text" id="teamMemberName" placeholder="e.g. John Doe" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Role / Title *</label>
-                        <input type="text" id="teamMemberRole" placeholder="e.g., Lead Photographer" required>
+                        <label>Role *</label>
+                        <input type="text" id="teamMemberRole" placeholder="e.g. Lead Photographer" required>
                     </div>
-                    
                     <div class="form-group">
                         <label>Bio</label>
-                        <textarea id="teamMemberBio" rows="3" placeholder="Brief bio..."></textarea>
+                        <textarea id="teamMemberBio" rows="3" placeholder="Short bio..."></textarea>
                     </div>
-                    
                     <div class="form-group">
                         <label>Instagram URL</label>
-                        <input type="url" id="teamMemberInstagram" placeholder="https://instagram.com/...">
+                        <input type="text" id="teamMemberInstagram" placeholder="https://instagram.com/...">
                     </div>
-                    
-                    <div class="form-group" id="teamMemberActiveField" style="display: none;">
-                        <label>
-                            <input type="checkbox" id="teamMemberIsActive" checked> Active (visible on website)
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <div id="teamPhotoDropzone" class="upload-dropzone" onclick="document.getElementById('teamPhotoInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            <h4>Click to upload photo</h4>
+                            <p>JPG, PNG up to 5MB</p>
+                            <input type="file" id="teamPhotoInput" accept="image/*" onchange="handleTeamPhotoSelect(event)" style="display:none;">
+                        </div>
+                        <div id="teamPhotoPreview" style="display:none; position:relative; text-align:center;">
+                            <img id="teamPhotoPreviewImg" src="" alt="Preview" style="max-width: 150px; max-height: 150px; border-radius: 50%;">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="clearTeamPhoto()" style="margin-top: 8px; width: auto;">Remove</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="teamMemberActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="teamMemberIsActive" checked> Active
                         </label>
                     </div>
                 </div>
@@ -4913,32 +5020,27 @@
         </div>
     </div>
 
-    <!-- Stat Add/Edit Modal -->
+    <!-- Stat Modal -->
     <div class="modal-overlay" id="statModal">
-        <div class="modal" style="max-width: 400px;">
+        <div class="modal" style="max-width: 450px;">
             <div class="modal-header">
                 <h2 id="statModalTitle">Add Statistic</h2>
                 <button class="modal-close" onclick="closeStatModal()">&times;</button>
             </div>
             <form id="statForm" onsubmit="saveStat(event)">
+                <input type="hidden" id="statId">
                 <div class="modal-body">
-                    <input type="hidden" id="statId">
-                    
                     <div class="form-group">
                         <label>Value *</label>
-                        <input type="text" id="statValue" placeholder="e.g., 500" required>
-                        <small style="color: var(--text-muted);">Can include numbers and symbols</small>
+                        <input type="text" id="statValue" placeholder="e.g. 500" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Suffix (Optional)</label>
-                        <input type="text" id="statSuffix" placeholder="e.g., +, %, K">
-                        <small style="color: var(--text-muted);">Displayed after the value (e.g., "500+")</small>
+                        <label>Suffix</label>
+                        <input type="text" id="statSuffix" placeholder="e.g. +">
                     </div>
-                    
                     <div class="form-group">
                         <label>Label *</label>
-                        <input type="text" id="statLabel" placeholder="e.g., Weddings Captured" required>
+                        <input type="text" id="statLabel" placeholder="e.g. Weddings Captured" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -4949,12 +5051,108 @@
         </div>
     </div>
 
+    <!-- Why Choose Us Card Modal -->
+    <div class="modal-overlay" id="whyCardModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="whyCardModalTitle">Add Feature Card</h2>
+                <button class="modal-close" onclick="closeWhyCardModal()">&times;</button>
+            </div>
+            <form id="whyCardForm" onsubmit="saveWhyCard(event)">
+                <input type="hidden" id="whyCardId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" id="whyCardTitle" placeholder="e.g. Creative Storytelling" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea id="whyCardDescription" rows="3" placeholder="Card description..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Icon Type</label>
+                        <input type="hidden" id="whyCardIconType" value="star">
+                        <div class="icon-picker-container">
+                            <div class="icon-picker-selected" onclick="toggleIconPicker()">
+                                <div class="selected-icon-preview" id="iconPickerPreview"></div>
+                                <span class="selected-icon-label" id="iconPickerLabel">Star</span>
+                                <svg class="picker-arrow" id="iconPickerArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                            </div>
+                            <div class="icon-picker-grid-wrapper" id="iconPickerGrid"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Highlight Text</label>
+                        <input type="text" id="whyCardHighlight" placeholder="e.g. 100+ Destination Weddings">
+                    </div>
+                    <div class="form-group">
+                        <label>Destinations (comma-separated)</label>
+                        <input type="text" id="whyCardDestinations" placeholder="e.g. Udaipur, Goa, Jaipur">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="whyCardIsFeatured"> Featured Card
+                        </label>
+                    </div>
+                    <div class="form-group" id="whyCardActiveField" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="whyCardIsActive" checked> Active
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeWhyCardModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="whyCardSubmitBtn">Add Card</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Film Roll Image Modal -->
+    <div class="modal-overlay" id="filmRollImageModal">
+        <div class="modal" style="max-width: 550px;">
+            <div class="modal-header">
+                <h2 id="filmRollModalTitle">Add Film Roll Image</h2>
+                <button class="modal-close" onclick="closeFilmRollImageModal()">&times;</button>
+            </div>
+            <form id="filmRollImageForm" onsubmit="saveFilmRollImage(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Image <span style="color: var(--danger);">*</span></label>
+                        <div id="filmRollImagePreview" style="display:none; margin-bottom: 12px; position: relative; border-radius: 10px; overflow: hidden; max-height: 200px;">
+                            <img id="filmRollImagePreviewImg" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                            <button type="button" onclick="clearFilmRollImage()" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); border: none; color: white; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;">&times;</button>
+                        </div>
+                        <input type="file" id="filmRollImageFile" accept="image/*" onchange="handleFilmRollImageSelect(event)" style="display: none;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('filmRollImageFile').click()" id="filmRollImagePickBtn" style="width: 100%;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            Choose Image
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>Caption</label>
+                        <input type="text" id="filmRollCaption" placeholder="e.g. Sarah & Michael">
+                    </div>
+                    <div class="form-group">
+                        <label>Alt Text</label>
+                        <input type="text" id="filmRollAltText" placeholder="Wedding" value="Wedding">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="closeFilmRollImageModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm" id="filmRollSubmitBtn">Add Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // CONFIGURATION - Backend API URL
         // ============================================
-        const BACKEND_URL = 'https://api.edastra.in'; // Production URL
-        // const BACKEND_URL = 'http://localhost:3000'; // Development URL
+        // Auto-detect: use localhost when running locally, production otherwise
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const BACKEND_URL = isLocalhost ? 'http://localhost:3000' : 'https://api.edastra.in';
         const API_BASE = `${BACKEND_URL}/api/admin`;
         
         let authToken = localStorage.getItem('adminToken');
@@ -5193,13 +5391,24 @@
             // Handle offerings subtab if specified
             if (section === 'offerings' && subtab) {
                 setTimeout(() => {
-                    document.querySelectorAll('.offerings-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.offerings-tab[data-subtab]').forEach(t => t.classList.remove('active'));
                     const tab = document.querySelector(`.offerings-tab[data-subtab="${subtab}"]`);
                     if (tab) {
                         tab.classList.add('active');
-                        document.querySelectorAll('.offerings-content').forEach(c => c.classList.remove('active'));
+                        document.querySelectorAll('#offeringsSection .offerings-content').forEach(c => c.classList.remove('active'));
                         document.getElementById(`${subtab}Content`).classList.add('active');
                         loadOfferingsSubtab(subtab);
+                    }
+                }, 100);
+            } else if (section === 'website' && subtab) {
+                setTimeout(() => {
+                    document.querySelectorAll('.offerings-tab[data-wstab]').forEach(t => t.classList.remove('active'));
+                    const tab = document.querySelector(`.offerings-tab[data-wstab="${subtab}"]`);
+                    if (tab) {
+                        tab.classList.add('active');
+                        document.querySelectorAll('#websiteSection .offerings-content').forEach(c => c.classList.remove('active'));
+                        document.getElementById(`${subtab}Content`).classList.add('active');
+                        loadWebsiteSubtab(subtab);
                     }
                 }, 100);
             } else {
@@ -5236,305 +5445,45 @@
         }
 
         // Website Controls subtabs navigation
-        document.querySelectorAll('.website-control-tab').forEach(tab => {
+        document.querySelectorAll('.offerings-tab[data-wstab]').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Update active tab
-                document.querySelectorAll('.website-control-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.offerings-tab[data-wstab]').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                
-                // Show corresponding content
-                const wctab = tab.dataset.wctab;
-                document.querySelectorAll('.website-control-content').forEach(c => c.classList.remove('active'));
-                document.getElementById(`${wctab}Content`).classList.add('active');
-                
-                // Load data for the subtab
-                loadWebsiteControlsSubtab(wctab);
+                const subtab = tab.dataset.wstab;
+                document.querySelectorAll('#websiteSection .offerings-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(`${subtab}Content`).classList.add('active');
+                loadWebsiteSubtab(subtab);
             });
         });
 
-        function loadWebsiteControlsSubtab(wctab) {
-            switch(wctab) {
-                case 'home': loadWebsiteHome(); break;
+        function loadWebsiteSubtab(subtab) {
+            switch(subtab) {
+                case 'hero': loadWebsiteHero(); break;
                 case 'archives': loadWebsiteArchives(); break;
                 case 'films': loadWebsiteFilms(); break;
-                case 'wcservices': loadWebsiteServices(); break;
+                case 'wsServices': loadWebsiteServices(); break;
                 case 'testimonials': loadWebsiteTestimonials(); break;
                 case 'about': loadWebsiteAbout(); break;
+                case 'whyChooseUs': loadWhyChooseUs(); break;
             }
         }
 
-        // ==========================================
-        // Website Controls - Home Page
-        // ==========================================
-        
-        let homeContentData = null;
-        let filmRollFilesToUpload = [];
-        
-        async function loadWebsiteHome() {
-            try {
-                const result = await apiCall('/website-content/home');
-                homeContentData = result.data;
-                
-                // Populate hero settings
-                if (homeContentData && homeContentData.home && homeContentData.home.hero) {
-                    document.getElementById('heroTagline').value = homeContentData.home.hero.tagline || '';
-                    renderFilmRollGrid(homeContentData.home.hero.filmRollImages || []);
-                } else {
-                    document.getElementById('heroTagline').value = '';
-                    renderFilmRollGrid([]);
-                }
-            } catch (error) {
-                showToast('Failed to load home content: ' + error.message, 'error');
-                renderFilmRollGrid([]);
-            }
-        }
-        
-        function renderFilmRollGrid(images) {
-            const grid = document.getElementById('filmRollGrid');
-            
-            if (!images || images.length === 0) {
-                grid.innerHTML = `
-                    <div class="film-roll-empty">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p>No film roll images yet</p>
-                        <p style="font-size: 0.8rem;">Click "Add Image" to upload your first image</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Sort by sortOrder
-            const sortedImages = [...images].sort((a, b) => a.sortOrder - b.sortOrder);
-            
-            grid.innerHTML = sortedImages.map((img, index) => `
-                <div class="film-roll-item" data-id="${img._id}">
-                    <span class="film-roll-item-order">#${index + 1}</span>
-                    <span class="film-roll-item-status ${img.isActive ? 'active' : 'inactive'}" title="${img.isActive ? 'Active' : 'Inactive'}"></span>
-                    <img src="${img.imageUrl}" alt="${img.altText || 'Wedding'}" loading="lazy">
-                    <div class="film-roll-item-overlay">
-                        ${img.caption ? `<div class="film-roll-item-caption">${img.caption}</div>` : ''}
-                        <div class="film-roll-item-actions">
-                            <button class="btn-edit" onclick="editFilmRollImage('${img._id}')">Edit</button>
-                            <button class="btn-delete" onclick="deleteFilmRollImage('${img._id}')">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        async function saveHeroSettings() {
-            try {
-                const tagline = document.getElementById('heroTagline').value;
-                
-                await apiCall('/website-content/home/hero', 'PUT', { tagline });
-                showToast('Hero settings saved successfully', 'success');
-            } catch (error) {
-                showToast('Failed to save hero settings: ' + error.message, 'error');
-            }
-        }
-        
-        // Film Roll Upload Modal
-        function openFilmRollUploadModal() {
-            filmRollFilesToUpload = [];
-            document.getElementById('filmRollFileInput').value = '';
-            document.getElementById('filmRollCaption').value = '';
-            document.getElementById('filmRollPreviewGrid').innerHTML = '';
-            document.getElementById('filmRollPreviewGrid').style.display = 'none';
-            document.getElementById('filmRollUploadProgress').style.display = 'none';
-            document.getElementById('filmRollUploadBtn').disabled = true;
-            document.getElementById('filmRollUploadModal').classList.add('active');
-        }
-        
-        function closeFilmRollUploadModal() {
-            filmRollFilesToUpload = [];
-            document.getElementById('filmRollUploadModal').classList.remove('active');
-        }
-        
-        // Setup dropzone events
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropzone = document.getElementById('filmRollDropzone');
-            const fileInput = document.getElementById('filmRollFileInput');
-            
-            if (dropzone && fileInput) {
-                dropzone.addEventListener('click', () => fileInput.click());
-                
-                dropzone.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    dropzone.classList.add('dragover');
-                });
-                
-                dropzone.addEventListener('dragleave', () => {
-                    dropzone.classList.remove('dragover');
-                });
-                
-                dropzone.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    dropzone.classList.remove('dragover');
-                    handleFilmRollFiles(e.dataTransfer.files);
-                });
-                
-                fileInput.addEventListener('change', (e) => {
-                    handleFilmRollFiles(e.target.files);
-                });
-            }
-        });
-        
-        function handleFilmRollFiles(files) {
-            const previewGrid = document.getElementById('filmRollPreviewGrid');
-            
-            for (const file of files) {
-                if (!file.type.startsWith('image/')) continue;
-                if (file.size > 50 * 1024 * 1024) {
-                    showToast(`File ${file.name} is too large (max 50MB)`, 'error');
-                    continue;
-                }
-                
-                filmRollFilesToUpload.push(file);
-                
-                // Create preview
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const div = document.createElement('div');
-                    div.className = 'upload-preview-item';
-                    div.innerHTML = `
-                        <img src="${e.target.result}" alt="Preview">
-                        <button type="button" class="remove-btn" onclick="removeFilmRollPreview(this, ${filmRollFilesToUpload.length - 1})">&times;</button>
-                    `;
-                    previewGrid.appendChild(div);
-                };
-                reader.readAsDataURL(file);
-            }
-            
-            if (filmRollFilesToUpload.length > 0) {
-                previewGrid.style.display = 'grid';
-                document.getElementById('filmRollUploadBtn').disabled = false;
-            }
-        }
-        
-        function removeFilmRollPreview(btn, index) {
-            btn.parentElement.remove();
-            filmRollFilesToUpload.splice(index, 1);
-            
-            if (filmRollFilesToUpload.length === 0) {
-                document.getElementById('filmRollPreviewGrid').style.display = 'none';
-                document.getElementById('filmRollUploadBtn').disabled = true;
-            }
-        }
-        
-        async function uploadFilmRollImages() {
-            if (filmRollFilesToUpload.length === 0) return;
-            
-            const progressDiv = document.getElementById('filmRollUploadProgress');
-            const progressFill = document.getElementById('filmRollProgressFill');
-            const progressText = document.getElementById('filmRollProgressText');
-            const uploadBtn = document.getElementById('filmRollUploadBtn');
-            
-            progressDiv.style.display = 'block';
-            uploadBtn.disabled = true;
-            
-            const caption = document.getElementById('filmRollCaption').value;
-            let successCount = 0;
-            
-            for (let i = 0; i < filmRollFilesToUpload.length; i++) {
-                const file = filmRollFilesToUpload[i];
-                const progress = ((i + 1) / filmRollFilesToUpload.length) * 100;
-                progressFill.style.width = `${progress}%`;
-                progressText.textContent = `Uploading ${i + 1} of ${filmRollFilesToUpload.length}...`;
-                
-                try {
-                    // Compress image before upload
-                    const compressedFile = await compressImage(file, 1200, 0.85);
-                    
-                    // Get signed URL for upload (use admin S3 endpoint)
-                    const signedUrlResult = await fetch(`${BACKEND_URL}/api/admin/s3/upload-url`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${authToken}`
-                        },
-                        body: JSON.stringify({
-                            folder: 'website',
-                            filename: file.name,
-                            mimeType: compressedFile.type,
-                            fileSize: compressedFile.size,
-                            prefix: 'home/film-roll'
-                        })
-                    });
-                    
-                    const signedUrlData = await signedUrlResult.json();
-                    
-                    if (!signedUrlData.success) {
-                        throw new Error(signedUrlData.error || 'Failed to get upload URL');
-                    }
-                    
-                    // Upload to S3
-                    const uploadResponse = await fetch(signedUrlData.uploadUrl, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': compressedFile.type
-                        },
-                        body: compressedFile
-                    });
-                    
-                    if (!uploadResponse.ok) {
-                        throw new Error('Failed to upload to S3');
-                    }
-                    
-                    // Construct the public URL
-                    const imageUrl = `https://${signedUrlData.bucket}.s3.${signedUrlData.region}.amazonaws.com/${signedUrlData.key}`;
-                    
-                    // Save to database
-                    await apiCall('/website-content/home/film-roll', 'POST', {
-                        imageUrl: imageUrl,
-                        s3Key: signedUrlData.key,
-                        caption: caption || '',
-                        altText: 'Wedding'
-                    });
-                    
-                    successCount++;
-                } catch (error) {
-                    console.error('Error uploading file:', error);
-                    showToast(`Failed to upload ${file.name}: ${error.message}`, 'error');
-                }
-            }
-            
-            if (successCount > 0) {
-                showToast(`Successfully uploaded ${successCount} image(s)`, 'success');
-                closeFilmRollUploadModal();
-                loadWebsiteHome();
-            } else {
-                progressDiv.style.display = 'none';
-                uploadBtn.disabled = false;
-            }
-        }
-        
         // Image compression utility
-        async function compressImage(file, maxWidth = 1200, quality = 0.85) {
+        function compressImage(file, maxWidth, quality) {
             return new Promise((resolve) => {
+                if (!file.type.startsWith('image/')) return resolve(file);
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const img = new Image();
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        
-                        // Calculate new dimensions
-                        if (width > maxWidth) {
-                            height = (height * maxWidth) / width;
-                            width = maxWidth;
-                        }
-                        
-                        canvas.width = width;
-                        canvas.height = height;
-                        
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        
+                        let w = img.width, h = img.height;
+                        if (w > maxWidth) { h = (h * maxWidth) / w; w = maxWidth; }
+                        canvas.width = w;
+                        canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                         canvas.toBlob((blob) => {
-                            resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                            resolve(blob || file);
                         }, 'image/jpeg', quality);
                     };
                     img.src = e.target.result;
@@ -5542,73 +5491,210 @@
                 reader.readAsDataURL(file);
             });
         }
-        
-        // Film Roll Edit Modal
-        function editFilmRollImage(imageId) {
-            if (!homeContentData || !homeContentData.home || !homeContentData.home.hero) return;
-            
-            const image = homeContentData.home.hero.filmRollImages.find(img => img._id === imageId);
-            if (!image) return;
-            
-            document.getElementById('editFilmRollId').value = imageId;
-            document.getElementById('editFilmRollPreview').src = image.imageUrl;
-            document.getElementById('editFilmRollCaption').value = image.caption || '';
-            document.getElementById('editFilmRollAltText').value = image.altText || 'Wedding';
-            document.getElementById('editFilmRollIsActive').checked = image.isActive !== false;
-            
-            document.getElementById('filmRollEditModal').classList.add('active');
-        }
-        
-        function closeFilmRollEditModal() {
-            document.getElementById('filmRollEditModal').classList.remove('active');
-        }
-        
-        async function saveFilmRollEdit(e) {
-            e.preventDefault();
-            
-            const imageId = document.getElementById('editFilmRollId').value;
-            const caption = document.getElementById('editFilmRollCaption').value;
-            const altText = document.getElementById('editFilmRollAltText').value;
-            const isActive = document.getElementById('editFilmRollIsActive').checked;
-            
-            try {
-                // Get current images and update the specific one
-                const images = homeContentData.home.hero.filmRollImages.map(img => {
-                    if (img._id === imageId) {
-                        return { ...img, caption, altText, isActive };
-                    }
-                    return img;
-                });
-                
-                await apiCall('/website-content/home/film-roll/reorder', 'PUT', { images });
-                
-                showToast('Image updated successfully', 'success');
-                closeFilmRollEditModal();
-                loadWebsiteHome();
-            } catch (error) {
-                showToast('Failed to update image: ' + error.message, 'error');
-            }
-        }
-        
-        async function deleteFilmRollImage(imageId) {
-            if (!confirm('Are you sure you want to delete this image?')) return;
-            
-            try {
-                await apiCall(`/website-content/home/film-roll/${imageId}`, 'DELETE');
-                showToast('Image deleted successfully', 'success');
-                loadWebsiteHome();
-            } catch (error) {
-                showToast('Failed to delete image: ' + error.message, 'error');
-            }
-        }
-        
+
         // ==========================================
-        // Website Controls - Archives Page
+        // Website Controls - Hero Section
+        // ==========================================
+        
+        let currentFilmRollImages = [];
+        let filmRollImageFile = null;
+
+        async function loadWebsiteHero() {
+            try {
+                const result = await apiCall('/website-content/home');
+                if (result.success && result.data) {
+                    const heroData = result.data.home?.hero || {};
+                    document.getElementById('heroTaglineInput').value = heroData.tagline || '';
+                    currentFilmRollImages = heroData.filmRollImages || [];
+                    renderFilmRollGrid();
+                }
+            } catch (error) {
+                showToast('Error loading hero content: ' + error.message, 'error');
+            }
+        }
+
+        function renderFilmRollGrid() {
+            const grid = document.getElementById('filmRollGrid');
+            if (!currentFilmRollImages || currentFilmRollImages.length === 0) {
+                grid.innerHTML = `
+                    <div class="film-roll-empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p style="color: var(--text-muted); margin-top: 12px;">No film roll images yet</p>
+                        <button class="btn btn-secondary btn-sm" style="margin-top: 12px;" onclick="openAddFilmRollModal()">+ Add First Image</button>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = currentFilmRollImages
+                .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+                .map((img, idx) => `
+                    <div class="film-roll-item">
+                        <img src="${img.imageUrl}" alt="${img.altText || 'Wedding'}" loading="lazy">
+                        <div class="film-roll-item-overlay">
+                            <span class="film-roll-item-caption">${img.caption || 'No caption'}</span>
+                            <div class="film-roll-item-actions">
+                                <button class="btn-delete" onclick="deleteFilmRollImageItem('${img._id}')" title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <span class="film-roll-item-order">#${idx + 1}</span>
+                        ${img.isActive === false ? '<span class="film-roll-item-status inactive">Inactive</span>' : ''}
+                    </div>
+                `).join('');
+        }
+
+        function openAddFilmRollModal() {
+            document.getElementById('filmRollModalTitle').textContent = 'Add Film Roll Image';
+            document.getElementById('filmRollSubmitBtn').textContent = 'Add Image';
+            document.getElementById('filmRollImageForm').reset();
+            document.getElementById('filmRollAltText').value = 'Wedding';
+            document.getElementById('filmRollImagePreview').style.display = 'none';
+            document.getElementById('filmRollImagePickBtn').style.display = '';
+            filmRollImageFile = null;
+            document.getElementById('filmRollImageModal').classList.add('active');
+        }
+
+        function closeFilmRollImageModal() {
+            document.getElementById('filmRollImageModal').classList.remove('active');
+        }
+
+        function handleFilmRollImageSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            filmRollImageFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('filmRollImagePreviewImg').src = e.target.result;
+                document.getElementById('filmRollImagePreview').style.display = 'block';
+                document.getElementById('filmRollImagePickBtn').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearFilmRollImage() {
+            filmRollImageFile = null;
+            document.getElementById('filmRollImagePreview').style.display = 'none';
+            document.getElementById('filmRollImagePickBtn').style.display = '';
+            document.getElementById('filmRollImageFile').value = '';
+        }
+
+        async function saveFilmRollImage(event) {
+            event.preventDefault();
+            
+            if (!filmRollImageFile) {
+                showToast('Please select an image', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('filmRollSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Uploading...';
+
+            try {
+                // Compress image
+                const compressedFile = await compressImage(filmRollImageFile, 1200, 0.85);
+
+                // Get signed upload URL
+                const signedUrlResult = await fetch(`${BACKEND_URL}/api/admin/s3/upload-url`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        folder: 'website',
+                        filename: filmRollImageFile.name,
+                        mimeType: compressedFile.type,
+                        fileSize: compressedFile.size,
+                        prefix: 'home/film-roll'
+                    })
+                });
+
+                const signedUrlData = await signedUrlResult.json();
+                if (!signedUrlData.success) throw new Error(signedUrlData.error || 'Failed to get upload URL');
+
+                // Upload to S3
+                const uploadResponse = await fetch(signedUrlData.uploadUrl, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': compressedFile.type },
+                    body: compressedFile
+                });
+                if (!uploadResponse.ok) throw new Error('Failed to upload image');
+
+                const imageUrl = `https://${signedUrlData.bucket}.s3.${signedUrlData.region}.amazonaws.com/${signedUrlData.key}`;
+                const s3Key = signedUrlData.key;
+
+                // Save to backend
+                const caption = document.getElementById('filmRollCaption').value.trim();
+                const altText = document.getElementById('filmRollAltText').value.trim() || 'Wedding';
+
+                const result = await apiCall('/website-content/home/film-roll', 'POST', {
+                    imageUrl, s3Key, caption, altText
+                });
+
+                if (result.success) {
+                    showToast('Film roll image added!', 'success');
+                    closeFilmRollImageModal();
+                    loadWebsiteHero();
+                } else {
+                    throw new Error(result.error || 'Failed to save');
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Add Image';
+            }
+        }
+
+        async function deleteFilmRollImageItem(imageId) {
+            if (!confirm('Delete this film roll image?')) return;
+
+            try {
+                const result = await apiCall(`/website-content/home/film-roll/${imageId}`, 'DELETE');
+                if (result.success) {
+                    showToast('Image deleted', 'success');
+                    loadWebsiteHero();
+                } else {
+                    throw new Error(result.error || 'Failed to delete');
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            }
+        }
+
+        async function saveHeroSettings() {
+            const btn = document.getElementById('heroSettingsSaveBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            try {
+                const tagline = document.getElementById('heroTaglineInput').value.trim();
+                const result = await apiCall('/website-content/home/hero', 'PUT', { tagline });
+
+                if (result.success) {
+                    showToast('Hero settings saved!', 'success');
+                } else {
+                    throw new Error(result.error || 'Failed to save');
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Settings';
+            }
+        }
+
+        // ==========================================
+        // Website Controls - Archive Page
         // ==========================================
         
         let archiveCoverFile = null;
-        let galleryFilesToUpload = [];
         let currentArchiveEntries = [];
+        let galleryFilesToUpload = [];
 
         async function loadWebsiteArchives() {
             const grid = document.getElementById('archiveEntriesGrid');
@@ -5643,7 +5729,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                         <p>No wedding archives yet</p>
-                        <p style="font-size: 0.85rem;">Click "Add Wedding" to create your first archive</p>
+                        <p style="font-size: 0.85rem;">Click "Add Archive" to create your first archive</p>
                     </div>
                 `;
                 return;
@@ -5944,11 +6030,17 @@
             
             const uploadedImages = [];
             
+            // Calculate total size for progress display
+            const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+            let uploadedSize = 0;
+            
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const progress = ((i + 1) / files.length) * 100;
                 progressFill.style.width = `${progress}%`;
-                progressText.textContent = `Uploading ${i + 1} of ${files.length}...`;
+                const uploadedMB = (uploadedSize / (1024 * 1024)).toFixed(1);
+                const totalMB = (totalSize / (1024 * 1024)).toFixed(1);
+                progressText.textContent = `Uploading ${i + 1} of ${files.length}... (${uploadedMB} MB / ${totalMB} MB)`;
                 
                 try {
                     const compressedFile = await compressImage(file, 1200, 0.85);
@@ -5987,6 +6079,9 @@
                         imageUrl: `https://${signedUrlData.bucket}.s3.${signedUrlData.region}.amazonaws.com/${signedUrlData.key}`,
                         s3Key: signedUrlData.key
                     });
+                    
+                    // Update uploaded size
+                    uploadedSize += file.size;
                 } catch (error) {
                     console.error(`Error uploading ${file.name}:`, error);
                 }
@@ -6170,19 +6265,19 @@
             document.getElementById('videoTabVimeo').classList.toggle('active', type === 'vimeo');
             
             // Show/hide sections
-            document.getElementById('videoUploadSection').style.display = type === 'upload' ? 'block' : 'none';
-            document.getElementById('videoYoutubeSection').style.display = type === 'youtube' ? 'block' : 'none';
-            document.getElementById('videoVimeoSection').style.display = type === 'vimeo' ? 'block' : 'none';
+            document.getElementById('videoSourceUpload').style.display = type === 'upload' ? 'block' : 'none';
+            document.getElementById('videoSourceYoutube').style.display = type === 'youtube' ? 'block' : 'none';
+            document.getElementById('videoSourceVimeo').style.display = type === 'vimeo' ? 'block' : 'none';
         }
         
         function handleFilmVideoSelect(event) {
             const file = event.target.files[0];
             if (!file) return;
             
-            // Check file size (500MB limit)
-            const maxSize = 500 * 1024 * 1024; // 500MB
+            // Check file size (3GB limit for wedding films)
+            const maxSize = 3 * 1024 * 1024 * 1024; // 3GB
             if (file.size > maxSize) {
-                showToast('Video file is too large. Maximum size is 500MB.', 'error');
+                showToast('Video file is too large. Maximum size is 3GB.', 'error');
                 return;
             }
             
@@ -6439,8 +6534,10 @@
                         xhr.upload.addEventListener('progress', (e) => {
                             if (e.lengthComputable) {
                                 const percent = Math.round((e.loaded / e.total) * 100);
-                                document.getElementById('filmVideoProgressBar').style.width = percent + '%';
-                                document.getElementById('filmVideoProgressText').textContent = `Uploading video... ${percent}%`;
+                                const loadedMB = (e.loaded / (1024 * 1024)).toFixed(1);
+                                const totalMB = (e.total / (1024 * 1024)).toFixed(1);
+                                document.getElementById('filmVideoProgressFill').style.width = percent + '%';
+                                document.getElementById('filmVideoProgressText').textContent = `Uploading video... ${percent}% (${loadedMB} MB / ${totalMB} MB)`;
                             }
                         });
                         
@@ -6463,7 +6560,50 @@
                     videoUrl = `https://${videoSignedUrlData.bucket}.s3.${videoSignedUrlData.region}.amazonaws.com/${videoSignedUrlData.key}`;
                     videoS3Key = videoSignedUrlData.key;
                     
-                    document.getElementById('filmVideoProgressText').textContent = 'Video uploaded!';
+                    document.getElementById('filmVideoProgressText').textContent = 'Video uploaded! Compressing...';
+                    
+                    // Always compress video on the backend
+                    document.getElementById('filmVideoProgressFill').style.width = '0%';
+                    document.getElementById('filmVideoProgressFill').style.animation = 'pulse 1.5s ease-in-out infinite';
+                    
+                    try {
+                        submitBtn.textContent = 'Compressing video...';
+                        const optimizeResponse = await fetch(`${API_BASE}/s3/optimize-video`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${authToken}`
+                            },
+                            body: JSON.stringify({
+                                s3Key: videoS3Key,
+                                quality: 'balanced',
+                                replaceOriginal: true
+                            })
+                        });
+                        
+                        const optimizeData = await optimizeResponse.json();
+                        document.getElementById('filmVideoProgressFill').style.animation = 'none';
+                        
+                        if (optimizeData.success) {
+                            videoUrl = optimizeData.url || videoUrl;
+                            videoS3Key = optimizeData.s3Key || videoS3Key;
+                            document.getElementById('filmVideoProgressFill').style.width = '100%';
+                            document.getElementById('filmVideoProgressText').textContent = 
+                                `Video compressed! ${optimizeData.originalSize} → ${optimizeData.compressedSize} (${optimizeData.reduction} smaller)`;
+                            console.log('Video optimization result:', optimizeData);
+                        } else {
+                            console.warn('Video compression skipped:', optimizeData.error);
+                            document.getElementById('filmVideoProgressFill').style.width = '100%';
+                            document.getElementById('filmVideoProgressText').textContent = 
+                                'Video uploaded (compression skipped: ' + (optimizeData.error || 'unavailable') + ')';
+                        }
+                    } catch (optimizeError) {
+                        console.error('Video compression error:', optimizeError);
+                        document.getElementById('filmVideoProgressFill').style.animation = 'none';
+                        document.getElementById('filmVideoProgressFill').style.width = '100%';
+                        document.getElementById('filmVideoProgressText').textContent = 
+                            'Video uploaded (compression skipped due to error)';
+                    }
                 }
                 
                 let apiUrl, method, body;
@@ -6573,7 +6713,7 @@
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        function extractVimeoId(url) {
+        function extractVimeoId(url) {π
             const regExp = /vimeo\.com\/(\d+)/;
             const match = url.match(regExp);
             return match ? match[1] : null;
@@ -6597,7 +6737,14 @@
                 const data = await response.json();
                 
                 if (data.success && data.data && data.data.services) {
-                    currentServiceEntries = data.data.services.entries || [];
+                    const servicesData = data.data.services;
+                    
+                    // Populate section settings
+                    document.getElementById('servicesSectionLabel').value = servicesData.sectionLabel || '';
+                    document.getElementById('servicesSectionTitle').value = servicesData.sectionTitle || '';
+                    document.getElementById('servicesSectionSubtitle').value = servicesData.sectionSubtitle || '';
+                    
+                    currentServiceEntries = servicesData.entries || [];
                     // Sort by sortOrder
                     currentServiceEntries.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
                     renderServiceEntriesGrid();
@@ -6608,6 +6755,39 @@
             } catch (error) {
                 console.error('Error loading services:', error);
                 grid.innerHTML = `<div class="services-empty"><p>Error loading services</p></div>`;
+            }
+        }
+
+        async function saveServicesSectionSettings() {
+            const sectionLabel = document.getElementById('servicesSectionLabel').value.trim();
+            const sectionTitle = document.getElementById('servicesSectionTitle').value.trim();
+            const sectionSubtitle = document.getElementById('servicesSectionSubtitle').value.trim();
+            
+            try {
+                const response = await fetch(`${API_BASE}/website-content/services`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        services: {
+                            sectionLabel,
+                            sectionTitle,
+                            sectionSubtitle
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showToast('Section settings saved successfully', 'success');
+                } else {
+                    throw new Error(data.error || 'Failed to save');
+                }
+            } catch (error) {
+                console.error('Error saving section settings:', error);
+                showToast(error.message || 'Failed to save section settings', 'error');
             }
         }
 
@@ -6685,6 +6865,8 @@
                 const modal = document.getElementById('serviceEntryModal');
                 console.log('Modal element:', modal);
                 modal.classList.add('active');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
                 console.log('Modal classes after add:', modal.className);
             } catch (error) {
                 console.error('Error opening service modal:', error);
@@ -6722,11 +6904,17 @@
             serviceFeatures = entry.features ? entry.features.map(f => f.text) : [];
             renderServiceFeatures();
             
-            document.getElementById('serviceEntryModal').classList.add('active');
+            const modal = document.getElementById('serviceEntryModal');
+            modal.classList.add('active');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeServiceEntryModal() {
-            document.getElementById('serviceEntryModal').classList.remove('active');
+            const modal = document.getElementById('serviceEntryModal');
+            modal.classList.remove('active');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
             serviceImageFile = null;
             serviceFeatures = [];
         }
@@ -6989,7 +7177,6 @@
                         </div>
                         <div class="testimonial-client-info">
                             <div class="testimonial-client-name">${entry.clientName}</div>
-                            <div class="testimonial-client-role">${entry.clientRole || 'Bride & Groom'}</div>
                         </div>
                     </div>
                     <div class="testimonial-rating">
@@ -7052,7 +7239,6 @@
             document.getElementById('testimonialPhotoDropzone').style.display = 'block';
             document.getElementById('testimonialPhotoPreview').style.display = 'none';
             document.getElementById('testimonialRating').value = '5';
-            document.getElementById('testimonialClientRole').value = 'Bride & Groom';
             testimonialPhotoFile = null;
             document.getElementById('testimonialEntryModal').classList.add('active');
         }
@@ -7065,7 +7251,6 @@
             document.getElementById('testimonialSubmitBtn').textContent = 'Save Changes';
             document.getElementById('testimonialEntryId').value = entry._id;
             document.getElementById('testimonialClientName').value = entry.clientName || '';
-            document.getElementById('testimonialClientRole').value = entry.clientRole || 'Bride & Groom';
             document.getElementById('testimonialWeddingDate').value = entry.weddingDate || '';
             document.getElementById('testimonialContent').value = entry.content || '';
             document.getElementById('testimonialRating').value = entry.rating || 5;
@@ -7170,12 +7355,12 @@
                     });
                     
                     photoS3Key = uploadUrlData.key;
-                    photoUrl = uploadUrlData.downloadUrl;
+                    // photoUrl will be generated from photoS3Key via signed URL at read time
+                    photoUrl = '';
                 }
                 
                 const testimonialData = {
                     clientName: document.getElementById('testimonialClientName').value,
-                    clientRole: document.getElementById('testimonialClientRole').value || 'Bride & Groom',
                     weddingDate: document.getElementById('testimonialWeddingDate').value,
                     content: document.getElementById('testimonialContent').value,
                     rating: parseInt(document.getElementById('testimonialRating').value) || 5,
@@ -7304,32 +7489,130 @@
         }
 
         function renderAboutStoryPreview() {
-            const preview = document.getElementById('aboutStoryPreview');
             const data = currentAboutData || {};
             
-            let coverHtml = '';
+            // Populate form fields
+            document.getElementById('aboutSectionLabel').value = data.sectionLabel || 'Our Story';
+            document.getElementById('aboutHeadline').value = data.headline || 'Passionate About Capturing Love';
+            
+            // Paragraphs
+            const paragraphs = data.paragraphs || [];
+            document.getElementById('aboutParagraph1').value = paragraphs[0] || '';
+            document.getElementById('aboutParagraph2').value = paragraphs[1] || '';
+            document.getElementById('aboutParagraph3').value = paragraphs[2] || '';
+            
+            // Cover image
+            document.getElementById('aboutCoverImageUrl').value = data.coverImageUrl || '';
+            document.getElementById('aboutCoverImageS3Key').value = data.coverImageS3Key || '';
+            
+            // Show preview if image exists
+            const previewContainer = document.getElementById('aboutCoverImagePreview');
             if (data.coverImageUrl) {
-                coverHtml = `
-                    <div class="cover-image-preview">
-                        <div class="story-label">Cover Image</div>
-                        <img src="${data.coverImageUrl}" alt="About Cover" onerror="this.onerror=null;this.style.display='none';">
-                    </div>
-                `;
+                previewContainer.style.display = 'block';
+                previewContainer.querySelector('img').src = data.coverImageUrl;
+            } else {
+                previewContainer.style.display = 'none';
             }
             
-            preview.innerHTML = `
-                <div class="story-section">
-                    <div class="story-label">Story</div>
-                    <div class="story-title">${data.storyTitle || 'Our Story'}</div>
-                    <div class="story-text">${data.storyContent || '<em style="color: var(--text-muted);">No story content added yet.</em>'}</div>
-                </div>
-                <div class="story-section">
-                    <div class="story-label">Mission</div>
-                    <div class="story-title">${data.missionTitle || 'Our Mission'}</div>
-                    <div class="story-text">${data.missionContent || '<em style="color: var(--text-muted);">No mission content added yet.</em>'}</div>
-                </div>
-                ${coverHtml}
-            `;
+            // Badge
+            document.getElementById('aboutBadgeValue').value = data.badgeValue || '500+';
+            document.getElementById('aboutBadgeLabel').value = data.badgeLabel || 'Weddings Captured';
+        }
+
+        async function saveAboutContent() {
+            const sectionLabel = document.getElementById('aboutSectionLabel').value.trim();
+            const headline = document.getElementById('aboutHeadline').value.trim();
+            const paragraphs = [
+                document.getElementById('aboutParagraph1').value.trim(),
+                document.getElementById('aboutParagraph2').value.trim(),
+                document.getElementById('aboutParagraph3').value.trim()
+            ].filter(p => p); // Remove empty paragraphs
+            
+            const coverImageUrl = document.getElementById('aboutCoverImageUrl').value.trim();
+            const coverImageS3Key = document.getElementById('aboutCoverImageS3Key').value.trim();
+            const badgeValue = document.getElementById('aboutBadgeValue').value.trim();
+            const badgeLabel = document.getElementById('aboutBadgeLabel').value.trim();
+            
+            try {
+                const response = await fetch(`${API_BASE}/website-content/about`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        sectionLabel,
+                        headline,
+                        paragraphs,
+                        coverImageUrl,
+                        coverImageS3Key,
+                        badgeValue,
+                        badgeLabel
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentAboutData = result.data.about;
+                    showToast('About content saved successfully', 'success');
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('Error saving about content:', error);
+                showToast('Failed to save about content', 'error');
+            }
+        }
+
+        async function uploadAboutCoverImage() {
+            const input = document.getElementById('aboutCoverInput');
+            const file = input.files[0];
+            if (!file) return;
+            
+            try {
+                showToast('Uploading image...', 'info');
+                
+                // Get signed URL
+                const response = await fetch(`${API_BASE}/s3/upload-url`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        folder: 'website',
+                        filename: file.name,
+                        mimeType: file.type,
+                        fileSize: file.size,
+                        prefix: 'about'
+                    })
+                });
+                
+                const urlData = await response.json();
+                if (!urlData.success) throw new Error(urlData.error);
+                
+                // Upload to S3
+                await fetch(urlData.uploadUrl, {
+                    method: 'PUT',
+                    body: file,
+                    headers: { 'Content-Type': file.type }
+                });
+                
+                // Update form - downloadUrl is generated at read time from S3 key
+                document.getElementById('aboutCoverImageUrl').value = '';
+                document.getElementById('aboutCoverImageS3Key').value = urlData.key;
+                
+                // Show preview
+                const previewContainer = document.getElementById('aboutCoverImagePreview');
+                previewContainer.style.display = 'block';
+                previewContainer.querySelector('img').src = URL.createObjectURL(file);
+                
+                showToast('Image uploaded successfully', 'success');
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast('Failed to upload image', 'error');
+            }
         }
 
         function renderStatsGrid() {
@@ -7410,152 +7693,6 @@
                     </div>
                 </div>
             `).join('');
-        }
-
-        // About Story Modal Functions
-        function openEditAboutStoryModal() {
-            const data = currentAboutData || {};
-            
-            document.getElementById('aboutStoryTitle').value = data.storyTitle || 'Our Story';
-            document.getElementById('aboutStoryContent').value = data.storyContent || '';
-            document.getElementById('aboutMissionTitle').value = data.missionTitle || 'Our Mission';
-            document.getElementById('aboutMissionContent').value = data.missionContent || '';
-            
-            // Handle cover image
-            if (data.coverImageUrl) {
-                document.getElementById('aboutCoverDropzone').style.display = 'none';
-                document.getElementById('aboutCoverPreview').style.display = 'block';
-                document.getElementById('aboutCoverPreviewImg').src = data.coverImageUrl;
-            } else {
-                document.getElementById('aboutCoverDropzone').style.display = 'block';
-                document.getElementById('aboutCoverPreview').style.display = 'none';
-            }
-            
-            aboutCoverFile = null;
-            document.getElementById('aboutStoryModal').classList.add('active');
-        }
-
-        function closeAboutStoryModal() {
-            document.getElementById('aboutStoryModal').classList.remove('active');
-            aboutCoverFile = null;
-        }
-
-        function handleAboutCoverSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                aboutCoverFile = file;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('aboutCoverPreviewImg').src = e.target.result;
-                    document.getElementById('aboutCoverDropzone').style.display = 'none';
-                    document.getElementById('aboutCoverPreview').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function clearAboutCover() {
-            aboutCoverFile = null;
-            document.getElementById('aboutCoverDropzone').style.display = 'block';
-            document.getElementById('aboutCoverPreview').style.display = 'none';
-            // Mark for removal
-            document.getElementById('aboutCoverInput').value = '';
-        }
-
-        async function saveAboutContent(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('aboutStorySubmitBtn');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Saving...';
-            
-            try {
-                let coverImageUrl = currentAboutData?.coverImageUrl || '';
-                let coverImageS3Key = currentAboutData?.coverImageS3Key || '';
-                
-                // Check if cover was cleared
-                const coverPreviewVisible = document.getElementById('aboutCoverPreview').style.display !== 'none';
-                if (!coverPreviewVisible && !aboutCoverFile) {
-                    coverImageUrl = '';
-                    coverImageS3Key = '';
-                }
-                
-                // Upload new cover if selected
-                if (aboutCoverFile) {
-                    const compressedFile = await compressImage(aboutCoverFile, 1200, 0.85);
-                    
-                    const timestamp = Date.now();
-                    const filename = `about_cover_${timestamp}.jpg`;
-                    
-                    const uploadUrlRes = await fetch(`${API_BASE}/s3/upload-url`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            folder: 'website',
-                            filename: filename,
-                            mimeType: 'image/jpeg',
-                            fileSize: compressedFile.size,
-                            prefix: 'about'
-                        })
-                    });
-                    
-                    const uploadUrlData = await uploadUrlRes.json();
-                    if (!uploadUrlData.success) throw new Error('Failed to get upload URL');
-                    
-                    await fetch(uploadUrlData.uploadUrl, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'image/jpeg' },
-                        body: compressedFile
-                    });
-                    
-                    coverImageS3Key = uploadUrlData.key;
-                    coverImageUrl = uploadUrlData.downloadUrl;
-                }
-                
-                const aboutData = {
-                    storyTitle: document.getElementById('aboutStoryTitle').value,
-                    storyContent: document.getElementById('aboutStoryContent').value,
-                    missionTitle: document.getElementById('aboutMissionTitle').value,
-                    missionContent: document.getElementById('aboutMissionContent').value,
-                    coverImageUrl,
-                    coverImageS3Key
-                };
-                
-                const response = await fetch(`${API_BASE}/website-content/about`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(aboutData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('About content updated!', 'success');
-                    closeAboutStoryModal();
-                    
-                    if (result.data && result.data.about) {
-                        currentAboutData = result.data.about;
-                        renderAboutStoryPreview();
-                    } else {
-                        loadWebsiteAbout();
-                    }
-                } else {
-                    throw new Error(result.error || 'Failed to save about content');
-                }
-            } catch (error) {
-                console.error('Error saving about content:', error);
-                showToast('Error: ' + error.message, 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
         }
 
         // Team Member Modal Functions
@@ -7879,6 +8016,336 @@
             }
         }
 
+        // ==========================================
+        // Website Controls - Why Choose Us
+        // ==========================================
+        
+        let whyChooseUsData = null;
+        let currentWhyCards = [];
+        
+        async function loadWhyChooseUs() {
+            try {
+                const result = await apiCall('/website-content/why-choose-us');
+                whyChooseUsData = result.data;
+                
+                if (whyChooseUsData && whyChooseUsData.whyChooseUs) {
+                    const wcu = whyChooseUsData.whyChooseUs;
+                    
+                    currentWhyCards = wcu.cards || [];
+                    currentWhyCards.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+                    renderWhyCardsGrid();
+                } else {
+                    currentWhyCards = [];
+                    renderWhyCardsGrid();
+                }
+            } catch (error) {
+                showToast('Failed to load Why Choose Us content: ' + error.message, 'error');
+                renderWhyCardsGrid();
+            }
+        }
+        
+        // Icon Picker for Why Choose Us modal
+        const iconPickerData = [
+            { category: 'Wedding & Love', icons: [
+                { value: 'heart', label: 'Heart' }, { value: 'rings', label: 'Rings' }, { value: 'sparkles', label: 'Sparkles' },
+                { value: 'crown', label: 'Crown' }, { value: 'gift', label: 'Gift' }, { value: 'music', label: 'Music' }
+            ]},
+            { category: 'Photography & Film', icons: [
+                { value: 'camera', label: 'Camera' }, { value: 'film', label: 'Film' }, { value: 'aperture', label: 'Aperture' },
+                { value: 'image', label: 'Image' }, { value: 'video', label: 'Video' }, { value: 'edit', label: 'Edit' }
+            ]},
+            { category: 'Quality & Trust', icons: [
+                { value: 'star', label: 'Star' }, { value: 'award', label: 'Award' }, { value: 'shield', label: 'Shield' },
+                { value: 'check-circle', label: 'Verified' }, { value: 'thumbs-up', label: 'Thumbs Up' }, { value: 'bookmark', label: 'Bookmark' }
+            ]},
+            { category: 'Service & Experience', icons: [
+                { value: 'luxury', label: 'Luxury' }, { value: 'palette', label: 'Creative' }, { value: 'headphones', label: 'Support' },
+                { value: 'coffee', label: 'Consultation' }, { value: 'smile', label: 'Experience' }, { value: 'feather', label: 'Elegant' },
+                { value: 'zap', label: 'Fast' }
+            ]},
+            { category: 'Team & Travel', icons: [
+                { value: 'team', label: 'Team' }, { value: 'users', label: 'Users' }, { value: 'globe', label: 'Globe' },
+                { value: 'map-pin', label: 'Location' }, { value: 'compass', label: 'Compass' }, { value: 'send', label: 'Delivery' }
+            ]},
+            { category: 'General', icons: [
+                { value: 'clock', label: 'Clock' }, { value: 'sun', label: 'Sun' }, { value: 'layers', label: 'Layers' },
+                { value: 'trending-up', label: 'Trending' }
+            ]}
+        ];
+
+        function renderIconPickerGrid() {
+            const grid = document.getElementById('iconPickerGrid');
+            const currentValue = document.getElementById('whyCardIconType').value;
+            grid.innerHTML = iconPickerData.map(cat => `
+                <div class="icon-picker-category">
+                    <div class="icon-picker-category-label">${cat.category}</div>
+                    <div class="icon-picker-icons">
+                        ${cat.icons.map(icon => `
+                            <div class="icon-picker-item ${icon.value === currentValue ? 'selected' : ''}" onclick="selectIcon('${icon.value}', '${icon.label}')" title="${icon.label}">
+                                ${getWhyCardIconSVG(icon.value)}
+                                <span class="icon-picker-tooltip">${icon.label}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleIconPicker() {
+            const grid = document.getElementById('iconPickerGrid');
+            const arrow = document.getElementById('iconPickerArrow');
+            const isOpen = grid.classList.contains('open');
+            if (!isOpen) {
+                renderIconPickerGrid();
+            }
+            grid.classList.toggle('open');
+            arrow.classList.toggle('open');
+        }
+
+        function selectIcon(value, label) {
+            document.getElementById('whyCardIconType').value = value;
+            document.getElementById('iconPickerPreview').innerHTML = getWhyCardIconSVG(value);
+            document.getElementById('iconPickerLabel').textContent = label;
+            // Update selected state
+            document.querySelectorAll('.icon-picker-item').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            // Close picker
+            document.getElementById('iconPickerGrid').classList.remove('open');
+            document.getElementById('iconPickerArrow').classList.remove('open');
+        }
+
+        function setIconPickerValue(value) {
+            document.getElementById('whyCardIconType').value = value;
+            document.getElementById('iconPickerPreview').innerHTML = getWhyCardIconSVG(value);
+            // Find label for this value
+            let label = value;
+            for (const cat of iconPickerData) {
+                const found = cat.icons.find(i => i.value === value);
+                if (found) { label = found.label; break; }
+            }
+            document.getElementById('iconPickerLabel').textContent = label;
+            // Close grid if open
+            document.getElementById('iconPickerGrid').classList.remove('open');
+            document.getElementById('iconPickerArrow').classList.remove('open');
+        }
+
+        function getWhyCardIconSVG(iconType) {
+            const icons = {
+                // Wedding & Love
+                'heart': `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+                'rings': `<svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5" fill="none"/><circle cx="15" cy="12" r="5" fill="none"/></svg>`,
+                'sparkles': `<svg viewBox="0 0 24 24"><path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3z"/><path d="M19 15l.5 1.5L21 17l-1.5.5L19 19l-.5-1.5L17 17l1.5-.5L19 15z"/><path d="M5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5L5 17z"/></svg>`,
+                'crown': `<svg viewBox="0 0 24 24"><path d="M2 20h20L19 8l-5 5-2-7-2 7-5-5L2 20z"/><line x1="2" y1="20" x2="22" y2="20"/></svg>`,
+                'gift': `<svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>`,
+                'music': `<svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
+                // Photography & Film
+                'camera': `<svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+                'film': `<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg>`,
+                'aperture': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>`,
+                'image': `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
+                'video': `<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+                'edit': `<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+                // Quality & Trust
+                'star': `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+                'award': `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`,
+                'shield': `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+                'check-circle': `<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+                'thumbs-up': `<svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>`,
+                'bookmark': `<svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`,
+                // Service & Experience
+                'luxury': `<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+                'palette': `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/><circle cx="6.5" cy="11.5" r="1.5"/><circle cx="9.5" cy="7.5" r="1.5"/><circle cx="14.5" cy="7.5" r="1.5"/><circle cx="17.5" cy="11.5" r="1.5"/></svg>`,
+                'headphones': `<svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+                'coffee': `<svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+                'smile': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
+                'feather': `<svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>`,
+                'zap': `<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                // Team & Travel
+                'team': `<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                'users': `<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                'globe': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+                'map-pin': `<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+                'compass': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
+                'send': `<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+                // General
+                'clock': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                'sun': `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+                'layers': `<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+                'trending-up': `<svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`
+            };
+            return icons[iconType] || icons['star'];
+        }
+
+        function renderWhyCardsGrid() {
+            const grid = document.getElementById('whyCardsGrid');
+            
+            if (!currentWhyCards || currentWhyCards.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.5;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p>No feature cards yet</p>
+                        <p style="font-size: 0.85rem;">Click "Add Card" to create your first feature card</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = currentWhyCards.map((card, index) => `
+                <div class="why-card-item ${card.isFeatured ? 'featured' : ''} ${!card.isActive ? 'inactive' : ''}" data-id="${card._id}">
+                    <div class="why-card-header">
+                        <span class="why-card-icon">${getWhyCardIconSVG(card.iconType)}</span>
+                        <div class="why-card-info">
+                            <h4>${card.title}</h4>
+                            ${card.isFeatured ? '<span class="badge featured-badge">Featured</span>' : ''}
+                            ${!card.isActive ? '<span class="badge inactive-badge">Hidden</span>' : ''}
+                        </div>
+                        <span class="why-card-order">#${index + 1}</span>
+                    </div>
+                    <p class="why-card-desc">${card.description}</p>
+                    ${card.highlight ? `<span class="why-card-highlight">${card.highlight}</span>` : ''}
+                    ${card.destinations && card.destinations.length > 0 ? `
+                        <div class="why-card-destinations">
+                            ${card.destinations.map(d => `<span class="dest-tag">${d}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                    <div class="why-card-actions">
+                        <button class="edit-btn" onclick="editWhyCard('${card._id}')" title="Edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </button>
+                        <button class="delete-btn" onclick="deleteWhyCard('${card._id}')" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function openAddWhyCardModal() {
+            try {
+                document.getElementById('whyCardModalTitle').textContent = 'Add Feature Card';
+                document.getElementById('whyCardId').value = '';
+                document.getElementById('whyCardTitle').value = '';
+                document.getElementById('whyCardDescription').value = '';
+                setIconPickerValue('star');
+                document.getElementById('whyCardIsFeatured').checked = false;
+                document.getElementById('whyCardHighlight').value = '';
+                document.getElementById('whyCardDestinations').value = '';
+                document.getElementById('whyCardIsActive').checked = true;
+                document.getElementById('whyCardActiveField').style.display = 'none';
+                document.getElementById('whyCardSubmitBtn').textContent = 'Add Card';
+                
+                const modal = document.getElementById('whyCardModal');
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } catch (error) {
+                console.error('Error opening why card modal:', error);
+                showToast('Error opening modal: ' + error.message, 'error');
+            }
+        }
+        
+        function editWhyCard(cardId) {
+            const card = currentWhyCards.find(c => c._id === cardId);
+            if (!card) {
+                showToast('Error: Card not found', 'error');
+                return;
+            }
+            
+            document.getElementById('whyCardModalTitle').textContent = 'Edit Feature Card';
+            document.getElementById('whyCardId').value = cardId;
+            document.getElementById('whyCardTitle').value = card.title || '';
+            document.getElementById('whyCardDescription').value = card.description || '';
+            setIconPickerValue(card.iconType || 'star');
+            document.getElementById('whyCardIsFeatured').checked = card.isFeatured || false;
+            document.getElementById('whyCardHighlight').value = card.highlight || '';
+            document.getElementById('whyCardDestinations').value = (card.destinations || []).join(', ');
+            document.getElementById('whyCardIsActive').checked = card.isActive !== false;
+            document.getElementById('whyCardActiveField').style.display = 'block';
+            document.getElementById('whyCardSubmitBtn').textContent = 'Save Changes';
+            
+            const modal = document.getElementById('whyCardModal');
+            modal.classList.add('active');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeWhyCardModal() {
+            const modal = document.getElementById('whyCardModal');
+            modal.classList.remove('active');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        async function saveWhyCard(event) {
+            event.preventDefault();
+            
+            const cardId = document.getElementById('whyCardId').value;
+            const isEdit = !!cardId;
+            
+            const destinationsStr = document.getElementById('whyCardDestinations').value;
+            const destinations = destinationsStr ? destinationsStr.split(',').map(d => d.trim()).filter(d => d) : [];
+            
+            const cardData = {
+                title: document.getElementById('whyCardTitle').value,
+                description: document.getElementById('whyCardDescription').value,
+                iconType: document.getElementById('whyCardIconType').value,
+                isFeatured: document.getElementById('whyCardIsFeatured').checked,
+                highlight: document.getElementById('whyCardHighlight').value,
+                destinations: destinations
+            };
+            
+            if (isEdit) {
+                cardData.isActive = document.getElementById('whyCardIsActive').checked;
+            }
+            
+            try {
+                let result;
+                if (isEdit) {
+                    result = await apiCall(`/website-content/why-choose-us/card/${cardId}`, 'PUT', cardData);
+                } else {
+                    result = await apiCall('/website-content/why-choose-us/card', 'POST', cardData);
+                }
+                
+                showToast(isEdit ? 'Card updated!' : 'Card added!', 'success');
+                closeWhyCardModal();
+                
+                if (result.data && result.data.whyChooseUs) {
+                    currentWhyCards = result.data.whyChooseUs.cards || [];
+                    currentWhyCards.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+                    renderWhyCardsGrid();
+                } else {
+                    loadWhyChooseUs();
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            }
+        }
+        
+        async function deleteWhyCard(cardId) {
+            if (!confirm('Are you sure you want to delete this card?')) return;
+            
+            try {
+                const result = await apiCall(`/website-content/why-choose-us/card/${cardId}`, 'DELETE');
+                showToast('Card deleted!', 'success');
+                
+                if (result.data && result.data.whyChooseUs) {
+                    currentWhyCards = result.data.whyChooseUs.cards || [];
+                    currentWhyCards.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+                    renderWhyCardsGrid();
+                } else {
+                    loadWhyChooseUs();
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            }
+        }
+
         // App bar logout handler
         document.getElementById('appBarLogout').addEventListener('click', () => {
             localStorage.removeItem('adminToken');
@@ -7911,26 +8378,26 @@
                 case 'dashboard': loadDashboard(); break;
                 case 'offerings': 
                     // Load the currently active subtab
-                    const activeSubtab = document.querySelector('.offerings-tab.active');
+                    const activeSubtab = document.querySelector('.offerings-tab[data-subtab].active');
                     if (activeSubtab) {
                         loadOfferingsSubtab(activeSubtab.dataset.subtab);
                     } else {
                         loadEvents(); // Default to events
                     }
                     break;
+                case 'website':
+                    // Load the currently active website subtab
+                    const activeWsTab = document.querySelector('.offerings-tab[data-wstab].active');
+                    if (activeWsTab) {
+                        loadWebsiteSubtab(activeWsTab.dataset.wstab);
+                    } else {
+                        loadWebsiteHero(); // Default to hero
+                    }
+                    break;
                 case 'quotes': loadQuotes(); break;
                 case 'users': loadUsers(); break;
                 case 'admins': loadAdmins(); break;
                 case 'settings': loadSettings(); break;
-                case 'websiteControls': 
-                    // Load the currently active website control subtab
-                    const activeWCTab = document.querySelector('.website-control-tab.active');
-                    if (activeWCTab) {
-                        loadWebsiteControlsSubtab(activeWCTab.dataset.wctab);
-                    } else {
-                        loadWebsiteControlsSubtab('home'); // Default to home
-                    }
-                    break;
             }
         }
 
