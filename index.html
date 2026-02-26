@@ -5001,8 +5001,8 @@
                 <input type="hidden" id="preWeddingEntryId">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Couple Name *</label>
-                        <input type="text" id="preWeddingCoupleName" placeholder="e.g. Priya & Arjun" required>
+                        <label>Couple Name</label>
+                        <input type="text" id="preWeddingCoupleName" placeholder="e.g. Priya & Arjun">
                     </div>
                     <div class="form-group">
                         <label>Location</label>
@@ -7325,11 +7325,6 @@
             const shootDate = document.getElementById('preWeddingShootDate').value;
             const description = document.getElementById('preWeddingDescription').value.trim();
             const isActive = document.getElementById('preWeddingIsActive').checked;
-            
-            if (!coupleName) {
-                showToast('Please fill in required fields', 'error');
-                return;
-            }
             
             // For new entries, cover image is required
             if (!isEdit && !preWeddingCoverFile) {
