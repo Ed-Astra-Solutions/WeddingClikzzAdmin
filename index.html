@@ -1055,6 +1055,40 @@
             margin-bottom: 1rem;
         }
 
+        .film-roll-item[draggable="true"] {
+            cursor: grab;
+        }
+
+        .film-roll-item.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+
+        .film-roll-item.drag-over {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+
+        .film-roll-item-drag-hint {
+            position: absolute;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: var(--gold);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .film-roll-item:hover .film-roll-item-drag-hint {
+            opacity: 1;
+        }
+
         /* Archive Entries Grid */
         .archive-entries-grid {
             display: grid;
@@ -1112,6 +1146,40 @@
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .archive-pos-input,
+        .film-pos-input {
+            width: 34px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-align: center;
+            border-radius: 3px;
+            padding: 1px 2px;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        .archive-pos-input::-webkit-outer-spin-button,
+        .archive-pos-input::-webkit-inner-spin-button,
+        .film-pos-input::-webkit-outer-spin-button,
+        .film-pos-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .archive-pos-input:focus,
+        .film-pos-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(201,169,98,0.15);
         }
 
         .archive-entry-status {
@@ -1129,6 +1197,48 @@
 
         .archive-entry-status.inactive {
             background: var(--danger);
+        }
+
+        /* Drag-and-drop reordering */
+        .archive-entry-card[draggable="true"] {
+            cursor: grab;
+        }
+
+        .archive-entry-card.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+
+        .archive-entry-card.drag-over {
+            outline: 2px dashed var(--gold);
+            outline-offset: -2px;
+        }
+
+        .archive-entry-drag-handle {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0,0,0,0.7);
+            color: var(--text-secondary, #ccc);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            letter-spacing: 0.04em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .archive-entry-card:hover .archive-entry-drag-handle {
+            opacity: 1;
+        }
+
+        .archive-entry-drag-handle svg {
+            width: 12px;
+            height: 12px;
         }
 
         .archive-entry-info {
@@ -1304,6 +1414,51 @@
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        /* Film drag-and-drop reordering */
+        .film-entry-card[draggable="true"] {
+            cursor: grab;
+        }
+
+        .film-entry-card.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+
+        .film-entry-card.drag-over {
+            outline: 2px dashed var(--gold);
+            outline-offset: -2px;
+        }
+
+        .film-entry-drag-handle {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0,0,0,0.7);
+            color: var(--text-secondary, #ccc);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            letter-spacing: 0.04em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .film-entry-card:hover .film-entry-drag-handle {
+            opacity: 1;
+        }
+
+        .film-entry-drag-handle svg {
+            width: 12px;
+            height: 12px;
         }
 
         .film-entry-duration {
@@ -3407,6 +3562,147 @@
             background: rgba(74, 159, 91, 0.2);
         }
 
+        /* Services Pricing Matrix */
+        .matrix-scroll {
+            overflow-x: auto;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 880px;
+        }
+
+        .matrix-table th {
+            white-space: nowrap;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .matrix-table th.matrix-price-col,
+        .matrix-table td.matrix-price-col {
+            text-align: center;
+            width: 140px;
+        }
+
+        .matrix-table td {
+            vertical-align: middle;
+        }
+
+        .matrix-name-input {
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .matrix-desc-input {
+            width: 100%;
+            margin-top: 6px;
+            padding: 7px 12px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .matrix-slug-hint {
+            display: block;
+            margin-top: 4px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .matrix-price-wrap {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .matrix-price-wrap .currency {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .matrix-price-input {
+            width: 96px;
+            padding: 9px 10px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
+            font-family: inherit;
+            text-align: right;
+        }
+
+        /* Empty price cell = service not offered for that category */
+        .matrix-price-input.is-empty {
+            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.015), rgba(255,255,255,0.015) 6px, transparent 6px, transparent 12px);
+            border-style: dashed;
+            border-color: var(--text-muted);
+        }
+
+        .matrix-price-input:focus,
+        .matrix-name-input:focus,
+        .matrix-desc-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            border-style: solid;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .matrix-price-input::placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .matrix-del-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: rgba(209, 82, 82, 0.12);
+            color: #E57373;
+            transition: var(--transition-smooth);
+        }
+
+        .matrix-del-btn:hover {
+            background: rgba(209, 82, 82, 0.2);
+        }
+
+        .matrix-hint {
+            margin: 14px 4px 4px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .matrix-hint .swatch {
+            display: inline-block;
+            width: 22px;
+            height: 12px;
+            vertical-align: middle;
+            border: 1px dashed var(--text-muted);
+            border-radius: 3px;
+            margin: 0 4px;
+            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 4px, transparent 4px, transparent 8px);
+        }
+
+        .matrix-toolbar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         /* Loading Spinner */
         .loading {
             display: flex;
@@ -3913,40 +4209,36 @@
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Category</th>
+                                    <th>Services</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="eventsTable">
-                                <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
+                                <tr><td colspan="7" class="loading"><div class="spinner"></div></td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Services Content -->
+                <!-- Services Content (Pricing Matrix) -->
                 <div class="offerings-content" id="servicesContent">
                     <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
                         <div class="table-header">
-                            <h2>Services</h2>
-                            <div class="search-box">
-                                <button class="btn btn-primary btn-sm" onclick="openModal('service')">+ Add Service</button>
+                            <h2>Services &amp; Pricing</h2>
+                            <div class="matrix-toolbar">
+                                <button class="btn btn-secondary btn-sm" onclick="addMatrixServiceRow()">+ Add Service</button>
+                                <button class="btn btn-primary btn-sm" id="saveMatrixBtn" onclick="saveServicesMatrix()">Save Changes</button>
                             </div>
                         </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Pricing</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="servicesTable">
-                                <tr><td colspan="5" class="loading"><div class="spinner"></div></td></tr>
-                            </tbody>
-                        </table>
+                        <div class="matrix-scroll" id="servicesMatrixWrap">
+                            <div class="loading"><div class="spinner"></div></div>
+                        </div>
+                        <p class="matrix-hint">
+                            Each column is a pricing category. A blank cell <span class="swatch"></span> means the service is
+                            <strong>not offered</strong> for events in that category (hidden from the quote builder). Enter <strong>0</strong> to offer it free.
+                            The order of rows here sets the display order for customers.
+                        </p>
                     </div>
                 </div>
 
@@ -4212,9 +4504,16 @@
 
             <!-- Website Controls Section -->
             <section class="section" id="websiteSection">
-                <div class="offerings-header">
+                <div class="offerings-header" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
                     <div class="offerings-header-left">
                         <h2>Website Controls</h2>
+                    </div>
+                    <div class="region-toggle" title="Content edits below apply to the selected region only" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.5rem 0.95rem;border:1px solid #C9A87C;border-radius:999px;background:rgba(201,168,124,0.08);">
+                        <label for="adminRegionSelector" style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#C9A87C;white-space:nowrap;cursor:pointer;margin:0;">Editing Region</label>
+                        <select id="adminRegionSelector" style="border:none;outline:none;background:transparent;color:#FAF7F2;font-size:0.95rem;font-weight:500;cursor:pointer;padding-right:0.25rem;">
+                            <option value="IN" style="color:#000;">🇮🇳 India</option>
+                            <option value="UAE" style="color:#000;">🇦🇪 UAE</option>
+                        </select>
                     </div>
                 </div>
 
@@ -4333,7 +4632,7 @@
                             </div>
                         </div>
                         <div style="padding: 20px;">
-                            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">These images appear in the scrolling film roll at the bottom of the hero section on the landing page.</p>
+                            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">These images appear in the scrolling film roll at the bottom of the hero section on the landing page. Drag any image to change its order &mdash; the new order saves automatically.</p>
                             <div class="film-roll-grid" id="filmRollGrid">
                                 <div class="loading"><div class="spinner"></div></div>
                             </div>
@@ -4347,10 +4646,27 @@
                         <div class="table-header">
                             <h2>Wedding Archives</h2>
                             <div class="search-box">
-                                <button class="btn btn-primary btn-sm" onclick="openAddArchiveModal()">+ Add Archive</button>
+                                <label class="btn btn-secondary btn-sm" id="archivesBulkUploadBtn" style="display:none; width:auto; cursor:pointer; padding:7px 14px; font-size:11px; letter-spacing:0.5px;">
+                                    + Bulk Upload
+                                    <input type="file" id="archivesBulkUploadInput" accept="image/*" multiple onchange="handleArchiveBulkUploadSelect(event)" style="display:none;">
+                                </label>
+                                <button class="btn btn-primary btn-sm" id="archivesAddEntryBtn" onclick="openAddArchiveModal()">+ Add Archive</button>
                             </div>
                         </div>
                         <div style="padding: 20px;">
+                            <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.85rem;margin-bottom:14px;border:1px solid #C9A87C;border-radius:8px;background:rgba(201,168,124,0.06);">
+                                <input type="checkbox" id="archivesHideDetailsToggle" onchange="saveArchivesHideDetails()" style="margin:0;cursor:pointer;">
+                                <label for="archivesHideDetailsToggle" style="margin:0;cursor:pointer;font-size:0.85rem;">
+                                    Hide couple name, place &amp; gallery on landing (temporary)
+                                </label>
+                                <span id="archivesHideDetailsStatus" style="margin-left:auto;font-size:0.75rem;color:#888;"></span>
+                            </div>
+                            <div id="archivesBulkUploadProgress" style="display:none; margin-bottom: 14px;">
+                                <div class="upload-progress-bar">
+                                    <div class="upload-progress-fill" id="archivesBulkProgressFill" style="width: 0%"></div>
+                                </div>
+                                <p id="archivesBulkProgressText" style="color: var(--text-muted); font-size: 12px; margin-top: 6px;">Uploading...</p>
+                            </div>
                             <div class="archive-entries-grid" id="archiveEntriesGrid">
                                 <div class="loading"><div class="spinner"></div></div>
                             </div>
@@ -4381,10 +4697,20 @@
                         <div class="table-header">
                             <h2>Pre-Wedding Shoots</h2>
                             <div class="search-box">
+                                <label class="btn btn-secondary btn-sm" id="preWeddingBulkUploadBtn" style="width:auto; cursor:pointer; padding:7px 14px; font-size:11px; letter-spacing:0.5px;">
+                                    + Bulk Upload
+                                    <input type="file" id="preWeddingBulkUploadInput" accept="image/*" multiple onchange="handlePreWeddingBulkUploadSelect(event)" style="display:none;">
+                                </label>
                                 <button class="btn btn-primary btn-sm" onclick="openAddPreWeddingModal()">+ Add Shoot</button>
                             </div>
                         </div>
                         <div style="padding: 20px;">
+                            <div id="preWeddingBulkUploadProgress" style="display:none; margin-bottom: 14px;">
+                                <div class="upload-progress-bar">
+                                    <div class="upload-progress-fill" id="preWeddingBulkProgressFill" style="width: 0%"></div>
+                                </div>
+                                <p id="preWeddingBulkProgressText" style="color: var(--text-muted); font-size: 12px; margin-top: 6px;">Uploading...</p>
+                            </div>
                             <div class="film-entries-grid" id="preWeddingEntriesGrid">
                                 <div class="loading"><div class="spinner"></div></div>
                             </div>
@@ -4576,11 +4902,11 @@
                     <input type="hidden" id="eventId">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" id="eventName" required>
+                        <input type="text" id="eventName" required oninput="onEventNameInput(this.value)">
                     </div>
                     <div class="form-group">
                         <label>Slug</label>
-                        <input type="text" id="eventSlug" required>
+                        <input type="text" id="eventSlug" required oninput="this.dataset.touched='1'" placeholder="auto-generated from name">
                     </div>
                     <div class="form-group">
                         <label>Icon (Emoji)</label>
@@ -4882,8 +5208,8 @@
                         <input type="text" id="filmTitle" placeholder="e.g. A Beautiful Day" required>
                     </div>
                     <div class="form-group">
-                        <label>Couple Name *</label>
-                        <input type="text" id="filmCoupleName" placeholder="e.g. Priya & Arjun" required>
+                        <label>Couple Name</label>
+                        <input type="text" id="filmCoupleName" placeholder="e.g. Priya & Arjun">
                     </div>
                     <div class="form-group">
                         <label>Wedding Place</label>
@@ -4928,7 +5254,7 @@
                         <div id="filmVideoDropzone" class="upload-dropzone" onclick="document.getElementById('filmVideoInput').click()">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                             <h4>Click to upload video</h4>
-                            <p>MP4, MOV up to 3GB</p>
+                            <p>MP4, MOV up to 5GB</p>
                             <input type="file" id="filmVideoInput" accept="video/*" onchange="handleFilmVideoSelect(event)" style="display:none;">
                         </div>
                         <div id="filmVideoPreview" style="display:none; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid var(--border-subtle);">
@@ -5456,6 +5782,7 @@
         
         let authToken = localStorage.getItem('adminToken');
         let currentAdmin = JSON.parse(localStorage.getItem('adminData') || '{}');
+        let currentRegion = localStorage.getItem('adminRegion') || 'IN';
 
         // Utility Functions
         function showToast(message, type = 'success') {
@@ -5476,8 +5803,13 @@
                 }
             };
             if (data) options.body = JSON.stringify(data);
-            
-            const response = await fetch(`${API_BASE}${endpoint}`, options);
+
+            let url = `${API_BASE}${endpoint}`;
+            if (endpoint.startsWith('/website-content')) {
+                url += (endpoint.includes('?') ? '&' : '?') + `region=${currentRegion}`;
+            }
+
+            const response = await fetch(url, options);
             const result = await response.json();
             
             if (!response.ok) {
@@ -5625,6 +5957,18 @@
         }
 
         document.getElementById('logoutBtn').addEventListener('click', logout);
+
+        // Region selector
+        (function initRegionSelector() {
+            const sel = document.getElementById('adminRegionSelector');
+            if (!sel) return;
+            sel.value = currentRegion;
+            sel.addEventListener('change', () => {
+                currentRegion = sel.value;
+                localStorage.setItem('adminRegion', currentRegion);
+                location.reload();
+            });
+        })();
 
         function showAdminPanel() {
             document.getElementById('loginPage').style.display = 'none';
@@ -5964,10 +6308,16 @@
                 return;
             }
 
+            currentFilmRollImages.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
             grid.innerHTML = currentFilmRollImages
-                .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
                 .map((img, idx) => `
-                    <div class="film-roll-item">
+                    <div class="film-roll-item" draggable="true" data-index="${idx}"
+                        ondragstart="handleFilmRollDragStart(event, ${idx})"
+                        ondragend="handleFilmRollDragEnd(event)"
+                        ondragover="handleFilmRollDragOver(event, ${idx})"
+                        ondragleave="handleFilmRollDragLeave(event)"
+                        ondrop="handleFilmRollDrop(event, ${idx})">
                         <img src="${img.imageUrl}" alt="${img.altText || 'Wedding'}" loading="lazy">
                         <div class="film-roll-item-overlay">
                             <span class="film-roll-item-caption">${img.caption || 'No caption'}</span>
@@ -5978,9 +6328,77 @@
                             </div>
                         </div>
                         <span class="film-roll-item-order">#${idx + 1}</span>
+                        <span class="film-roll-item-drag-hint" title="Drag to reorder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" /></svg>
+                        </span>
                         ${img.isActive === false ? '<span class="film-roll-item-status inactive">Inactive</span>' : ''}
                     </div>
                 `).join('');
+        }
+
+        let filmRollDragIndex = null;
+
+        function handleFilmRollDragStart(event, index) {
+            filmRollDragIndex = index;
+            event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', String(index));
+            event.currentTarget.classList.add('dragging');
+        }
+
+        function handleFilmRollDragEnd(event) {
+            event.currentTarget.classList.remove('dragging');
+            document.querySelectorAll('.film-roll-item.drag-over')
+                .forEach(el => el.classList.remove('drag-over'));
+        }
+
+        function handleFilmRollDragOver(event, index) {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'move';
+            if (filmRollDragIndex !== null && index !== filmRollDragIndex) {
+                event.currentTarget.classList.add('drag-over');
+            }
+        }
+
+        function handleFilmRollDragLeave(event) {
+            event.currentTarget.classList.remove('drag-over');
+        }
+
+        async function handleFilmRollDrop(event, dropIndex) {
+            event.preventDefault();
+            event.currentTarget.classList.remove('drag-over');
+
+            if (filmRollDragIndex === null || filmRollDragIndex === dropIndex) {
+                filmRollDragIndex = null;
+                return;
+            }
+
+            const [moved] = currentFilmRollImages.splice(filmRollDragIndex, 1);
+            currentFilmRollImages.splice(dropIndex, 0, moved);
+            filmRollDragIndex = null;
+
+            // Reassign sortOrder to match new positions, then re-render optimistically
+            currentFilmRollImages.forEach((img, idx) => { img.sortOrder = idx; });
+            renderFilmRollGrid();
+
+            try {
+                const images = currentFilmRollImages.map((img, idx) => ({
+                    _id: img._id,
+                    imageUrl: img.imageUrl,
+                    s3Key: img.s3Key,
+                    thumbnailUrl: img.thumbnailUrl,
+                    thumbnailS3Key: img.thumbnailS3Key,
+                    caption: img.caption,
+                    altText: img.altText,
+                    isActive: img.isActive,
+                    sortOrder: idx
+                }));
+                const result = await apiCall('/website-content/home/film-roll/reorder', 'PUT', { images });
+                if (!result.success) throw new Error(result.error || 'Failed to save order');
+                showToast('Film roll order updated', 'success');
+            } catch (error) {
+                showToast('Error saving order: ' + error.message, 'error');
+                loadWebsiteHero();
+            }
         }
 
         function openAddFilmRollModal() {
@@ -6139,28 +6557,170 @@
         
         let archiveCoverFile = null;
         let currentArchiveEntries = [];
+        let currentArchivesHideDetails = false;
         let galleryFilesToUpload = [];
 
         async function loadWebsiteArchives() {
             const grid = document.getElementById('archiveEntriesGrid');
             grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
+
             try {
-                const response = await fetch(`${API_BASE}/website-content/archives`, {
+                const response = await fetch(`${API_BASE}/website-content/archives?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
-                
-                if (data.success && data.data && data.data.archives && data.data.archives.entries) {
-                    currentArchiveEntries = data.data.archives.entries.sort((a, b) => a.sortOrder - b.sortOrder);
-                    renderArchiveEntriesGrid();
+
+                if (data.success && data.data && data.data.archives) {
+                    currentArchivesHideDetails = !!data.data.archives.hideDetails;
+                    currentArchiveEntries = (data.data.archives.entries || []).sort((a, b) => a.sortOrder - b.sortOrder);
                 } else {
+                    currentArchivesHideDetails = false;
                     currentArchiveEntries = [];
-                    renderArchiveEntriesGrid();
                 }
+                const toggle = document.getElementById('archivesHideDetailsToggle');
+                if (toggle) toggle.checked = currentArchivesHideDetails;
+                updateArchivesBulkUploadVisibility();
+                renderArchiveEntriesGrid();
             } catch (error) {
                 console.error('Error loading archives:', error);
                 grid.innerHTML = '<div class="archive-empty"><p>Error loading archives</p></div>';
+            }
+        }
+
+        // Bulk upload is only available for the UAE site when "hide details" is enabled.
+        function updateArchivesBulkUploadVisibility() {
+            const btn = document.getElementById('archivesBulkUploadBtn');
+            if (!btn) return;
+            const show = currentRegion === 'UAE' && currentArchivesHideDetails;
+            btn.style.display = show ? 'inline-flex' : 'none';
+        }
+
+        async function handleArchiveBulkUploadSelect(event) {
+            const files = Array.from(event.target.files);
+            const input = event.target;
+            if (files.length === 0) return;
+
+            if (!(currentRegion === 'UAE' && currentArchivesHideDetails)) {
+                showToast('Bulk upload is only available for UAE when details are hidden', 'error');
+                input.value = '';
+                return;
+            }
+
+            const progressDiv = document.getElementById('archivesBulkUploadProgress');
+            const progressFill = document.getElementById('archivesBulkProgressFill');
+            const progressText = document.getElementById('archivesBulkProgressText');
+            progressDiv.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            const uploadedImages = [];
+            const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+            let uploadedSize = 0;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const progress = ((i + 1) / files.length) * 100;
+                progressFill.style.width = `${progress}%`;
+                const uploadedMB = (uploadedSize / (1024 * 1024)).toFixed(1);
+                const totalMB = (totalSize / (1024 * 1024)).toFixed(1);
+                progressText.textContent = `Uploading ${i + 1} of ${files.length}... (${uploadedMB} MB / ${totalMB} MB)`;
+
+                try {
+                    const compressedFile = await compressImage(file, 1200, 0.85);
+
+                    const signedUrlResult = await fetch(`${BACKEND_URL}/api/admin/s3/upload-url`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify({
+                            folder: 'website',
+                            filename: file.name,
+                            mimeType: compressedFile.type,
+                            fileSize: compressedFile.size,
+                            prefix: 'archives/covers'
+                        })
+                    });
+
+                    const signedUrlData = await signedUrlResult.json();
+                    if (!signedUrlData.success) {
+                        throw new Error(signedUrlData.error);
+                    }
+
+                    const uploadResponse = await fetch(signedUrlData.uploadUrl, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': compressedFile.type },
+                        body: compressedFile
+                    });
+
+                    if (!uploadResponse.ok) {
+                        throw new Error('Upload failed');
+                    }
+
+                    uploadedImages.push({
+                        coverImageUrl: `https://${signedUrlData.bucket}.s3.${signedUrlData.region}.amazonaws.com/${signedUrlData.key}`,
+                        coverImageS3Key: signedUrlData.key
+                    });
+
+                    uploadedSize += file.size;
+                } catch (error) {
+                    console.error(`Error uploading ${file.name}:`, error);
+                }
+            }
+
+            if (uploadedImages.length > 0) {
+                try {
+                    const response = await fetch(`${API_BASE}/website-content/archives/bulk?region=${currentRegion}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify({ images: uploadedImages })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const failed = files.length - uploadedImages.length;
+                        showToast(
+                            `${uploadedImages.length} picture(s) uploaded successfully${failed > 0 ? `, ${failed} failed` : ''}`,
+                            failed > 0 ? 'error' : 'success'
+                        );
+                        await loadWebsiteArchives();
+                    } else {
+                        throw new Error(data.error || 'Failed to save pictures');
+                    }
+                } catch (error) {
+                    console.error('Error saving bulk pictures:', error);
+                    showToast(error.message || 'Error saving pictures', 'error');
+                }
+            } else {
+                showToast('No pictures were uploaded', 'error');
+            }
+
+            progressDiv.style.display = 'none';
+            input.value = '';
+        }
+
+        async function saveArchivesHideDetails() {
+            const toggle = document.getElementById('archivesHideDetailsToggle');
+            const status = document.getElementById('archivesHideDetailsStatus');
+            if (!toggle) return;
+            const newValue = toggle.checked;
+            if (status) status.textContent = 'Saving…';
+            try {
+                const result = await apiCall('/website-content/archives/settings', 'PUT', { hideDetails: newValue });
+                currentArchivesHideDetails = newValue;
+                if (status) status.textContent = 'Saved';
+                setTimeout(() => { if (status) status.textContent = ''; }, 1500);
+                updateArchivesBulkUploadVisibility();
+                renderArchiveEntriesGrid();
+                showToast('Archive display setting updated', 'success');
+            } catch (error) {
+                toggle.checked = currentArchivesHideDetails;
+                if (status) status.textContent = '';
+                showToast(error.message || 'Failed to update setting', 'error');
             }
         }
 
@@ -6180,14 +6740,29 @@
                 return;
             }
             
+            const hideDetails = currentArchivesHideDetails;
             grid.innerHTML = currentArchiveEntries.map((entry, index) => `
-                <div class="archive-entry-card" data-id="${entry._id}">
+                <div class="archive-entry-card" data-id="${entry._id}" draggable="true">
                     <div class="archive-entry-cover">
                         <img src="${entry.coverImageUrl}" alt="${entry.coupleName}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 fill=%22%23333%22%3E%3Crect width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%23666%22 font-size=%2214%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
                         <div class="archive-entry-cover-overlay"></div>
-                        <span class="archive-entry-badge">#${index + 1}</span>
+                        <span class="archive-entry-badge" title="Type a position and press Enter to reorder">#
+                            <input type="number" min="1" max="${currentArchiveEntries.length}" value="${index + 1}"
+                                class="archive-pos-input" draggable="false"
+                                onmousedown="event.stopPropagation();"
+                                onclick="event.stopPropagation();"
+                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"
+                                onchange="setArchivePosition('${entry._id}', this.value)">
+                        </span>
                         <span class="archive-entry-status ${entry.isActive ? 'active' : 'inactive'}"></span>
+                        <span class="archive-entry-drag-handle" title="Drag to reorder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                            </svg>
+                            Drag to reorder
+                        </span>
                     </div>
+                    ${hideDetails ? '' : `
                     <div class="archive-entry-info">
                         <div class="archive-entry-couple">${entry.coupleName}</div>
                         <div class="archive-entry-place">${entry.weddingPlace}</div>
@@ -6198,13 +6773,15 @@
                             ${entry.galleryImages ? entry.galleryImages.length : 0} photos
                         </div>
                     </div>
+                    `}
                     <div class="archive-entry-actions">
+                        ${hideDetails ? '' : `
                         <button class="btn-gallery" onclick="openArchiveGalleryModal('${entry._id}')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             Gallery
-                        </button>
+                        </button>`}
                         <button class="btn-edit" onclick="editArchiveEntry('${entry._id}')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -6220,9 +6797,131 @@
                     </div>
                 </div>
             `).join('');
+
+            attachArchiveDragHandlers();
+        }
+
+        // ---- Archive entry drag-and-drop reordering ----
+        let archiveDragSrcId = null;
+
+        function attachArchiveDragHandlers() {
+            const grid = document.getElementById('archiveEntriesGrid');
+            if (!grid) return;
+
+            grid.querySelectorAll('.archive-entry-card').forEach(card => {
+                card.addEventListener('dragstart', (e) => {
+                    // Don't start a drag from the action buttons.
+                    if (e.target.closest('button')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    archiveDragSrcId = card.dataset.id;
+                    card.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', card.dataset.id);
+                });
+
+                card.addEventListener('dragend', () => {
+                    archiveDragSrcId = null;
+                    grid.querySelectorAll('.archive-entry-card').forEach(c => {
+                        c.classList.remove('dragging', 'drag-over');
+                    });
+                });
+
+                card.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                card.addEventListener('dragenter', () => {
+                    if (archiveDragSrcId && card.dataset.id !== archiveDragSrcId) {
+                        card.classList.add('drag-over');
+                    }
+                });
+
+                card.addEventListener('dragleave', (e) => {
+                    // Ignore leave events bubbling from child elements.
+                    if (!card.contains(e.relatedTarget)) {
+                        card.classList.remove('drag-over');
+                    }
+                });
+
+                card.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    card.classList.remove('drag-over');
+                    const srcId = archiveDragSrcId;
+                    const targetId = card.dataset.id;
+                    if (!srcId || srcId === targetId) return;
+
+                    const fromIndex = currentArchiveEntries.findIndex(en => en._id === srcId);
+                    const toIndex = currentArchiveEntries.findIndex(en => en._id === targetId);
+                    if (fromIndex === -1 || toIndex === -1) return;
+
+                    const [moved] = currentArchiveEntries.splice(fromIndex, 1);
+                    currentArchiveEntries.splice(toIndex, 0, moved);
+
+                    renderArchiveEntriesGrid(); // re-numbers the #N badges
+                    persistArchiveOrder();
+                });
+            });
+        }
+
+        // Manually set an archive's position by typing a number into its badge.
+        function setArchivePosition(entryId, value) {
+            const total = currentArchiveEntries.length;
+            let pos = parseInt(value, 10);
+            const fromIndex = currentArchiveEntries.findIndex(en => en._id === entryId);
+            if (fromIndex === -1) return;
+
+            if (isNaN(pos)) {
+                renderArchiveEntriesGrid(); // revert the input to its current number
+                return;
+            }
+            pos = Math.max(1, Math.min(total, pos));
+            const toIndex = pos - 1;
+            if (toIndex === fromIndex) {
+                renderArchiveEntriesGrid(); // clamp/normalize the displayed value
+                return;
+            }
+
+            const [moved] = currentArchiveEntries.splice(fromIndex, 1);
+            currentArchiveEntries.splice(toIndex, 0, moved);
+
+            renderArchiveEntriesGrid(); // re-numbers the #N badges
+            persistArchiveOrder();
+        }
+
+        async function persistArchiveOrder() {
+            const orderedIds = currentArchiveEntries.map(en => en._id);
+            try {
+                const result = await apiCall('/website-content/archives/reorder', 'PUT', { orderedIds });
+                if (!result.success) throw new Error(result.error || 'Failed to save order');
+                // Keep local sortOrder in sync so a re-render without reload stays correct.
+                currentArchiveEntries.forEach((en, i) => { en.sortOrder = i; });
+                showToast('Archive order saved', 'success');
+            } catch (error) {
+                showToast(error.message || 'Failed to save archive order', 'error');
+                loadWebsiteArchives(); // revert to the server's order
+            }
         }
 
         // Archive Entry Modal Functions
+        function applyArchiveDetailFieldsVisibility() {
+            const hide = !!currentArchivesHideDetails;
+            const nameInput = document.getElementById('archiveCoupleName');
+            const placeInput = document.getElementById('archiveWeddingPlace');
+            if (nameInput) {
+                nameInput.required = !hide;
+                const group = nameInput.closest('.form-group');
+                if (group) group.style.display = hide ? 'none' : '';
+            }
+            if (placeInput) {
+                placeInput.required = !hide;
+                const group = placeInput.closest('.form-group');
+                if (group) group.style.display = hide ? 'none' : '';
+            }
+        }
+
         function openAddArchiveModal() {
             document.getElementById('archiveModalTitle').textContent = 'Add Wedding Archive';
             document.getElementById('archiveSubmitBtn').textContent = 'Add Wedding';
@@ -6232,6 +6931,7 @@
             document.getElementById('archiveCoverDropzone').style.display = 'block';
             document.getElementById('archiveCoverPreview').style.display = 'none';
             archiveCoverFile = null;
+            applyArchiveDetailFieldsVisibility();
             document.getElementById('archiveEntryModal').classList.add('active');
         }
 
@@ -6254,7 +6954,8 @@
             document.getElementById('archiveCoverPreview').style.display = 'block';
             document.getElementById('archiveCoverPreviewImg').src = entry.coverImageUrl;
             archiveCoverFile = null; // No new file selected
-            
+
+            applyArchiveDetailFieldsVisibility();
             document.getElementById('archiveEntryModal').classList.add('active');
         }
 
@@ -6290,13 +6991,16 @@
             const entryId = document.getElementById('archiveEntryId').value;
             const isEdit = !!entryId;
             
-            const coupleName = document.getElementById('archiveCoupleName').value.trim();
-            const weddingPlace = document.getElementById('archiveWeddingPlace').value.trim();
+            let coupleName = document.getElementById('archiveCoupleName').value.trim();
+            let weddingPlace = document.getElementById('archiveWeddingPlace').value.trim();
             const weddingDate = document.getElementById('archiveWeddingDate').value;
             const description = document.getElementById('archiveDescription').value.trim();
             const isActive = document.getElementById('archiveIsActive').checked;
-            
-            if (!coupleName || !weddingPlace) {
+
+            if (currentArchivesHideDetails) {
+                if (!coupleName) coupleName = '—';
+                if (!weddingPlace) weddingPlace = '—';
+            } else if (!coupleName || !weddingPlace) {
                 showToast('Please fill in required fields', 'error');
                 return;
             }
@@ -6356,7 +7060,7 @@
                 let apiUrl, method, body;
                 
                 if (isEdit) {
-                    apiUrl = `${API_BASE}/website-content/archives/entry/${entryId}`;
+                    apiUrl = `${API_BASE}/website-content/archives/entry/${entryId}?region=${currentRegion}`;
                     method = 'PUT';
                     body = { coupleName, weddingPlace, weddingDate, description, isActive };
                     if (coverImageUrl) {
@@ -6364,7 +7068,7 @@
                         body.coverImageS3Key = coverImageS3Key;
                     }
                 } else {
-                    apiUrl = `${API_BASE}/website-content/archives/entry`;
+                    apiUrl = `${API_BASE}/website-content/archives/entry?region=${currentRegion}`;
                     method = 'POST';
                     body = { coupleName, weddingPlace, weddingDate, description, coverImageUrl, coverImageS3Key };
                 }
@@ -6402,7 +7106,7 @@
             }
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}`, {
+                const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -6535,7 +7239,7 @@
             // Save uploaded images to database
             if (uploadedImages.length > 0) {
                 try {
-                    const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}/gallery`, {
+                    const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}/gallery?region=${currentRegion}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -6577,7 +7281,7 @@
             if (!confirm('Delete this image?')) return;
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}/gallery/${imageId}`, {
+                const response = await fetch(`${API_BASE}/website-content/archives/entry/${entryId}/gallery/${imageId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -6617,7 +7321,7 @@
             grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/films`, {
+                const response = await fetch(`${API_BASE}/website-content/films?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -6652,15 +7356,28 @@
             }
             
             grid.innerHTML = currentFilmEntries.map((entry, index) => `
-                <div class="film-entry-card" data-id="${entry._id}">
+                <div class="film-entry-card" data-id="${entry._id}" draggable="true">
                     <div class="film-entry-thumbnail">
                         <img src="${entry.thumbnailUrl}" alt="${entry.title}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22640%22 height=%22360%22 fill=%22%23333%22%3E%3Crect width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%23666%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Thumbnail%3C/text%3E%3C/svg%3E'">
                         <div class="film-entry-play-icon">
                             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                         </div>
-                        <span class="film-entry-badge">#${index + 1}</span>
+                        <span class="film-entry-badge" title="Type a position and press Enter to reorder">#
+                            <input type="number" min="1" max="${currentFilmEntries.length}" value="${index + 1}"
+                                class="film-pos-input" draggable="false"
+                                onmousedown="event.stopPropagation();"
+                                onclick="event.stopPropagation();"
+                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"
+                                onchange="setFilmPosition('${entry._id}', this.value)">
+                        </span>
                         ${entry.duration ? `<span class="film-entry-duration">${entry.duration}</span>` : ''}
                         <span class="film-entry-status ${entry.isActive ? 'active' : 'inactive'}"></span>
+                        <span class="film-entry-drag-handle" title="Drag to reorder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                            </svg>
+                            Drag to reorder
+                        </span>
                     </div>
                     <div class="film-entry-info">
                         <div class="film-entry-title">${entry.title}</div>
@@ -6695,6 +7412,112 @@
                     </div>
                 </div>
             `).join('');
+
+            attachFilmDragHandlers();
+        }
+
+        // ---- Film entry drag-and-drop reordering ----
+        let filmDragSrcId = null;
+
+        function attachFilmDragHandlers() {
+            const grid = document.getElementById('filmEntriesGrid');
+            if (!grid) return;
+
+            grid.querySelectorAll('.film-entry-card').forEach(card => {
+                card.addEventListener('dragstart', (e) => {
+                    // Don't start a drag from the action buttons.
+                    if (e.target.closest('button')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    filmDragSrcId = card.dataset.id;
+                    card.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', card.dataset.id);
+                });
+
+                card.addEventListener('dragend', () => {
+                    filmDragSrcId = null;
+                    grid.querySelectorAll('.film-entry-card').forEach(c => {
+                        c.classList.remove('dragging', 'drag-over');
+                    });
+                });
+
+                card.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                card.addEventListener('dragenter', () => {
+                    if (filmDragSrcId && card.dataset.id !== filmDragSrcId) {
+                        card.classList.add('drag-over');
+                    }
+                });
+
+                card.addEventListener('dragleave', (e) => {
+                    // Ignore leave events bubbling from child elements.
+                    if (!card.contains(e.relatedTarget)) {
+                        card.classList.remove('drag-over');
+                    }
+                });
+
+                card.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    card.classList.remove('drag-over');
+                    const srcId = filmDragSrcId;
+                    const targetId = card.dataset.id;
+                    if (!srcId || srcId === targetId) return;
+
+                    const fromIndex = currentFilmEntries.findIndex(en => en._id === srcId);
+                    const toIndex = currentFilmEntries.findIndex(en => en._id === targetId);
+                    if (fromIndex === -1 || toIndex === -1) return;
+
+                    const [moved] = currentFilmEntries.splice(fromIndex, 1);
+                    currentFilmEntries.splice(toIndex, 0, moved);
+
+                    renderFilmEntriesGrid(); // re-numbers the #N badges
+                    persistFilmOrder();
+                });
+            });
+        }
+
+        // Manually set a film's position by typing a number into its badge.
+        function setFilmPosition(entryId, value) {
+            const total = currentFilmEntries.length;
+            let pos = parseInt(value, 10);
+            const fromIndex = currentFilmEntries.findIndex(en => en._id === entryId);
+            if (fromIndex === -1) return;
+
+            if (isNaN(pos)) {
+                renderFilmEntriesGrid(); // revert the input to its current number
+                return;
+            }
+            pos = Math.max(1, Math.min(total, pos));
+            const toIndex = pos - 1;
+            if (toIndex === fromIndex) {
+                renderFilmEntriesGrid(); // clamp/normalize the displayed value
+                return;
+            }
+
+            const [moved] = currentFilmEntries.splice(fromIndex, 1);
+            currentFilmEntries.splice(toIndex, 0, moved);
+
+            renderFilmEntriesGrid(); // re-numbers the #N badges
+            persistFilmOrder();
+        }
+
+        async function persistFilmOrder() {
+            const orderedIds = currentFilmEntries.map(en => en._id);
+            try {
+                const result = await apiCall('/website-content/films/reorder', 'PUT', { orderedIds });
+                if (!result.success) throw new Error(result.error || 'Failed to save order');
+                // Keep local sortOrder in sync so a re-render without reload stays correct.
+                currentFilmEntries.forEach((en, i) => { en.sortOrder = i; });
+                showToast('Film order saved', 'success');
+            } catch (error) {
+                showToast(error.message || 'Failed to save film order', 'error');
+                loadWebsiteFilms(); // revert to the server's order
+            }
         }
 
         // Film Entry Modal Functions
@@ -6719,10 +7542,10 @@
             const file = event.target.files[0];
             if (!file) return;
             
-            // Check file size (3GB limit for wedding films)
-            const maxSize = 3 * 1024 * 1024 * 1024; // 3GB
+            // Check file size (5GB limit for wedding films)
+            const maxSize = 5 * 1024 * 1024 * 1024; // 5GB
             if (file.size > maxSize) {
-                showToast('Video file is too large. Maximum size is 3GB.', 'error');
+                showToast('Video file is too large. Maximum size is 5GB.', 'error');
                 return;
             }
             
@@ -6855,7 +7678,7 @@
             const isEdit = !!entryId;
             
             const title = document.getElementById('filmTitle').value.trim();
-            const coupleName = document.getElementById('filmCoupleName').value.trim();
+            const coupleName = document.getElementById('filmCoupleName').value.trim() || '—';
             const weddingPlace = document.getElementById('filmWeddingPlace').value.trim();
             const duration = document.getElementById('filmDuration').value.trim();
             const description = document.getElementById('filmDescription').value.trim();
@@ -6873,7 +7696,7 @@
                 vimeoUrl = document.getElementById('filmVimeoUrl').value.trim();
             }
             
-            if (!title || !coupleName) {
+            if (!title) {
                 showToast('Please fill in required fields', 'error');
                 return;
             }
@@ -7054,7 +7877,7 @@
                 let apiUrl, method, body;
                 
                 if (isEdit) {
-                    apiUrl = `${API_BASE}/website-content/films/entry/${entryId}`;
+                    apiUrl = `${API_BASE}/website-content/films/entry/${entryId}?region=${currentRegion}`;
                     method = 'PUT';
                     body = { title, coupleName, weddingPlace, duration, description, youtubeUrl, vimeoUrl, videoUrl, videoS3Key, isActive };
                     if (thumbnailUrl) {
@@ -7062,7 +7885,7 @@
                         body.thumbnailS3Key = thumbnailS3Key;
                     }
                 } else {
-                    apiUrl = `${API_BASE}/website-content/films/entry`;
+                    apiUrl = `${API_BASE}/website-content/films/entry?region=${currentRegion}`;
                     method = 'POST';
                     body = { title, coupleName, weddingPlace, duration, description, youtubeUrl, vimeoUrl, videoUrl, videoS3Key, thumbnailUrl, thumbnailS3Key };
                 }
@@ -7101,7 +7924,7 @@
             }
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/films/entry/${entryId}`, {
+                const response = await fetch(`${API_BASE}/website-content/films/entry/${entryId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -7176,7 +7999,7 @@
             grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot`, {
+                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -7211,15 +8034,28 @@
             }
             
             grid.innerHTML = currentPreWeddingEntries.map((entry, index) => `
-                <div class="archive-entry-card" data-id="${entry._id}">
+                <div class="archive-entry-card" data-id="${entry._id}" draggable="true">
                     <div class="archive-entry-cover">
                         <img src="${entry.coverImageUrl}" alt="${entry.coupleName}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 fill=%22%23333%22%3E%3Crect width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%23666%22 font-size=%2214%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
                         <div class="archive-entry-cover-overlay"></div>
-                        <span class="archive-entry-badge">#${index + 1}</span>
+                        <span class="archive-entry-badge" title="Type a position and press Enter to reorder">#
+                            <input type="number" min="1" max="${currentPreWeddingEntries.length}" value="${index + 1}"
+                                class="archive-pos-input" draggable="false"
+                                onmousedown="event.stopPropagation();"
+                                onclick="event.stopPropagation();"
+                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"
+                                onchange="setPreWeddingPosition('${entry._id}', this.value)">
+                        </span>
                         <span class="archive-entry-status ${entry.isActive ? 'active' : 'inactive'}"></span>
+                        <span class="archive-entry-drag-handle" title="Drag to reorder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                            </svg>
+                            Drag to reorder
+                        </span>
                     </div>
                     <div class="archive-entry-info">
-                        <div class="archive-entry-couple">${entry.coupleName}</div>
+                        <div class="archive-entry-couple">${entry.coupleName || 'Untitled shoot'}</div>
                         ${entry.location ? `<div class="archive-entry-place">${entry.location}</div>` : ''}
                         <div class="archive-entry-gallery-count">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -7250,6 +8086,112 @@
                     </div>
                 </div>
             `).join('');
+
+            attachPreWeddingDragHandlers();
+        }
+
+        // ---- Pre-wedding entry drag-and-drop reordering ----
+        let preWeddingDragSrcId = null;
+
+        function attachPreWeddingDragHandlers() {
+            const grid = document.getElementById('preWeddingEntriesGrid');
+            if (!grid) return;
+
+            grid.querySelectorAll('.archive-entry-card').forEach(card => {
+                card.addEventListener('dragstart', (e) => {
+                    // Don't start a drag from the action buttons.
+                    if (e.target.closest('button')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    preWeddingDragSrcId = card.dataset.id;
+                    card.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', card.dataset.id);
+                });
+
+                card.addEventListener('dragend', () => {
+                    preWeddingDragSrcId = null;
+                    grid.querySelectorAll('.archive-entry-card').forEach(c => {
+                        c.classList.remove('dragging', 'drag-over');
+                    });
+                });
+
+                card.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                card.addEventListener('dragenter', () => {
+                    if (preWeddingDragSrcId && card.dataset.id !== preWeddingDragSrcId) {
+                        card.classList.add('drag-over');
+                    }
+                });
+
+                card.addEventListener('dragleave', (e) => {
+                    // Ignore leave events bubbling from child elements.
+                    if (!card.contains(e.relatedTarget)) {
+                        card.classList.remove('drag-over');
+                    }
+                });
+
+                card.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    card.classList.remove('drag-over');
+                    const srcId = preWeddingDragSrcId;
+                    const targetId = card.dataset.id;
+                    if (!srcId || srcId === targetId) return;
+
+                    const fromIndex = currentPreWeddingEntries.findIndex(en => en._id === srcId);
+                    const toIndex = currentPreWeddingEntries.findIndex(en => en._id === targetId);
+                    if (fromIndex === -1 || toIndex === -1) return;
+
+                    const [moved] = currentPreWeddingEntries.splice(fromIndex, 1);
+                    currentPreWeddingEntries.splice(toIndex, 0, moved);
+
+                    renderPreWeddingEntriesGrid(); // re-numbers the #N badges
+                    persistPreWeddingOrder();
+                });
+            });
+        }
+
+        // Manually set a pre-wedding shoot's position by typing a number into its badge.
+        function setPreWeddingPosition(entryId, value) {
+            const total = currentPreWeddingEntries.length;
+            let pos = parseInt(value, 10);
+            const fromIndex = currentPreWeddingEntries.findIndex(en => en._id === entryId);
+            if (fromIndex === -1) return;
+
+            if (isNaN(pos)) {
+                renderPreWeddingEntriesGrid(); // revert the input to its current number
+                return;
+            }
+            pos = Math.max(1, Math.min(total, pos));
+            const toIndex = pos - 1;
+            if (toIndex === fromIndex) {
+                renderPreWeddingEntriesGrid(); // clamp/normalize the displayed value
+                return;
+            }
+
+            const [moved] = currentPreWeddingEntries.splice(fromIndex, 1);
+            currentPreWeddingEntries.splice(toIndex, 0, moved);
+
+            renderPreWeddingEntriesGrid(); // re-numbers the #N badges
+            persistPreWeddingOrder();
+        }
+
+        async function persistPreWeddingOrder() {
+            const orderedIds = currentPreWeddingEntries.map(en => en._id);
+            try {
+                const result = await apiCall('/website-content/preWeddingShoot/reorder', 'PUT', { orderedIds });
+                if (!result.success) throw new Error(result.error || 'Failed to save order');
+                // Keep local sortOrder in sync so a re-render without reload stays correct.
+                currentPreWeddingEntries.forEach((en, i) => { en.sortOrder = i; });
+                showToast('Pre-wedding order saved', 'success');
+            } catch (error) {
+                showToast(error.message || 'Failed to save pre-wedding order', 'error');
+                loadWebsitePreWeddingShoot(); // revert to the server's order
+            }
         }
 
         // Pre-Wedding Entry Modal Functions
@@ -7381,7 +8323,7 @@
                 let apiUrl, method, body;
                 
                 if (isEdit) {
-                    apiUrl = `${API_BASE}/website-content/preWeddingShoot/entry/${entryId}`;
+                    apiUrl = `${API_BASE}/website-content/preWeddingShoot/entry/${entryId}?region=${currentRegion}`;
                     method = 'PUT';
                     body = { coupleName, location, shootDate, description, isActive };
                     if (coverImageUrl) {
@@ -7389,7 +8331,7 @@
                         body.coverImageS3Key = coverImageS3Key;
                     }
                 } else {
-                    apiUrl = `${API_BASE}/website-content/preWeddingShoot/entry`;
+                    apiUrl = `${API_BASE}/website-content/preWeddingShoot/entry?region=${currentRegion}`;
                     method = 'POST';
                     body = { coupleName, location, shootDate, description, coverImageUrl, coverImageS3Key };
                 }
@@ -7427,7 +8369,7 @@
             }
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}`, {
+                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -7444,6 +8386,110 @@
                 console.error('Error deleting pre-wedding shoot:', error);
                 showToast(error.message || 'Failed to delete pre-wedding shoot', 'error');
             }
+        }
+
+        // Bulk upload: each selected image becomes its own pre-wedding shoot
+        // card (cover-only); couple name/location/date can be edited later.
+        async function handlePreWeddingBulkUploadSelect(event) {
+            const files = Array.from(event.target.files);
+            const input = event.target;
+            if (files.length === 0) return;
+
+            const progressDiv = document.getElementById('preWeddingBulkUploadProgress');
+            const progressFill = document.getElementById('preWeddingBulkProgressFill');
+            const progressText = document.getElementById('preWeddingBulkProgressText');
+            progressDiv.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            const uploadedImages = [];
+            const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+            let uploadedSize = 0;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const progress = ((i + 1) / files.length) * 100;
+                progressFill.style.width = `${progress}%`;
+                const uploadedMB = (uploadedSize / (1024 * 1024)).toFixed(1);
+                const totalMB = (totalSize / (1024 * 1024)).toFixed(1);
+                progressText.textContent = `Uploading ${i + 1} of ${files.length}... (${uploadedMB} MB / ${totalMB} MB)`;
+
+                try {
+                    const compressedFile = await compressImage(file, 1200, 0.85);
+
+                    const signedUrlResult = await fetch(`${BACKEND_URL}/api/admin/s3/upload-url`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify({
+                            folder: 'website',
+                            filename: file.name,
+                            mimeType: compressedFile.type,
+                            fileSize: compressedFile.size,
+                            prefix: 'preWeddingShoot/covers'
+                        })
+                    });
+
+                    const signedUrlData = await signedUrlResult.json();
+                    if (!signedUrlData.success) {
+                        throw new Error(signedUrlData.error);
+                    }
+
+                    const uploadResponse = await fetch(signedUrlData.uploadUrl, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': compressedFile.type },
+                        body: compressedFile
+                    });
+
+                    if (!uploadResponse.ok) {
+                        throw new Error('Upload failed');
+                    }
+
+                    uploadedImages.push({
+                        coverImageUrl: `https://${signedUrlData.bucket}.s3.${signedUrlData.region}.amazonaws.com/${signedUrlData.key}`,
+                        coverImageS3Key: signedUrlData.key
+                    });
+
+                    uploadedSize += file.size;
+                } catch (error) {
+                    console.error(`Error uploading ${file.name}:`, error);
+                }
+            }
+
+            if (uploadedImages.length > 0) {
+                try {
+                    const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/bulk?region=${currentRegion}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify({ images: uploadedImages })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const failed = files.length - uploadedImages.length;
+                        showToast(
+                            `${uploadedImages.length} shoot(s) added successfully${failed > 0 ? `, ${failed} failed` : ''}`,
+                            failed > 0 ? 'error' : 'success'
+                        );
+                        await loadWebsitePreWeddingShoot();
+                    } else {
+                        throw new Error(data.error || 'Failed to save shoots');
+                    }
+                } catch (error) {
+                    console.error('Error saving bulk pre-wedding shoots:', error);
+                    showToast(error.message || 'Error saving shoots', 'error');
+                }
+            } else {
+                showToast('No shoots were uploaded', 'error');
+            }
+
+            progressDiv.style.display = 'none';
+            input.value = '';
         }
 
         // Pre-Wedding Gallery Modal Functions
@@ -7555,7 +8601,7 @@
             // Save uploaded images to database
             if (uploadedImages.length > 0) {
                 try {
-                    const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}/gallery`, {
+                    const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}/gallery?region=${currentRegion}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -7597,7 +8643,7 @@
             if (!confirm('Delete this image?')) return;
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}/gallery/${imageId}`, {
+                const response = await fetch(`${API_BASE}/website-content/preWeddingShoot/entry/${entryId}/gallery/${imageId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -7637,7 +8683,7 @@
             const grid = document.getElementById('servicesEntriesGrid');
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/services`, {
+                const response = await fetch(`${API_BASE}/website-content/services?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -7670,7 +8716,7 @@
             const sectionSubtitle = document.getElementById('servicesSectionSubtitle').value.trim();
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/services`, {
+                const response = await fetch(`${API_BASE}/website-content/services?region=${currentRegion}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -7959,7 +9005,7 @@
                 let apiUrl, method, body;
                 
                 if (isEdit) {
-                    apiUrl = `${API_BASE}/website-content/services/entry/${entryId}`;
+                    apiUrl = `${API_BASE}/website-content/services/entry/${entryId}?region=${currentRegion}`;
                     method = 'PUT';
                     body = { badge, title, description, features, linkText, linkUrl, isActive };
                     if (imageUrl) {
@@ -7967,7 +9013,7 @@
                         body.imageS3Key = imageS3Key;
                     }
                 } else {
-                    apiUrl = `${API_BASE}/website-content/services/entry`;
+                    apiUrl = `${API_BASE}/website-content/services/entry?region=${currentRegion}`;
                     method = 'POST';
                     body = { badge, title, description, features, linkText, linkUrl, imageUrl, imageS3Key };
                 }
@@ -8005,7 +9051,7 @@
             }
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/services/entry/${entryId}`, {
+                const response = await fetch(`${API_BASE}/website-content/services/entry/${entryId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -8035,7 +9081,7 @@
             const grid = document.getElementById('testimonialsGrid');
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/testimonials`, {
+                const response = await fetch(`${API_BASE}/website-content/testimonials?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -8278,9 +9324,9 @@
                     testimonialData.isActive = document.getElementById('testimonialIsActive').checked;
                 }
                 
-                const url = isEdit 
-                    ? `${API_BASE}/website-content/testimonials/entry/${entryId}`
-                    : `${API_BASE}/website-content/testimonials/entry`;
+                const url = isEdit
+                    ? `${API_BASE}/website-content/testimonials/entry/${entryId}?region=${currentRegion}`
+                    : `${API_BASE}/website-content/testimonials/entry?region=${currentRegion}`;
                 
                 const response = await fetch(url, {
                     method: isEdit ? 'PUT' : 'POST',
@@ -8321,7 +9367,7 @@
             if (!confirm('Are you sure you want to delete this testimonial?')) return;
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/testimonials/entry/${entryId}`, {
+                const response = await fetch(`${API_BASE}/website-content/testimonials/entry/${entryId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -8363,7 +9409,7 @@
             const teamGrid = document.getElementById('teamMembersGrid');
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/about`, {
+                const response = await fetch(`${API_BASE}/website-content/about?region=${currentRegion}`, {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -8440,7 +9486,7 @@
             const badgeLabel = document.getElementById('aboutBadgeLabel').value.trim();
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/about`, {
+                const response = await fetch(`${API_BASE}/website-content/about?region=${currentRegion}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -8741,9 +9787,9 @@
                     memberData.isActive = document.getElementById('teamMemberIsActive').checked;
                 }
                 
-                const url = isEdit 
-                    ? `${API_BASE}/website-content/about/team/${memberId}`
-                    : `${API_BASE}/website-content/about/team`;
+                const url = isEdit
+                    ? `${API_BASE}/website-content/about/team/${memberId}?region=${currentRegion}`
+                    : `${API_BASE}/website-content/about/team?region=${currentRegion}`;
                 
                 const response = await fetch(url, {
                     method: isEdit ? 'PUT' : 'POST',
@@ -8783,7 +9829,7 @@
             if (!confirm('Are you sure you want to delete this team member?')) return;
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/about/team/${memberId}`, {
+                const response = await fetch(`${API_BASE}/website-content/about/team/${memberId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -8854,9 +9900,9 @@
                     label: document.getElementById('statLabel').value
                 };
                 
-                const url = isEdit 
-                    ? `${API_BASE}/website-content/about/stat/${statId}`
-                    : `${API_BASE}/website-content/about/stat`;
+                const url = isEdit
+                    ? `${API_BASE}/website-content/about/stat/${statId}?region=${currentRegion}`
+                    : `${API_BASE}/website-content/about/stat?region=${currentRegion}`;
                 
                 const response = await fetch(url, {
                     method: isEdit ? 'PUT' : 'POST',
@@ -8896,7 +9942,7 @@
             if (!confirm('Are you sure you want to delete this statistic?')) return;
             
             try {
-                const response = await fetch(`${API_BASE}/website-content/about/stat/${statId}`, {
+                const response = await fetch(`${API_BASE}/website-content/about/stat/${statId}?region=${currentRegion}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
@@ -9595,25 +10641,69 @@
         }
 
         // Events
+        // Single source of truth for pricing categories (must match Event/Service model enums)
+        const OFFERING_CATEGORIES = [
+            { value: 'wedding', label: 'Wedding' },
+            { value: 'reception-sangeet-engagement', label: 'Reception / Sangeet / Engagement' },
+            { value: 'haldi-mehendi-house', label: 'Haldi / Mehendi / House' },
+            { value: 'prewedding', label: 'Pre-Wedding' }
+        ];
+
+        function categoryLabel(value) {
+            const c = OFFERING_CATEGORIES.find(c => c.value === value);
+            return c ? c.label : value;
+        }
+
+        // Convert a name to a URL-safe slug
+        function slugify(text) {
+            return (text || '')
+                .toString()
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
         async function loadEvents() {
             try {
-                const result = await apiCall('/events');
-                document.getElementById('eventsTable').innerHTML = result.data.map(e => `
+                // Fetch services too so we can show how many are offered under each event's category
+                const [eventsResult, servicesResult] = await Promise.all([
+                    apiCall('/events'),
+                    apiCall('/services').catch(() => ({ data: [] }))
+                ]);
+                const services = servicesResult.data || [];
+                const activeServiceCountForCategory = (category) =>
+                    services.filter(s => s.isActive !== false && (s.pricing || []).some(p => p.category === category)).length;
+
+                document.getElementById('eventsTable').innerHTML = eventsResult.data.map(e => {
+                    const count = activeServiceCountForCategory(e.category);
+                    return `
                     <tr>
                         <td>${e.icon || '✨'}</td>
                         <td>${e.name}</td>
                         <td>${e.slug}</td>
-                        <td>${e.category}</td>
+                        <td>${categoryLabel(e.category)}</td>
+                        <td>${count > 0
+                            ? `<span class="status-badge status-active">${count} service${count !== 1 ? 's' : ''}</span>`
+                            : `<span class="status-badge status-inactive" title="No active service has a price for this category — quotes for this event will be empty">0 services</span>`}</td>
                         <td><span class="status-badge status-${e.isActive ? 'active' : 'inactive'}">${e.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td class="actions">
                             <button class="action-btn edit" onclick="editEvent('${e._id}')">✏️</button>
                             <button class="action-btn delete" onclick="deleteEvent('${e._id}')">🗑️</button>
                         </td>
-                    </tr>
-                `).join('') || '<tr><td colspan="6">No events found</td></tr>';
+                    </tr>`;
+                }).join('') || '<tr><td colspan="7">No events found</td></tr>';
             } catch (error) {
                 showToast(error.message, 'error');
             }
+        }
+
+        // Auto-fill the event slug from the name (only for new events, until slug is manually edited)
+        function onEventNameInput(value) {
+            if (document.getElementById('eventId').value) return; // editing existing — leave slug alone
+            const slug = document.getElementById('eventSlug');
+            if (slug.dataset.touched === '1') return; // user customized it
+            slug.value = slugify(value);
         }
 
         let eventsCache = [];
@@ -9632,7 +10722,8 @@
                 document.getElementById('eventDescription').value = event.description || '';
                 document.getElementById('eventSortOrder').value = event.sortOrder || 0;
                 document.getElementById('eventIsActive').checked = event.isActive;
-                
+                document.getElementById('eventSlug').dataset.touched = '1'; // keep existing slug while editing
+
                 openModal('event');
             } catch (error) {
                 showToast(error.message, 'error');
@@ -9678,24 +10769,174 @@
             }
         });
 
-        // Services
+        // Services — Pricing Matrix (services as rows, categories as columns)
         async function loadServices() {
+            const wrap = document.getElementById('servicesMatrixWrap');
             try {
                 const result = await apiCall('/services');
-                document.getElementById('servicesTable').innerHTML = result.data.map(s => `
-                    <tr>
-                        <td>${s.name}</td>
-                        <td>${s.slug}</td>
-                        <td>${s.pricing.map(p => `${p.category}: ${formatCurrency(p.price)}`).join('<br>')}</td>
-                        <td><span class="status-badge status-${s.isActive ? 'active' : 'inactive'}">${s.isActive ? 'Active' : 'Inactive'}</span></td>
-                        <td class="actions">
-                            <button class="action-btn edit" onclick="editService('${s._id}')">✏️</button>
-                            <button class="action-btn delete" onclick="deleteService('${s._id}')">🗑️</button>
-                        </td>
-                    </tr>
-                `).join('') || '<tr><td colspan="5">No services found</td></tr>';
+                renderServicesMatrix(result.data || []);
+            } catch (error) {
+                if (wrap) wrap.innerHTML = `<div style="padding:24px;color:var(--danger);">${error.message}</div>`;
+                showToast(error.message, 'error');
+            }
+        }
+
+        function escAttr(str) {
+            return (str || '').toString().replace(/"/g, '&quot;');
+        }
+
+        function buildMatrixRow(service) {
+            const s = service || {};
+            const pricingByCat = {};
+            (s.pricing || []).forEach(p => { pricingByCat[p.category] = p.price; });
+
+            const priceCells = OFFERING_CATEGORIES.map(cat => {
+                const val = pricingByCat[cat.value];
+                const hasVal = val !== undefined && val !== null && val !== '';
+                return `
+                    <td class="matrix-price-col">
+                        <div class="matrix-price-wrap">
+                            <span class="currency">₹</span>
+                            <input type="number" min="0" step="1"
+                                   class="matrix-price-input ${hasVal ? '' : 'is-empty'}"
+                                   data-cat="${cat.value}"
+                                   placeholder="—"
+                                   value="${hasVal ? val : ''}"
+                                   oninput="this.classList.toggle('is-empty', this.value === '')">
+                        </div>
+                    </td>`;
+            }).join('');
+
+            const isNew = !s._id;
+            return `
+                <tr data-id="${s._id || ''}" data-slug="${escAttr(s.slug || '')}">
+                    <td class="matrix-service-cell">
+                        <input type="text" class="matrix-name-input" placeholder="Service name" value="${escAttr(s.name || '')}">
+                        <input type="text" class="matrix-desc-input" placeholder="Short description (optional)" value="${escAttr(s.description || '')}">
+                        ${s.slug ? `<span class="matrix-slug-hint">/${s.slug}</span>` : '<span class="matrix-slug-hint">slug auto-generated from name</span>'}
+                    </td>
+                    ${priceCells}
+                    <td style="text-align:center;">
+                        <input type="checkbox" class="matrix-active-input" ${s.isActive === false ? '' : 'checked'}>
+                    </td>
+                    <td style="text-align:center;">
+                        <button type="button" class="matrix-del-btn" title="Delete service"
+                                onclick="removeMatrixRow(this, '${s._id || ''}')">🗑️</button>
+                    </td>
+                </tr>`;
+        }
+
+        function renderServicesMatrix(services) {
+            const wrap = document.getElementById('servicesMatrixWrap');
+            const headCols = OFFERING_CATEGORIES.map(c => `<th class="matrix-price-col">${c.label}</th>`).join('');
+            const rows = (services || []).length
+                ? services.map(buildMatrixRow).join('')
+                : '';
+
+            wrap.innerHTML = `
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:240px;">Service</th>
+                            ${headCols}
+                            <th style="text-align:center;">Active</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesMatrixBody">${rows}</tbody>
+                </table>
+                ${rows ? '' : '<div style="padding:24px;color:var(--text-light);text-align:center;">No services yet. Click “+ Add Service” to create your first one.</div>'}
+            `;
+        }
+
+        function addMatrixServiceRow() {
+            let body = document.getElementById('servicesMatrixBody');
+            // If the empty-state placeholder is showing, render an empty table first
+            if (!body) {
+                renderServicesMatrix([]);
+                body = document.getElementById('servicesMatrixBody');
+            }
+            body.insertAdjacentHTML('beforeend', buildMatrixRow({}));
+            const newRow = body.lastElementChild;
+            newRow.querySelector('.matrix-name-input').focus();
+            newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function removeMatrixRow(btn, id) {
+            if (id) {
+                deleteService(id); // existing service — delete via API + reload
+            } else {
+                btn.closest('tr').remove(); // unsaved new row — just drop it
+            }
+        }
+
+        async function saveServicesMatrix() {
+            const body = document.getElementById('servicesMatrixBody');
+            if (!body) return;
+
+            const rows = Array.from(body.querySelectorAll('tr'));
+            const payloads = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const id = row.dataset.id;
+                const name = row.querySelector('.matrix-name-input').value.trim();
+
+                // Skip blank brand-new rows; block blank existing rows
+                if (!name) {
+                    if (id) {
+                        showToast('Every service needs a name.', 'error');
+                        row.querySelector('.matrix-name-input').focus();
+                        return;
+                    }
+                    continue;
+                }
+
+                const pricing = [];
+                row.querySelectorAll('.matrix-price-input').forEach(inp => {
+                    if (inp.value !== '') {
+                        pricing.push({ category: inp.dataset.cat, price: parseFloat(inp.value) || 0 });
+                    }
+                });
+
+                payloads.push({
+                    id,
+                    data: {
+                        name,
+                        slug: row.dataset.slug || slugify(name),
+                        description: row.querySelector('.matrix-desc-input').value.trim(),
+                        pricing,
+                        sortOrder: i,
+                        isActive: row.querySelector('.matrix-active-input').checked
+                    }
+                });
+            }
+
+            if (payloads.length === 0) {
+                showToast('Nothing to save.', 'error');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveMatrixBtn');
+            const originalText = saveBtn.textContent;
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving…';
+
+            try {
+                for (const p of payloads) {
+                    if (p.id) {
+                        await apiCall(`/services/${p.id}`, 'PUT', p.data);
+                    } else {
+                        await apiCall('/services', 'POST', p.data);
+                    }
+                }
+                showToast('Services saved successfully');
+                await loadServices();
             } catch (error) {
                 showToast(error.message, 'error');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = originalText;
             }
         }
 
@@ -10022,7 +11263,7 @@
                     <hr style="margin: 15px 0; border-color: var(--gold-dark);">
                     <h4 style="color: var(--gold); margin-bottom: 10px;">Items</h4>
                     ${q.items.map(item => `
-                        <p>• ${item.eventName} - ${item.serviceName}: ${formatCurrency(item.price)}</p>
+                        <p>• ${item.eventName} - ${item.serviceName}${item.crew > 1 ? ` (×${item.crew} photographers)` : ''}: ${formatCurrency(item.price)}</p>
                     `).join('')}
                     <hr style="margin: 15px 0; border-color: var(--gold-dark);">
                     <p><strong>Total:</strong> ${formatCurrency(q.total)}</p>
@@ -10085,6 +11326,8 @@
                         }
                         eventGroups[eventKey].services.push({
                             name: item.serviceName,
+                            crew: item.crew || 1,
+                            unitPrice: item.unitPrice,
                             price: item.price
                         });
                     });
@@ -10177,9 +11420,12 @@
                     // Services
                     if (group.services && group.services.length > 0) {
                         group.services.forEach(service => {
+                            const crewNote = service.crew > 1
+                                ? ` <span style="color: #C9A87C; font-size: 0.85em;">(${service.crew} photographers × ${formatCurrencyLocal(service.unitPrice)})</span>`
+                                : '';
                             invoiceHTML += `
                                 <tr class="service-row">
-                                    <td>${service.name}</td>
+                                    <td>${service.name}${crewNote}</td>
                                     <td>${formatCurrencyLocal(service.price)}</td>
                                 </tr>
                             `;
@@ -10660,6 +11906,9 @@
             document.getElementById(`${type}Modal`).classList.add('active');
             if (type === 'event') {
                 document.getElementById('eventModalTitle').textContent = document.getElementById('eventId').value ? 'Edit Event' : 'Add Event';
+                if (!document.getElementById('eventId').value) {
+                    document.getElementById('eventSlug').dataset.touched = ''; // allow auto-slug for new event
+                }
             } else if (type === 'service') {
                 document.getElementById('serviceModalTitle').textContent = document.getElementById('serviceId').value ? 'Edit Service' : 'Add Service';
                 if (!document.getElementById('serviceId').value) {
