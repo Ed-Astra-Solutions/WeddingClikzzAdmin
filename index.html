@@ -10705,6 +10705,7 @@
                         <input type="checkbox" class="event-service-active" ${s.isActive === false ? '' : 'checked'}> Active
                     </label>
                     <button type="button" class="matrix-del-btn" title="Remove service" onclick="removeEventServiceRow(this, '${s._id || ''}')">🗑️</button>
+                    <input type="text" class="event-service-description" placeholder="Description (shown to customers on the quote builder)" value="${escAttr(s.description || '')}" title="Short description shown under the service name on the quotation site" style="flex:1 1 100%;min-width:0;">
                 </div>`;
         }
 
@@ -10764,12 +10765,13 @@
                 const isActive = row.querySelector('.event-service-active').checked;
                 const crewEnabled = row.querySelector('.event-service-crew-enabled').checked;
                 const crewLabel = row.querySelector('.event-service-crew').value.trim() || 'Photographers';
+                const description = row.querySelector('.event-service-description').value.trim();
                 const existing = eventServicesCache.find(s => s._id === id);
 
                 const data = {
                     name,
                     slug: row.dataset.slug || slugify(name),
-                    description: existing?.description || '',
+                    description,
                     crewLabel,
                     crewEnabled,
                     sortOrder: existing?.sortOrder ?? rows.indexOf(row),
