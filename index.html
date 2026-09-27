@@ -3265,6 +3265,80 @@
         }
 
         /* ==========================================
+           Grouped sidebar + group sub-tabs
+           ========================================== */
+        .nav-group-label {
+            padding: 18px 26px 7px;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .nav-menu > .nav-group-label:first-child {
+            padding-top: 8px;
+        }
+
+        .nav-icon {
+            font-size: 19px;
+            margin-right: 12px;
+            color: inherit;
+            opacity: 0.85;
+        }
+
+        .nav-item.active .nav-icon {
+            opacity: 1;
+        }
+
+        /* The badge stays pinned right while the icon leads the label. */
+        .nav-item .nav-badge {
+            margin-left: auto;
+        }
+
+        .group-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .group-tabs[hidden] { display: none; }
+
+        .group-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .group-tab .mi { font-size: 17px; color: inherit; }
+
+        .group-tab:hover {
+            background: rgba(201, 169, 98, 0.08);
+            border-color: var(--gold-dark);
+            color: var(--gold-light);
+        }
+
+        .group-tab.active {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-color: var(--gold);
+            color: #0A0A0A;
+            font-weight: 600;
+        }
+
+        /* ==========================================
            Material Symbols icons
            ========================================== */
         .mi {
@@ -3304,8 +3378,8 @@
         .nav-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 0;
         }
 
         .nav-badge {
@@ -4675,16 +4749,18 @@
                 <span>Admin Console</span>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item active" data-section="dashboard">Dashboard</li>
-                <li class="nav-item" data-section="offerings">Offerings</li>
-                <li class="nav-item" data-section="website">Website Controls</li>
-                <li class="nav-item" data-section="quoteBuilder">Quotation Builder</li>
-                <li class="nav-item" data-section="quotes">Quotes</li>
-                <li class="nav-item" data-section="users">Customers</li>
-                <li class="nav-item" data-section="admins">Admins</li>
-                <li class="nav-item" data-section="settings">Email Notifications</li>
-                <li class="nav-item" data-section="enquiries" data-title="Enquiries">Enquiries<span class="nav-badge" id="enquiryBadge" hidden>0</span></li>
-                <li class="nav-item" data-section="subscribers">Subscribers</li>
+                <li class="nav-group-label">Daily</li>
+                <li class="nav-item active" data-section="dashboard"><span class="mi nav-icon">dashboard</span>Dashboard</li>
+                <li class="nav-item" data-section="enquiries" data-title="Enquiries"><span class="mi nav-icon">forum</span>Enquiries<span class="nav-badge" id="enquiryBadge" hidden>0</span></li>
+                <li class="nav-item" data-group="quotations" data-title="Quotations"><span class="mi nav-icon">request_quote</span>Quotations</li>
+
+                <li class="nav-group-label">Catalogue</li>
+                <li class="nav-item" data-section="offerings"><span class="mi nav-icon">sell</span>Offerings</li>
+                <li class="nav-item" data-section="website"><span class="mi nav-icon">language</span>Website</li>
+
+                <li class="nav-group-label">Admin</li>
+                <li class="nav-item" data-group="contacts" data-title="Contacts"><span class="mi nav-icon">group</span>Contacts</li>
+                <li class="nav-item" data-group="configuration" data-title="Settings"><span class="mi nav-icon">settings</span>Settings</li>
             </ul>
         </aside>
 
@@ -4697,6 +4773,9 @@
                     <button class="btn btn-secondary btn-sm" id="logoutBtn">Logout</button>
                 </div>
             </div>
+
+            <!-- Sub-tabs for grouped sidebar entries (Quotations, Contacts, Settings) -->
+            <div class="group-tabs" id="groupTabs" hidden></div>
 
             <!-- Dashboard Section -->
             <section class="section active" id="dashboardSection">
@@ -6733,26 +6812,103 @@
          * A nav item's label, ignoring any badge element inside it.
          */
         function navItemTitle(item) {
-            return (item.dataset.title || item.childNodes[0].textContent || '').trim();
+            if (!item) return '';
+            if (item.dataset.title) return item.dataset.title;
+            // Read only direct text nodes, so the leading icon span and the
+            // trailing count badge never leak into the heading.
+            return [...item.childNodes]
+                .filter(n => n.nodeType === Node.TEXT_NODE)
+                .map(n => n.textContent)
+                .join('')
+                .trim();
+        }
+
+        /**
+         * Sidebar entries that stand for several related sections. Each shows a
+         * row of sub-tabs instead of its own sidebar row, which keeps the
+         * sidebar short without hiding anything.
+         */
+        const NAV_GROUPS = {
+            quotations: [
+                { section: 'quoteBuilder', label: 'Builder', icon: 'edit_note' },
+                { section: 'quotes', label: 'All Quotes', icon: 'receipt_long' }
+            ],
+            contacts: [
+                { section: 'users', label: 'Customers', icon: 'person' },
+                { section: 'subscribers', label: 'Subscribers', icon: 'mail' }
+            ],
+            configuration: [
+                { section: 'admins', label: 'Admins', icon: 'shield_person' },
+                { section: 'settings', label: 'Email Notifications', icon: 'notifications' }
+            ]
+        };
+
+        // Remembers which sub-tab each group was last left on.
+        const groupLastSection = {};
+
+        function sectionGroup(section) {
+            return Object.keys(NAV_GROUPS).find(g => NAV_GROUPS[g].some(m => m.section === section));
+        }
+
+        /**
+         * Show `section`, updating the sidebar, the heading and the group
+         * sub-tab bar to match. The single entry point for all navigation.
+         */
+        function showSection(section, { title } = {}) {
+            showSectionChrome(section, { title });
+            loadSection(section);
+        }
+
+        /**
+         * Everything showSection does except loading the section's data:
+         * sidebar state, sub-tab bar, visible section and heading.
+         */
+        function showSectionChrome(section, { title } = {}) {
+            const group = sectionGroup(section);
+            const bar = document.getElementById('groupTabs');
+
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            const navItem = group
+                ? document.querySelector(`.nav-item[data-group="${group}"]`)
+                : document.querySelector(`.nav-item[data-section="${section}"]`);
+            if (navItem) navItem.classList.add('active');
+
+            if (group) {
+                groupLastSection[group] = section;
+                bar.innerHTML = NAV_GROUPS[group].map(m => `
+                    <button type="button" class="group-tab ${m.section === section ? 'active' : ''}"
+                            onclick="showSection('${m.section}')">
+                        <span class="mi">${m.icon}</span>${m.label}
+                    </button>
+                `).join('');
+                bar.hidden = false;
+            } else {
+                bar.hidden = true;
+                bar.innerHTML = '';
+            }
+
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(`${section}Section`);
+            if (target) target.classList.add('active');
+
+            // Heading: the group name, or the sidebar label for a standalone entry.
+            const heading = title
+                || (group ? navItemTitle(navItem) : (navItem ? navItemTitle(navItem) : section));
+            document.getElementById('pageTitle').textContent = heading;
+            updateAppBarTitle(heading);
+
+            closeSidebarOnMobile();
         }
 
         // Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-                
-                const section = item.dataset.section;
-                const title = navItemTitle(item);
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                document.getElementById(`${section}Section`).classList.add('active');
-                document.getElementById('pageTitle').textContent = title;
-                updateAppBarTitle(title);
-                
-                // Close sidebar on mobile after navigation
-                closeSidebarOnMobile();
-                
-                loadSection(section);
+                const group = item.dataset.group;
+                // A group opens wherever it was last left, else its first tab.
+                const section = group
+                    ? (groupLastSection[group] || NAV_GROUPS[group][0].section)
+                    : item.dataset.section;
+                showSection(section);
             });
         });
 
@@ -6775,20 +6931,16 @@
 
         // Navigate to section programmatically (used by dashboard cards)
         function navigateToSection(section, subtab = null) {
-            // Update sidebar navigation
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            const navItem = document.querySelector(`.nav-item[data-section="${section}"]`);
-            if (navItem) {
-                navItem.classList.add('active');
-                const title = navItemTitle(navItem);
-                document.getElementById('pageTitle').textContent = title;
-                updateAppBarTitle(title);
+            // showSection owns the sidebar, heading and group sub-tab bar.
+            // It also calls loadSection, which the subtab branches below replace.
+            const hasSubtab = Boolean(subtab) && (section === 'offerings' || section === 'website');
+            if (!hasSubtab) {
+                showSection(section);
+                return;
             }
-            
-            // Show section
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(`${section}Section`).classList.add('active');
-            
+
+            showSectionChrome(section);
+
             // Handle offerings subtab if specified
             if (section === 'offerings' && subtab) {
                 setTimeout(() => {
@@ -6812,11 +6964,8 @@
                         loadWebsiteSubtab(subtab);
                     }
                 }, 100);
-            } else {
-                // Load section data
-                loadSection(section);
             }
-            
+
             // Close sidebar on mobile
             closeSidebarOnMobile();
         }
