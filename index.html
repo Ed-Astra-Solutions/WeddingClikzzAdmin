@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeddingClikz Admin Console</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #C9A962;
@@ -3145,27 +3146,37 @@
             font-size: 14px;
         }
 
-        .action-btn.edit {
-            background: rgba(90, 143, 212, 0.12);
-            color: #7EB3F0;
+        /* All row actions share one gold treatment; destructive ones only
+           turn red on hover, so the row reads calmly but still warns. */
+        .action-btn.view,
+        .action-btn.edit,
+        .action-btn.delete {
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid var(--border-subtle);
+            color: var(--gold);
         }
 
-        .action-btn.delete {
-            background: rgba(209, 82, 82, 0.12);
-            color: #E57373;
+        .action-btn .mi {
+            font-size: 18px;
+            color: inherit;
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
         }
 
+        .action-btn.view:hover,
         .action-btn.edit:hover {
-            background: rgba(90, 143, 212, 0.2);
-            box-shadow: 0 4px 12px rgba(90, 143, 212, 0.15);
+            background: rgba(201, 169, 98, 0.2);
+            border-color: var(--border-gold);
+            color: var(--gold-light);
+            box-shadow: 0 4px 12px rgba(201, 169, 98, 0.15);
         }
 
         .action-btn.delete:hover {
             background: rgba(209, 82, 82, 0.2);
+            border-color: rgba(209, 82, 82, 0.4);
+            color: #E57373;
             box-shadow: 0 4px 12px rgba(209, 82, 82, 0.15);
         }
 
@@ -3252,6 +3263,40 @@
             background: rgba(209, 82, 82, 0.15);
             color: #E57373;
         }
+
+        /* ==========================================
+           Material Symbols icons
+           ========================================== */
+        .mi {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+            vertical-align: middle;
+            color: var(--gold);
+            /* The ligature name is the text content; never let it wrap or
+               be picked up as a word by text selection styling. */
+            user-select: none;
+        }
+
+        /* Inline with button/label text */
+        .btn .mi {
+            font-size: 18px;
+            margin-right: -2px;
+        }
+
+        .mi-sm { font-size: 17px; }
+        .mi-lg { font-size: 22px; }
 
         /* ==========================================
            Enquiries — unread badge & detail rows
@@ -4743,7 +4788,7 @@
                                     <p>Toggle items as Active or Inactive to control what customers see. Inactive items are <em>hidden</em> from the quote builder but remain in your system – perfect for seasonal offerings or temporarily unavailable services.</p>
                                 </div>
                                 <div class="info-tooltip-section" style="border-top: 1px solid rgba(201, 169, 98, 0.2); padding-top: 12px; margin-top: 8px;">
-                                    <p style="margin: 0; font-size: 11px; color: var(--text-muted);"><strong>💡 Tip:</strong> Start by creating your Events first, then add Services with category-based pricing, and finally add any optional Add-ons.</p>
+                                    <p style="margin: 0; font-size: 11px; color: var(--text-muted);"><strong><span class="mi mi-sm">lightbulb</span> Tip:</strong> Start by creating your Events first, then add Services with category-based pricing, and finally add any optional Add-ons.</p>
                                 </div>
                             </div>
                         </div>
@@ -4827,7 +4872,7 @@
                         <h2>Quotes</h2>
                         <div class="search-box">
                             <button class="btn btn-secondary btn-sm" onclick="startNewQuotation()" title="Build a new quotation">+ New Quotation</button>
-                            <button class="btn btn-secondary btn-sm" onclick="exportQuotesCsv()" title="Export CSV">⬇ Export</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportQuotesCsv()" title="Export CSV"><span class="mi">download</span> Export</button>
                             <input type="text" id="quoteSearch" placeholder="Search quotes...">
                             <select id="quoteStatusFilter">
                                 <option value="">All Status</option>
@@ -4895,8 +4940,8 @@
                     <div class="table-header">
                         <h2>Website Enquiries <span class="status-badge status-new" id="enquiryUnreadPill" hidden>0 unseen</span></h2>
                         <div class="search-box">
-                            <button class="btn btn-secondary btn-sm" onclick="markAllEnquiriesRead()" id="enquiryMarkAllBtn" title="Mark every enquiry as seen">✓ Mark all seen</button>
-                            <button class="btn btn-secondary btn-sm" onclick="exportEnquiriesCsv()" title="Export CSV">⬇ Export</button>
+                            <button class="btn btn-secondary btn-sm" onclick="markAllEnquiriesRead()" id="enquiryMarkAllBtn" title="Mark every enquiry as seen"><span class="mi">done_all</span> Mark all seen</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportEnquiriesCsv()" title="Export CSV"><span class="mi">download</span> Export</button>
                             <input type="text" id="enquirySearch" placeholder="Search enquiries...">
                             <select id="enquirySourceFilter">
                                 <option value="">All Sources</option>
@@ -5058,7 +5103,7 @@
                     <div class="table-header">
                         <h2>Customers</h2>
                         <div class="search-box">
-                            <button class="btn btn-secondary btn-sm" onclick="exportCustomersCsv()" title="Export CSV">⬇ Export</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportCustomersCsv()" title="Export CSV"><span class="mi">download</span> Export</button>
                             <input type="text" id="userSearch" placeholder="Search customers...">
                         </div>
                     </div>
@@ -5084,13 +5129,13 @@
                         </div>
                         <div class="pagination-controls">
                             <button class="pagination-btn" id="customersPrevBtn" onclick="changeCustomersPage('prev')" disabled>
-                                ← Previous
+                                <span class="mi mi-sm">chevron_left</span> Previous
                             </button>
                             <div class="pagination-pages" id="customersPaginationPages">
                                 <!-- Page numbers will be inserted here -->
                             </div>
                             <button class="pagination-btn" id="customersNextBtn" onclick="changeCustomersPage('next')" disabled>
-                                Next →
+                                Next <span class="mi mi-sm">chevron_right</span>
                             </button>
                         </div>
                         <div class="pagination-per-page">
@@ -5166,7 +5211,7 @@
                     <div class="table-header">
                         <h2>Newsletter Subscribers</h2>
                         <div class="search-box">
-                            <button class="btn btn-secondary btn-sm" onclick="exportSubscribersCsv()" title="Export CSV">⬇ Export</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportSubscribersCsv()" title="Export CSV"><span class="mi">download</span> Export</button>
                             <input type="text" id="subscriberSearch" placeholder="Search subscribers...">
                             <select id="subscriberStatusFilter">
                                 <option value="">All Status</option>
@@ -5197,11 +5242,11 @@
                         </div>
                         <div class="pagination-controls">
                             <button class="pagination-btn" id="subscribersPrevBtn" onclick="changeSubscribersPage('prev')" disabled>
-                                ← Previous
+                                <span class="mi mi-sm">chevron_left</span> Previous
                             </button>
                             <div class="pagination-pages" id="subscribersPaginationPages"></div>
                             <button class="pagination-btn" id="subscribersNextBtn" onclick="changeSubscribersPage('next')" disabled>
-                                Next →
+                                Next <span class="mi mi-sm">chevron_right</span>
                             </button>
                         </div>
                         <div class="pagination-per-page">
@@ -5798,8 +5843,8 @@
                 <div class="loading"><div class="spinner"></div></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="quoteDetailsPdfBtn">⬇ Download PDF</button>
-                <button type="button" class="btn btn-secondary" id="quoteDetailsEditBtn">✏️ Edit</button>
+                <button type="button" class="btn btn-secondary" id="quoteDetailsPdfBtn"><span class="mi">download</span> Download PDF</button>
+                <button type="button" class="btn btn-secondary" id="quoteDetailsEditBtn"><span class="mi">edit</span> Edit</button>
                 <button type="button" class="btn btn-secondary" onclick="closeQuoteDetailsModal()">Close</button>
             </div>
         </div>
@@ -6487,7 +6532,7 @@
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            toast.innerHTML = `<span>${type === 'success' ? '✓' : type === 'error' ? '✕' : '⚠'}</span> ${message}`;
+            toast.innerHTML = `<span class="mi mi-sm" style="color: inherit;">${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'warning'}</span> ${message}`;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 4000);
         }
@@ -11345,7 +11390,7 @@
                         <td><span class="status-badge status-${q.status}">${q.status}</span></td>
                         <td>${formatDate(q.createdAt)}</td>
                         <td class="actions">
-                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details">👁️</button>
+                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details"><span class="mi">visibility</span></button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="6">No quotes yet</td></tr>';
@@ -11391,8 +11436,8 @@
                             : `<span class="status-badge status-inactive" title="No active service has a price for this event — quotes for this event will be empty">0 services</span>`}</td>
                         <td><span class="status-badge status-${e.isActive ? 'active' : 'inactive'}">${e.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td class="actions">
-                            <button class="action-btn edit" onclick="editEvent('${e._id}')">✏️</button>
-                            <button class="action-btn delete" onclick="deleteEvent('${e._id}')">🗑️</button>
+                            <button class="action-btn edit" onclick="editEvent('${e._id}')"><span class="mi">edit</span></button>
+                            <button class="action-btn delete" onclick="deleteEvent('${e._id}')"><span class="mi">delete</span></button>
                         </td>
                     </tr>`;
                 }).join('') || '<tr><td colspan="6">No events found</td></tr>';
@@ -11488,7 +11533,7 @@
                     <label style="display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap;">
                         <input type="checkbox" class="event-service-active" ${s.isActive === false ? '' : 'checked'}> Active
                     </label>
-                    <button type="button" class="matrix-del-btn" title="Remove service" onclick="removeEventServiceRow(this, '${s._id || ''}')">🗑️</button>
+                    <button type="button" class="matrix-del-btn" title="Remove service" onclick="removeEventServiceRow(this, '${s._id || ''}')"><span class="mi">delete</span></button>
                     <input type="text" class="event-service-description" placeholder="Description (shown to customers on the quote builder)" value="${escAttr(s.description || '')}" title="Short description shown under the service name on the quotation site" style="flex:1 1 100%;min-width:0;">
                 </div>`;
         }
@@ -11637,8 +11682,8 @@
                         <td>₹${s.price.toLocaleString('en-IN')}</td>
                         <td><span class="status-badge status-${s.isActive ? 'active' : 'inactive'}">${s.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td class="actions">
-                            <button class="action-btn edit" onclick="editAdditionalService('${s._id}')">✏️</button>
-                            <button class="action-btn delete" onclick="deleteAdditionalService('${s._id}')">🗑️</button>
+                            <button class="action-btn edit" onclick="editAdditionalService('${s._id}')"><span class="mi">edit</span></button>
+                            <button class="action-btn delete" onclick="deleteAdditionalService('${s._id}')"><span class="mi">delete</span></button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="5">No additional services found</td></tr>';
@@ -11749,11 +11794,11 @@
                         <td><span class="status-badge status-${q.status}">${q.status}</span></td>
                         <td>${formatDate(q.createdAt)}</td>
                         <td class="actions">
-                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details">👁️</button>
-                            <button class="action-btn edit" onclick="downloadQuotePdf('${q._id}', '${q.quoteNumber}')" title="Download PDF">⬇</button>
-                            <button class="action-btn edit" onclick="sendQuoteEmail('${q._id}', ${Boolean(q.customerEmail)})" title="${q.emailSentAt ? 'Resend email' : 'Send email'}">✉️</button>
-                            <button class="action-btn edit" onclick="editQuote('${q._id}')" title="Edit in the builder">✏️</button>
-                            <button class="action-btn delete" onclick="deleteQuote('${q._id}')" title="Delete">🗑️</button>
+                            <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details"><span class="mi">visibility</span></button>
+                            <button class="action-btn edit" onclick="downloadQuotePdf('${q._id}', '${q.quoteNumber}')" title="Download PDF"><span class="mi">download</span></button>
+                            <button class="action-btn edit" onclick="sendQuoteEmail('${q._id}', ${Boolean(q.customerEmail)})" title="${q.emailSentAt ? 'Resend email' : 'Send email'}"><span class="mi">mail</span></button>
+                            <button class="action-btn edit" onclick="editQuote('${q._id}')" title="Edit in the builder"><span class="mi">edit</span></button>
+                            <button class="action-btn delete" onclick="deleteQuote('${q._id}')" title="Delete"><span class="mi">delete</span></button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="7">No quotes found</td></tr>';
@@ -12164,9 +12209,9 @@
                             <td><span class="status-badge status-${e.status}">${e.status}</span></td>
                             <td>${formatDate(e.createdAt)}</td>
                             <td class="actions">
-                                <button class="action-btn view" onclick="viewEnquiry('${e._id}')" title="View enquiry">👁️</button>
-                                <button class="action-btn edit" onclick="toggleEnquiryRead('${e._id}', ${!e.isRead})" title="${e.isRead ? 'Mark as unseen' : 'Mark as seen'}">${e.isRead ? '📩' : '✓'}</button>
-                                <button class="action-btn delete" onclick="deleteEnquiry('${e._id}')" title="Delete">🗑️</button>
+                                <button class="action-btn view" onclick="viewEnquiry('${e._id}')" title="View enquiry"><span class="mi">visibility</span></button>
+                                <button class="action-btn edit" onclick="toggleEnquiryRead('${e._id}', ${!e.isRead})" title="${e.isRead ? 'Mark as unseen' : 'Mark as seen'}"><span class="mi">${e.isRead ? 'mark_email_unread' : 'mark_email_read'}</span></button>
+                                <button class="action-btn delete" onclick="deleteEnquiry('${e._id}')" title="Delete"><span class="mi">delete</span></button>
                             </td>
                         </tr>
                     `;
@@ -12915,7 +12960,7 @@
                         <td>${u.quotations ? u.quotations.length : 0}</td>
                         <td>${formatDate(u.createdAt)}</td>
                         <td class="actions">
-                            <button class="action-btn delete" onclick="deleteUser('${u._id}')">🗑️</button>
+                            <button class="action-btn delete" onclick="deleteUser('${u._id}')"><span class="mi">delete</span></button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="5">No customers found</td></tr>';
@@ -13072,7 +13117,7 @@
                         <td>${s.source || 'website'}</td>
                         <td><span class="status-badge status-${s.isActive ? 'active' : 'inactive'}">${s.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td>${formatDate(s.subscribedAt || s.createdAt)}</td>
-                        <td>${s.welcomeEmailSent ? '✅' : '❌'}</td>
+                        <td>${s.welcomeEmailSent ? '<span class="mi mi-sm" style="color: var(--success);">check_circle</span>' : '<span class="mi mi-sm" style="color: var(--text-muted);">cancel</span>'}</td>
                     </tr>
                 `).join('') || '<tr><td colspan="6">No subscribers found</td></tr>';
 
@@ -13235,8 +13280,8 @@
                         <td><span class="status-badge status-${a.isActive ? 'active' : 'inactive'}">${a.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td>${formatDate(a.lastLogin)}</td>
                         <td class="actions">
-                            <button class="action-btn edit" onclick="editAdmin('${a._id}')">✏️</button>
-                            ${a._id !== currentAdmin.id ? `<button class="action-btn delete" onclick="deleteAdmin('${a._id}')">🗑️</button>` : ''}
+                            <button class="action-btn edit" onclick="editAdmin('${a._id}')"><span class="mi">edit</span></button>
+                            ${a._id !== currentAdmin.id ? `<button class="action-btn delete" onclick="deleteAdmin('${a._id}')"><span class="mi">delete</span></button>` : ''}
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="6">No admins found</td></tr>';
