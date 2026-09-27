@@ -3254,6 +3254,115 @@
         }
 
         /* ==========================================
+           Enquiries — unread badge & detail rows
+           ========================================== */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .nav-badge {
+            flex-shrink: 0;
+            min-width: 22px;
+            height: 20px;
+            padding: 0 7px;
+            border-radius: 10px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 20px;
+            text-align: center;
+            letter-spacing: 0.3px;
+            box-shadow: 0 0 12px rgba(209, 82, 82, 0.4);
+        }
+
+        .nav-badge[hidden] { display: none; }
+
+        /* Paint the cells, not the row, so the tint covers every column evenly. */
+        tbody tr.enquiry-unread td {
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        tbody tr.enquiry-unread td:first-child {
+            box-shadow: inset 3px 0 0 var(--gold);
+        }
+
+        .enquiry-name {
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .enquiry-unread .enquiry-name::before {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            vertical-align: middle;
+        }
+
+        .source-badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .source-landing { background: rgba(201, 169, 98, 0.12); color: var(--gold); }
+        .source-lifestyle { background: rgba(90, 143, 212, 0.12); color: #7EB3F0; }
+
+        .status-new { background: rgba(209, 82, 82, 0.12); color: #E57373; }
+        .status-contacted { background: rgba(232, 155, 60, 0.12); color: #F0B860; }
+        .status-closed { background: rgba(74, 159, 91, 0.12); color: #6ABF7B; }
+
+        .enquiry-detail dl {
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            gap: 12px 18px;
+            margin: 0;
+        }
+
+        .enquiry-detail dt {
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding-top: 2px;
+        }
+
+        .enquiry-detail dd {
+            margin: 0;
+            color: var(--text-bright);
+            font-size: 15px;
+            word-break: break-word;
+        }
+
+        .enquiry-detail dd a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .enquiry-detail dd a:hover { text-decoration: underline; }
+
+        .enquiry-message {
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 560px) {
+            .enquiry-detail dl { grid-template-columns: minmax(0, 1fr); gap: 4px 0; }
+            .enquiry-detail dt { margin-top: 10px; }
+        }
+
+        /* ==========================================
            Quotation Builder
            ========================================== */
         .qb-layout {
@@ -4529,6 +4638,7 @@
                 <li class="nav-item" data-section="users">Customers</li>
                 <li class="nav-item" data-section="admins">Admins</li>
                 <li class="nav-item" data-section="settings">Email Notifications</li>
+                <li class="nav-item" data-section="enquiries" data-title="Enquiries">Enquiries<span class="nav-badge" id="enquiryBadge" hidden>0</span></li>
                 <li class="nav-item" data-section="subscribers">Subscribers</li>
             </ul>
         </aside>
@@ -4770,6 +4880,75 @@
                                 <select id="quotesPerPage" onchange="changeQuotesPerPage()">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enquiries Section -->
+            <section class="section" id="enquiriesSection">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2>Website Enquiries <span class="status-badge status-new" id="enquiryUnreadPill" hidden>0 unseen</span></h2>
+                        <div class="search-box">
+                            <button class="btn btn-secondary btn-sm" onclick="markAllEnquiriesRead()" id="enquiryMarkAllBtn" title="Mark every enquiry as seen">✓ Mark all seen</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportEnquiriesCsv()" title="Export CSV">⬇ Export</button>
+                            <input type="text" id="enquirySearch" placeholder="Search enquiries...">
+                            <select id="enquirySourceFilter">
+                                <option value="">All Sources</option>
+                                <option value="landing">Wedding Site</option>
+                                <option value="lifestyle">Lifestyle Site</option>
+                            </select>
+                            <select id="enquiryStatusFilter">
+                                <option value="">All Status</option>
+                                <option value="unread">Unseen Only</option>
+                                <option value="new">New</option>
+                                <option value="contacted">Contacted</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Event</th>
+                                <th>Source</th>
+                                <th>Status</th>
+                                <th>Received</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enquiriesTable">
+                            <tr><td colspan="7" class="loading"><div class="spinner"></div></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination-container" id="enquiriesPagination">
+                        <div class="pagination-info">
+                            Showing <span id="enquiriesShowingStart">0</span>-<span id="enquiriesShowingEnd">0</span> of <span id="enquiriesTotalCount">0</span> enquiries
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="enquiriesPrevBtn" onclick="changeEnquiriesPage(-1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <div class="pagination-pages" id="enquiriesPaginationPages"></div>
+                            <button class="pagination-btn" id="enquiriesNextBtn" onclick="changeEnquiriesPage(1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                            <div class="pagination-per-page">
+                                <label>Per page:</label>
+                                <select id="enquiriesPerPage" onchange="changeEnquiriesPerPage()">
+                                    <option value="10">10</option>
+                                    <option value="20" selected>20</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
@@ -5481,6 +5660,27 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Enquiry Details Modal -->
+    <div class="modal-overlay" id="enquiryModal">
+        <div class="modal" style="max-width: 640px;">
+            <div class="modal-header">
+                <h2>Enquiry</h2>
+                <button class="modal-close" onclick="closeEnquiryModal()">&times;</button>
+            </div>
+            <div class="modal-body enquiry-detail" id="enquiryModalContent">
+                <div class="loading"><div class="spinner"></div></div>
+            </div>
+            <div class="modal-footer">
+                <select id="enquiryStatusSelect" style="padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--white); font-family: inherit; margin-right: auto;">
+                    <option value="new">New</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <button type="button" class="btn btn-secondary" onclick="closeEnquiryModal()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -6452,6 +6652,10 @@
             localStorage.removeItem('adminData');
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('adminLayout').style.display = 'none';
+            if (enquiryBadgePoll) {
+                clearInterval(enquiryBadgePoll);
+                enquiryBadgePoll = null;
+            }
         }
 
         document.getElementById('logoutBtn').addEventListener('click', logout);
@@ -6474,6 +6678,17 @@
             document.getElementById('adminName').textContent = currentAdmin.name || 'Admin';
             updateAppBarUser(currentAdmin.name, currentAdmin.email);
             loadDashboard();
+            refreshEnquiryBadge();
+            // Keep the unseen-enquiry badge current while the console stays open.
+            if (enquiryBadgePoll) clearInterval(enquiryBadgePoll);
+            enquiryBadgePoll = setInterval(refreshEnquiryBadge, 60000);
+        }
+
+        /**
+         * A nav item's label, ignoring any badge element inside it.
+         */
+        function navItemTitle(item) {
+            return (item.dataset.title || item.childNodes[0].textContent || '').trim();
         }
 
         // Navigation
@@ -6483,7 +6698,7 @@
                 item.classList.add('active');
                 
                 const section = item.dataset.section;
-                const title = item.textContent.trim();
+                const title = navItemTitle(item);
                 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
                 document.getElementById(`${section}Section`).classList.add('active');
                 document.getElementById('pageTitle').textContent = title;
@@ -6520,7 +6735,7 @@
             const navItem = document.querySelector(`.nav-item[data-section="${section}"]`);
             if (navItem) {
                 navItem.classList.add('active');
-                const title = navItem.textContent.trim();
+                const title = navItemTitle(navItem);
                 document.getElementById('pageTitle').textContent = title;
                 updateAppBarTitle(title);
             }
@@ -11082,6 +11297,7 @@
                     break;
                 case 'quotes': loadQuotes(); break;
                 case 'quoteBuilder': loadQuoteBuilder(); break;
+                case 'enquiries': loadEnquiries(true); break;
                 case 'users': loadUsers(); break;
                 case 'admins': loadAdmins(); break;
                 case 'settings': loadSettings(); break;
@@ -11870,6 +12086,250 @@
         function closeQuoteDetailsModal() {
             document.getElementById('quoteDetailsModal').classList.remove('active');
         }
+
+        // ============================================
+        // Website Enquiries
+        // ============================================
+        let enquiriesCurrentPage = 1;
+        let enquiriesPerPage = 20;
+        let enquiriesTotalCount = 0;
+        let enquiriesTotalPages = 1;
+        let currentEnquiryId = null;
+        let enquiryBadgePoll = null;
+
+        /**
+         * Reflect the unread total on the sidebar badge and the section heading.
+         */
+        function setEnquiryUnread(count) {
+            const badge = document.getElementById('enquiryBadge');
+            const pill = document.getElementById('enquiryUnreadPill');
+            const markAll = document.getElementById('enquiryMarkAllBtn');
+            const n = Number(count) || 0;
+
+            badge.textContent = n > 99 ? '99+' : n;
+            badge.hidden = n === 0;
+
+            pill.textContent = `${n} unseen`;
+            pill.hidden = n === 0;
+            markAll.disabled = n === 0;
+        }
+
+        async function refreshEnquiryBadge() {
+            try {
+                const result = await apiCall('/enquiries/unread-count');
+                setEnquiryUnread(result.unreadCount);
+            } catch (error) {
+                // A badge refresh is best-effort; never interrupt the admin for it.
+                console.warn('Could not refresh the enquiry badge:', error.message);
+            }
+        }
+
+        async function loadEnquiries(resetPage = false) {
+            if (resetPage) enquiriesCurrentPage = 1;
+
+            try {
+                const search = document.getElementById('enquirySearch').value;
+                const source = document.getElementById('enquirySourceFilter').value;
+                const statusFilter = document.getElementById('enquiryStatusFilter').value;
+
+                let query = `?page=${enquiriesCurrentPage}&limit=${enquiriesPerPage}`;
+                if (search) query += `&search=${encodeURIComponent(search)}`;
+                if (source) query += `&source=${source}`;
+                // "Unseen only" filters on the read flag; the rest are workflow statuses.
+                if (statusFilter === 'unread') query += '&unreadOnly=true';
+                else if (statusFilter) query += `&status=${statusFilter}`;
+
+                const result = await apiCall(`/enquiries${query}`);
+                const enquiries = result.data || [];
+
+                enquiriesTotalCount = result.total || 0;
+                enquiriesTotalPages = result.totalPages || 1;
+                setEnquiryUnread(result.unreadCount);
+                updateEnquiriesPagination();
+
+                document.getElementById('enquiriesTable').innerHTML = enquiries.map(e => {
+                    const contact = [e.email, e.phone].filter(Boolean).join('<br>') || '—';
+                    const eventBits = [
+                        e.eventDate ? formatDate(e.eventDate) : '',
+                        e.location || '',
+                        e.serviceLabel || e.service || ''
+                    ].filter(Boolean);
+
+                    return `
+                        <tr class="${e.isRead ? '' : 'enquiry-unread'}">
+                            <td><span class="enquiry-name">${qbEscape(e.name || '—')}</span>${e.partner || e.company ? `<br><small>${qbEscape(e.partner || e.company)}</small>` : ''}</td>
+                            <td><small>${contact}</small></td>
+                            <td><small>${eventBits.length ? qbEscape(eventBits.join(' · ')) : '—'}</small></td>
+                            <td><span class="source-badge source-${e.source}">${e.source === 'lifestyle' ? 'Lifestyle' : 'Wedding'}</span></td>
+                            <td><span class="status-badge status-${e.status}">${e.status}</span></td>
+                            <td>${formatDate(e.createdAt)}</td>
+                            <td class="actions">
+                                <button class="action-btn view" onclick="viewEnquiry('${e._id}')" title="View enquiry">👁️</button>
+                                <button class="action-btn edit" onclick="toggleEnquiryRead('${e._id}', ${!e.isRead})" title="${e.isRead ? 'Mark as unseen' : 'Mark as seen'}">${e.isRead ? '📩' : '✓'}</button>
+                                <button class="action-btn delete" onclick="deleteEnquiry('${e._id}')" title="Delete">🗑️</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('') || '<tr><td colspan="7">No enquiries found</td></tr>';
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function updateEnquiriesPagination() {
+            const start = enquiriesTotalCount === 0 ? 0 : (enquiriesCurrentPage - 1) * enquiriesPerPage + 1;
+            const end = Math.min(enquiriesCurrentPage * enquiriesPerPage, enquiriesTotalCount);
+
+            document.getElementById('enquiriesShowingStart').textContent = start;
+            document.getElementById('enquiriesShowingEnd').textContent = end;
+            document.getElementById('enquiriesTotalCount').textContent = enquiriesTotalCount;
+            document.getElementById('enquiriesPrevBtn').disabled = enquiriesCurrentPage <= 1;
+            document.getElementById('enquiriesNextBtn').disabled = enquiriesCurrentPage >= enquiriesTotalPages;
+
+            let html = '';
+            const maxVisible = 5;
+            let startPage = Math.max(1, enquiriesCurrentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(enquiriesTotalPages, startPage + maxVisible - 1);
+            if (endPage - startPage + 1 < maxVisible) startPage = Math.max(1, endPage - maxVisible + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="pagination-page ${i === enquiriesCurrentPage ? 'active' : ''}" onclick="goToEnquiriesPage(${i})">${i}</button>`;
+            }
+            document.getElementById('enquiriesPaginationPages').innerHTML = html;
+        }
+
+        function changeEnquiriesPage(delta) {
+            const next = enquiriesCurrentPage + delta;
+            if (next >= 1 && next <= enquiriesTotalPages) {
+                enquiriesCurrentPage = next;
+                loadEnquiries();
+            }
+        }
+
+        function goToEnquiriesPage(page) {
+            if (page >= 1 && page <= enquiriesTotalPages && page !== enquiriesCurrentPage) {
+                enquiriesCurrentPage = page;
+                loadEnquiries();
+            }
+        }
+
+        function changeEnquiriesPerPage() {
+            enquiriesPerPage = parseInt(document.getElementById('enquiriesPerPage').value);
+            enquiriesCurrentPage = 1;
+            loadEnquiries();
+        }
+
+        /**
+         * Open one enquiry. Viewing it marks it seen, which is what clears the badge.
+         */
+        async function viewEnquiry(id) {
+            const modal = document.getElementById('enquiryModal');
+            const content = document.getElementById('enquiryModalContent');
+
+            currentEnquiryId = id;
+            modal.classList.add('active');
+            content.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+            try {
+                const result = await apiCall(`/enquiries/${id}`);
+                const e = result.data;
+
+                const row = (label, value) => value
+                    ? `<dt>${label}</dt><dd>${value}</dd>`
+                    : '';
+
+                content.innerHTML = `
+                    <dl>
+                        ${row('Name', qbEscape(e.name))}
+                        ${row(e.source === 'lifestyle' ? 'Company' : 'Partner', qbEscape(e.partner || e.company || ''))}
+                        ${row('Email', e.email ? `<a href="mailto:${qbEscape(e.email)}">${qbEscape(e.email)}</a>` : '')}
+                        ${row('Phone', e.phone ? `<a href="tel:${qbEscape(e.phone.replace(/\s/g, ''))}">${qbEscape(e.phone)}</a>` : '')}
+                        ${row('Event Date', e.eventDate ? formatDate(e.eventDate) : '')}
+                        ${row('Location', qbEscape(e.location || ''))}
+                        ${row('Service', qbEscape(e.serviceLabel || e.service || ''))}
+                        ${row('Source', `<span class="source-badge source-${e.source}">${e.source === 'lifestyle' ? 'Lifestyle Site' : 'Wedding Site'}</span>`)}
+                        ${row('Received', formatDate(e.createdAt))}
+                        ${row('Message', e.message ? `<span class="enquiry-message">${qbEscape(e.message)}</span>` : '')}
+                    </dl>
+                `;
+
+                const statusSelect = document.getElementById('enquiryStatusSelect');
+                statusSelect.value = e.status;
+                statusSelect.onchange = () => updateEnquiryStatus(id, statusSelect.value);
+
+                // Opening an enquiry counts as seeing it.
+                if (!e.isRead) {
+                    const marked = await apiCall(`/enquiries/${id}`, 'PUT', { isRead: true });
+                    setEnquiryUnread(marked.unreadCount);
+                    loadEnquiries();
+                }
+            } catch (error) {
+                content.innerHTML = `<p style="color: var(--danger);">Could not load the enquiry: ${qbEscape(error.message)}</p>`;
+            }
+        }
+
+        function closeEnquiryModal() {
+            document.getElementById('enquiryModal').classList.remove('active');
+            currentEnquiryId = null;
+        }
+
+        async function updateEnquiryStatus(id, status) {
+            try {
+                const result = await apiCall(`/enquiries/${id}`, 'PUT', { status });
+                setEnquiryUnread(result.unreadCount);
+                showToast(`Enquiry marked ${status}`);
+                loadEnquiries();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        async function toggleEnquiryRead(id, isRead) {
+            try {
+                const result = await apiCall(`/enquiries/${id}`, 'PUT', { isRead });
+                setEnquiryUnread(result.unreadCount);
+                loadEnquiries();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        async function markAllEnquiriesRead() {
+            if (!confirm('Mark every enquiry as seen?')) return;
+            try {
+                const result = await apiCall('/enquiries/mark-all-read', 'PUT');
+                setEnquiryUnread(0);
+                showToast(`${result.updated} enquiry(s) marked as seen`);
+                loadEnquiries();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        async function deleteEnquiry(id) {
+            if (!confirm('Delete this enquiry? This cannot be undone.')) return;
+            try {
+                const result = await apiCall(`/enquiries/${id}`, 'DELETE');
+                setEnquiryUnread(result.unreadCount);
+                showToast('Enquiry deleted');
+                loadEnquiries();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        function exportEnquiriesCsv() {
+            const source = document.getElementById('enquirySourceFilter').value;
+            const statusFilter = document.getElementById('enquiryStatusFilter').value;
+            const params = [];
+            if (source) params.push(`source=${source}`);
+            if (statusFilter && statusFilter !== 'unread') params.push(`status=${statusFilter}`);
+            triggerCsvDownload(`/export/enquiries${params.length ? `?${params.join('&')}` : ''}`);
+        }
+
+        document.getElementById('enquirySearch').addEventListener('input', debounce(() => loadEnquiries(true), 300));
+        document.getElementById('enquirySourceFilter').addEventListener('change', () => loadEnquiries(true));
+        document.getElementById('enquiryStatusFilter').addEventListener('change', () => loadEnquiries(true));
 
         // ============================================
         // Quotation Builder
