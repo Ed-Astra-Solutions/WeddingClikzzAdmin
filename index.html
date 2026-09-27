@@ -3253,6 +3253,475 @@
             color: #E57373;
         }
 
+        /* ==========================================
+           Quotation Builder
+           ========================================== */
+        .qb-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .qb-card {
+            background: linear-gradient(180deg, #161616 0%, #101010 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .qb-card-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .qb-card-head h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .qb-card-head p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .qb-step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: rgba(201, 169, 98, 0.12);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        .qb-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 20px;
+        }
+
+        .qb-layout .form-group {
+            margin-bottom: 20px;
+        }
+
+        .qb-layout .form-group input,
+        .qb-layout .form-group select,
+        .qb-layout .form-group textarea {
+            padding: 12px 15px;
+            font-size: 15px;
+        }
+
+        .qb-optional {
+            color: var(--text-muted);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+
+        .qb-required {
+            color: var(--gold);
+        }
+
+        /* Event picker */
+        .qb-events {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 12px;
+        }
+
+        .qb-event {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-align: left;
+            color: inherit;
+            font-family: inherit;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .qb-event:hover {
+            border-color: var(--border-gold);
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .qb-event.selected {
+            border-color: var(--gold);
+            background: rgba(201, 169, 98, 0.1);
+            box-shadow: 0 0 0 1px rgba(201, 169, 98, 0.2);
+        }
+
+        .qb-event-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .qb-event-name {
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .qb-event.selected .qb-event-name {
+            color: var(--gold-light);
+        }
+
+        /* Per-event service blocks */
+        .qb-event-block {
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .qb-event-block-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(201, 169, 98, 0.05);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .qb-event-block-head h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-light);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .qb-event-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qb-event-date label {
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .qb-event-date input {
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 14px;
+            color-scheme: dark;
+        }
+
+        .qb-event-date input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .qb-service-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 18px;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.07);
+            transition: var(--transition-smooth);
+        }
+
+        .qb-service-row:last-child {
+            border-bottom: none;
+        }
+
+        .qb-service-row.selected {
+            background: rgba(201, 169, 98, 0.04);
+        }
+
+        .qb-check {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-gold);
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            color: transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .qb-check.on {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #0A0A0A;
+        }
+
+        .qb-check svg {
+            width: 13px;
+            height: 13px;
+            stroke-width: 3;
+        }
+
+        .qb-service-label {
+            flex: 1;
+            min-width: 140px;
+            cursor: pointer;
+        }
+
+        .qb-service-label strong {
+            display: block;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 15px;
+        }
+
+        .qb-service-label small {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .qb-crew {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .qb-crew-label {
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-right: 2px;
+        }
+
+        .qb-crew button {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+            border: 1px solid var(--border-gold);
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--gold);
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .qb-crew button:hover:not(:disabled) {
+            background: rgba(201, 169, 98, 0.15);
+        }
+
+        .qb-crew button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .qb-crew span {
+            min-width: 24px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .qb-service-price {
+            min-width: 92px;
+            text-align: right;
+            font-weight: 700;
+            color: var(--text-bright);
+            font-size: 15px;
+        }
+
+        .qb-addons-head {
+            padding: 12px 18px 6px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .qb-addons {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Summary rail */
+        .qb-summary {
+            position: sticky;
+            top: 20px;
+            background: linear-gradient(180deg, #181818 0%, #101010 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .qb-summary h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .qb-summary-client {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+            word-break: break-word;
+        }
+
+        .qb-summary-lines {
+            max-height: 340px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+        }
+
+        .qb-summary-lines::-webkit-scrollbar { width: 4px; }
+        .qb-summary-lines::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
+
+        .qb-summary-event {
+            color: var(--gold-light);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 12px 0 6px;
+        }
+
+        .qb-summary-event:first-child { margin-top: 0; }
+
+        .qb-summary-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-light);
+            padding: 3px 0;
+        }
+
+        .qb-summary-line span:last-child {
+            color: var(--text-bright);
+            white-space: nowrap;
+        }
+
+        .qb-summary-empty {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-style: italic;
+            padding: 8px 0 12px;
+        }
+
+        .qb-summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-gold);
+            margin-bottom: 18px;
+        }
+
+        .qb-summary-total span:first-child {
+            color: var(--text-light);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .qb-summary-total strong {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 24px;
+        }
+
+        .qb-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qb-actions .btn {
+            width: 100%;
+            padding: 13px 18px;
+        }
+
+        .qb-actions .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .qb-note {
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .qb-editing-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            background: rgba(201, 169, 98, 0.07);
+            color: var(--gold-light);
+            font-size: 14px;
+        }
+
+        @media (max-width: 1100px) {
+            .qb-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .qb-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .qb-grid-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .qb-service-price {
+                min-width: auto;
+            }
+        }
+
         /* Quote Details Invoice Styling */
         .quote-invoice {
             background: var(--white);
@@ -4055,6 +4524,7 @@
                 <li class="nav-item active" data-section="dashboard">Dashboard</li>
                 <li class="nav-item" data-section="offerings">Offerings</li>
                 <li class="nav-item" data-section="website">Website Controls</li>
+                <li class="nav-item" data-section="quoteBuilder">Quotation Builder</li>
                 <li class="nav-item" data-section="quotes">Quotes</li>
                 <li class="nav-item" data-section="users">Customers</li>
                 <li class="nav-item" data-section="admins">Admins</li>
@@ -4178,13 +4648,6 @@
                         </svg>
                         Events
                     </button>
-                    <button class="offerings-tab" data-subtab="services">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        Services
-                    </button>
                     <button class="offerings-tab" data-subtab="additionalServices">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -4208,37 +4671,15 @@
                                     <th>Icon</th>
                                     <th>Name</th>
                                     <th>Slug</th>
-                                    <th>Category</th>
                                     <th>Services</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="eventsTable">
-                                <tr><td colspan="7" class="loading"><div class="spinner"></div></td></tr>
+                                <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-
-                <!-- Services Content (Pricing Matrix) -->
-                <div class="offerings-content" id="servicesContent">
-                    <div class="table-container" style="border-radius: 0 0 14px 14px; border-top: none;">
-                        <div class="table-header">
-                            <h2>Services &amp; Pricing</h2>
-                            <div class="matrix-toolbar">
-                                <button class="btn btn-secondary btn-sm" onclick="addMatrixServiceRow()">+ Add Service</button>
-                                <button class="btn btn-primary btn-sm" id="saveMatrixBtn" onclick="saveServicesMatrix()">Save Changes</button>
-                            </div>
-                        </div>
-                        <div class="matrix-scroll" id="servicesMatrixWrap">
-                            <div class="loading"><div class="spinner"></div></div>
-                        </div>
-                        <p class="matrix-hint">
-                            Each column is a pricing category. A blank cell <span class="swatch"></span> means the service is
-                            <strong>not offered</strong> for events in that category (hidden from the quote builder). Enter <strong>0</strong> to offer it free.
-                            The order of rows here sets the display order for customers.
-                        </p>
                     </div>
                 </div>
 
@@ -4275,6 +4716,7 @@
                     <div class="table-header">
                         <h2>Quotes</h2>
                         <div class="search-box">
+                            <button class="btn btn-secondary btn-sm" onclick="startNewQuotation()" title="Build a new quotation">+ New Quotation</button>
                             <button class="btn btn-secondary btn-sm" onclick="exportQuotesCsv()" title="Export CSV">⬇ Export</button>
                             <input type="text" id="quoteSearch" placeholder="Search quotes...">
                             <select id="quoteStatusFilter">
@@ -4334,6 +4776,100 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Quotation Builder Section -->
+            <section class="section" id="quoteBuilderSection">
+                <div class="qb-editing-banner" id="qbEditingBanner" style="display: none;">
+                    <span>Editing quotation <strong id="qbEditingNumber"></strong></span>
+                    <button class="btn btn-secondary btn-sm" onclick="resetQuoteBuilder()">Start a new quotation</button>
+                </div>
+
+                <div class="qb-layout">
+                    <div>
+                        <!-- Step 1: Client details -->
+                        <div class="qb-card">
+                            <div class="qb-card-head">
+                                <h3><span class="qb-step">1</span>Client Details</h3>
+                                <p>Only the name is required</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="qbClientName">Client Name <span class="qb-required">*</span></label>
+                                <input type="text" id="qbClientName" placeholder="e.g. Ananya &amp; Rohit" autocomplete="off">
+                            </div>
+                            <div class="qb-grid-2">
+                                <div class="form-group">
+                                    <label for="qbClientPhone">Mobile Number <span class="qb-optional">(optional)</span></label>
+                                    <input type="tel" id="qbClientPhone" placeholder="+91 98765 43210" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="qbClientInstagram">Instagram <span class="qb-optional">(optional)</span></label>
+                                    <input type="text" id="qbClientInstagram" placeholder="@handle" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="qbClientEmail">Email <span class="qb-optional">(optional — required to email the client)</span></label>
+                                <input type="email" id="qbClientEmail" placeholder="client@example.com" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Events -->
+                        <div class="qb-card">
+                            <div class="qb-card-head">
+                                <h3><span class="qb-step">2</span>Events</h3>
+                                <p>Pick every event to quote for</p>
+                            </div>
+                            <div class="qb-events" id="qbEventsGrid">
+                                <div class="loading"><div class="spinner"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Services & add-ons -->
+                        <div class="qb-card">
+                            <div class="qb-card-head">
+                                <h3><span class="qb-step">3</span>Services &amp; Add-ons</h3>
+                                <p>Set the crew size per service</p>
+                            </div>
+                            <div id="qbServicesArea">
+                                <p class="qb-summary-empty">Select an event above to choose its services.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Notes -->
+                        <div class="qb-card">
+                            <div class="qb-card-head">
+                                <h3><span class="qb-step">4</span>Notes &amp; Validity</h3>
+                                <p>Both optional</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="qbNotes">Notes for the client <span class="qb-optional">(optional)</span></label>
+                                <textarea id="qbNotes" rows="3" placeholder="Anything the client should know about this quotation"></textarea>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0; max-width: 260px;">
+                                <label for="qbValidUntil">Valid until <span class="qb-optional">(defaults to 30 days)</span></label>
+                                <input type="date" id="qbValidUntil" style="color-scheme: dark;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live summary rail -->
+                    <aside class="qb-summary">
+                        <h3>Quotation Summary</h3>
+                        <div class="qb-summary-client" id="qbSummaryClient">No client details yet</div>
+                        <div class="qb-summary-lines" id="qbSummaryLines">
+                            <p class="qb-summary-empty">Nothing selected yet.</p>
+                        </div>
+                        <div class="qb-summary-total">
+                            <span>Total</span>
+                            <strong id="qbSummaryTotal">₹0</strong>
+                        </div>
+                        <div class="qb-actions">
+                            <button class="btn btn-primary" id="qbSendBtn" onclick="saveQuote(true)">Save &amp; Email</button>
+                            <button class="btn btn-secondary" id="qbDraftBtn" onclick="saveQuote(false)">Save as Draft</button>
+                        </div>
+                        <p class="qb-note" id="qbNoteText">The client gets the quotation with the PDF attached, and a copy goes to every address under Email Notifications. Download the PDF from the Quotes list any time.</p>
+                    </aside>
                 </div>
             </section>
 
@@ -4892,7 +5428,7 @@
         </main>
     </div>
     <div class="modal-overlay" id="eventModal">
-        <div class="modal">
+        <div class="modal" style="max-width: 640px;">
             <div class="modal-header">
                 <h2 id="eventModalTitle">Add Event</h2>
                 <button class="modal-close" onclick="closeModal('event')">&times;</button>
@@ -4913,15 +5449,6 @@
                         <input type="text" id="eventIcon" placeholder="✨">
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
-                        <select id="eventCategory" required>
-                            <option value="wedding">Wedding</option>
-                            <option value="reception-sangeet-engagement">Reception/Sangeet/Engagement</option>
-                            <option value="haldi-mehendi-house">Haldi/Mehendi/House</option>
-                            <option value="prewedding">Pre-Wedding</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label>Description</label>
                         <textarea id="eventDescription" rows="3"></textarea>
                     </div>
@@ -4934,54 +5461,23 @@
                             <input type="checkbox" id="eventIsActive" checked> Active
                         </label>
                     </div>
+                    <div class="form-group" id="eventServicesSection">
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+                            <label style="margin:0;">Services &amp; Pricing for this event</label>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="addEventServiceRow()">+ Add Service</button>
+                        </div>
+                        <p class="matrix-hint" style="margin:6px 0 10px;">
+                            Prices are specific to <strong>this event</strong> — changing a price here does not affect other events. Leave a price blank to
+                            <strong>not offer</strong> that service for this event (hidden from the quote builder); enter <strong>0</strong> to offer it free.
+                            The service name &amp; crew settings are shared everywhere the service is offered. Untick <strong>Crew</strong> to hide the crew-size stepper for a service (crew stays 1).
+                        </p>
+                        <div id="eventServicesList">
+                            <div class="loading"><div class="spinner"></div></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('event')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Service Modal -->
-    <div class="modal-overlay" id="serviceModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 id="serviceModalTitle">Add Service</h2>
-                <button class="modal-close" onclick="closeModal('service')">&times;</button>
-            </div>
-            <form id="serviceForm">
-                <div class="modal-body">
-                    <input type="hidden" id="serviceId">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="serviceName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Slug</label>
-                        <input type="text" id="serviceSlug" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="serviceDescription" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Pricing by Category</label>
-                        <div class="pricing-list" id="pricingList"></div>
-                        <button type="button" class="add-pricing-btn" onclick="addPricingRow()">+ Add Pricing</button>
-                    </div>
-                    <div class="form-group">
-                        <label>Sort Order</label>
-                        <input type="number" id="serviceSortOrder" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="serviceIsActive" checked> Active
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('service')">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
@@ -5102,6 +5598,8 @@
                 <div class="loading"><div class="spinner"></div></div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="quoteDetailsPdfBtn">⬇ Download PDF</button>
+                <button type="button" class="btn btn-secondary" id="quoteDetailsEditBtn">✏️ Edit</button>
                 <button type="button" class="btn btn-secondary" onclick="closeQuoteDetailsModal()">Close</button>
             </div>
         </div>
@@ -5404,7 +5902,7 @@
     <div class="modal-overlay" id="serviceEntryModal">
         <div class="modal">
             <div class="modal-header">
-                <h2 id="serviceModalTitle">Add Service</h2>
+                <h2 id="serviceEntryModalTitle">Add Service</h2>
                 <button class="modal-close" onclick="closeServiceEntryModal()">&times;</button>
             </div>
             <form id="serviceEntryForm" onsubmit="saveServiceEntry(event)">
@@ -6082,7 +6580,6 @@
         function loadOfferingsSubtab(subtab) {
             switch(subtab) {
                 case 'events': loadEvents(); break;
-                case 'services': loadServices(); break;
                 case 'additionalServices': loadAdditionalServices(); break;
             }
         }
@@ -8804,7 +9301,7 @@
         function openAddServiceModal() {
             console.log('openAddServiceModal called');
             try {
-                document.getElementById('serviceModalTitle').textContent = 'Add Service';
+                document.getElementById('serviceEntryModalTitle').textContent = 'Add Service';
                 document.getElementById('serviceSubmitBtn').textContent = 'Add Service';
                 document.getElementById('serviceEntryForm').reset();
                 document.getElementById('serviceEntryId').value = '';
@@ -8835,7 +9332,7 @@
                 return;
             }
             
-            document.getElementById('serviceModalTitle').textContent = 'Edit Service';
+            document.getElementById('serviceEntryModalTitle').textContent = 'Edit Service';
             document.getElementById('serviceSubmitBtn').textContent = 'Save Changes';
             document.getElementById('serviceEntryId').value = entry._id;
             document.getElementById('serviceBadge').value = entry.badge || '';
@@ -10584,6 +11081,7 @@
                     }
                     break;
                 case 'quotes': loadQuotes(); break;
+                case 'quoteBuilder': loadQuoteBuilder(); break;
                 case 'users': loadUsers(); break;
                 case 'admins': loadAdmins(); break;
                 case 'settings': loadSettings(); break;
@@ -10642,18 +11140,6 @@
 
         // Events
         // Single source of truth for pricing categories (must match Event/Service model enums)
-        const OFFERING_CATEGORIES = [
-            { value: 'wedding', label: 'Wedding' },
-            { value: 'reception-sangeet-engagement', label: 'Reception / Sangeet / Engagement' },
-            { value: 'haldi-mehendi-house', label: 'Haldi / Mehendi / House' },
-            { value: 'prewedding', label: 'Pre-Wedding' }
-        ];
-
-        function categoryLabel(value) {
-            const c = OFFERING_CATEGORIES.find(c => c.value === value);
-            return c ? c.label : value;
-        }
-
         // Convert a name to a URL-safe slug
         function slugify(text) {
             return (text || '')
@@ -10666,33 +11152,34 @@
 
         async function loadEvents() {
             try {
-                // Fetch services too so we can show how many are offered under each event's category
+                // Fetch services too so we can show how many active services each event offers
                 const [eventsResult, servicesResult] = await Promise.all([
                     apiCall('/events'),
                     apiCall('/services').catch(() => ({ data: [] }))
                 ]);
-                const services = servicesResult.data || [];
-                const activeServiceCountForCategory = (category) =>
-                    services.filter(s => s.isActive !== false && (s.pricing || []).some(p => p.category === category)).length;
+                const activeServiceIds = new Set(
+                    (servicesResult.data || []).filter(s => s.isActive !== false).map(s => String(s._id))
+                );
+                const offeredServiceCount = (event) =>
+                    (event.servicePricing || []).filter(sp => activeServiceIds.has(String(sp.service))).length;
 
                 document.getElementById('eventsTable').innerHTML = eventsResult.data.map(e => {
-                    const count = activeServiceCountForCategory(e.category);
+                    const count = offeredServiceCount(e);
                     return `
                     <tr>
                         <td>${e.icon || '✨'}</td>
                         <td>${e.name}</td>
                         <td>${e.slug}</td>
-                        <td>${categoryLabel(e.category)}</td>
                         <td>${count > 0
                             ? `<span class="status-badge status-active">${count} service${count !== 1 ? 's' : ''}</span>`
-                            : `<span class="status-badge status-inactive" title="No active service has a price for this category — quotes for this event will be empty">0 services</span>`}</td>
+                            : `<span class="status-badge status-inactive" title="No active service has a price for this event — quotes for this event will be empty">0 services</span>`}</td>
                         <td><span class="status-badge status-${e.isActive ? 'active' : 'inactive'}">${e.isActive ? 'Active' : 'Inactive'}</span></td>
                         <td class="actions">
                             <button class="action-btn edit" onclick="editEvent('${e._id}')">✏️</button>
                             <button class="action-btn delete" onclick="deleteEvent('${e._id}')">🗑️</button>
                         </td>
                     </tr>`;
-                }).join('') || '<tr><td colspan="7">No events found</td></tr>';
+                }).join('') || '<tr><td colspan="6">No events found</td></tr>';
             } catch (error) {
                 showToast(error.message, 'error');
             }
@@ -10712,22 +11199,169 @@
                 const result = await apiCall('/events');
                 const event = result.data.find(e => e._id === id);
                 if (!event) return showToast('Event not found', 'error');
-                
+
                 document.getElementById('eventModalTitle').textContent = 'Edit Event';
                 document.getElementById('eventId').value = event._id;
                 document.getElementById('eventName').value = event.name;
                 document.getElementById('eventSlug').value = event.slug;
                 document.getElementById('eventIcon').value = event.icon || '';
-                document.getElementById('eventCategory').value = event.category;
                 document.getElementById('eventDescription').value = event.description || '';
                 document.getElementById('eventSortOrder').value = event.sortOrder || 0;
                 document.getElementById('eventIsActive').checked = event.isActive;
                 document.getElementById('eventSlug').dataset.touched = '1'; // keep existing slug while editing
 
+                // Prices are stored on the event, per service — build a lookup for this event
+                currentEventPricing = {};
+                (event.servicePricing || []).forEach(sp => { currentEventPricing[String(sp.service)] = sp.price; });
+
                 openModal('event');
+                loadEventServices();
             } catch (error) {
                 showToast(error.message, 'error');
             }
+        }
+
+        // ----- Services & pricing shown inside the Edit/Add Event modal -----
+        // Services are a shared catalogue (name + crew settings); the PRICE is per-event,
+        // stored on the event as servicePricing. currentEventPricing maps serviceId -> price
+        // for the event currently open in the modal.
+        let eventServicesCache = [];
+        let currentEventPricing = {};
+
+        // Enable/disable a single service's crew-name input from its per-row "Crew" checkbox
+        function onServiceCrewToggle(cb) {
+            const row = cb.closest('.event-service-row');
+            const nameInput = row.querySelector('.event-service-crew');
+            nameInput.disabled = !cb.checked;
+            nameInput.style.opacity = cb.checked ? '1' : '0.45';
+        }
+
+        async function loadEventServices() {
+            const listEl = document.getElementById('eventServicesList');
+            if (!listEl) return;
+            listEl.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+            try {
+                const result = await apiCall('/services');
+                eventServicesCache = result.data || [];
+                renderEventServices();
+            } catch (error) {
+                listEl.innerHTML = `<div style="padding:12px;color:var(--danger);">${error.message}</div>`;
+            }
+        }
+
+        function eventServiceRowHtml(service) {
+            const s = service || {};
+            const val = s._id != null && currentEventPricing[String(s._id)] !== undefined
+                ? currentEventPricing[String(s._id)] : '';
+            const hasVal = val !== '' && val !== undefined && val !== null;
+            const crewOn = s.crewEnabled !== false;
+            return `
+                <div class="event-service-row" data-id="${s._id || ''}" data-slug="${escAttr(s.slug || '')}"
+                     style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">
+                    <input type="text" class="event-service-name" placeholder="Service name" value="${escAttr(s.name || '')}" style="flex:2 1 160px;min-width:0;">
+                    <label style="display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap;" title="Let customers choose a crew size for this service">
+                        <input type="checkbox" class="event-service-crew-enabled" ${crewOn ? 'checked' : ''} onchange="onServiceCrewToggle(this)"> Crew
+                    </label>
+                    <input type="text" class="event-service-crew" placeholder="Crew name (e.g. Photographers)" value="${escAttr(s.crewLabel || '')}" title="Label shown on the crew-size stepper" ${crewOn ? '' : 'disabled'} style="flex:1 1 140px;min-width:0;opacity:${crewOn ? '1' : '0.45'};">
+                    <div class="matrix-price-wrap" style="width:130px;flex:none;">
+                        <span class="currency">₹</span>
+                        <input type="number" min="0" step="1" class="matrix-price-input event-service-price ${hasVal ? '' : 'is-empty'}"
+                               placeholder="—" value="${hasVal ? val : ''}"
+                               oninput="this.classList.toggle('is-empty', this.value === '')">
+                    </div>
+                    <label style="display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap;">
+                        <input type="checkbox" class="event-service-active" ${s.isActive === false ? '' : 'checked'}> Active
+                    </label>
+                    <button type="button" class="matrix-del-btn" title="Remove service" onclick="removeEventServiceRow(this, '${s._id || ''}')">🗑️</button>
+                    <input type="text" class="event-service-description" placeholder="Description (shown to customers on the quote builder)" value="${escAttr(s.description || '')}" title="Short description shown under the service name on the quotation site" style="flex:1 1 100%;min-width:0;">
+                </div>`;
+        }
+
+        function renderEventServices() {
+            const listEl = document.getElementById('eventServicesList');
+            if (!listEl) return;
+            const rows = eventServicesCache.map(eventServiceRowHtml).join('');
+            listEl.innerHTML = rows ||
+                '<div style="padding:12px;color:var(--text-light);text-align:center;">No services yet. Click “+ Add Service” to add one.</div>';
+        }
+
+        function addEventServiceRow() {
+            const listEl = document.getElementById('eventServicesList');
+            if (!listEl) return;
+            // Drop the empty-state placeholder if present
+            if (!listEl.querySelector('.event-service-row')) listEl.innerHTML = '';
+            listEl.insertAdjacentHTML('beforeend', eventServiceRowHtml({}));
+            const newRow = listEl.lastElementChild;
+            newRow.querySelector('.event-service-name').focus();
+            newRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function removeEventServiceRow(btn, id) {
+            if (id) {
+                if (!confirm('Delete this service? It will be removed from every event that offers it.')) return;
+                try {
+                    await apiCall(`/services/${id}`, 'DELETE');
+                    showToast('Service deleted');
+                    btn.closest('.event-service-row').remove();
+                    eventServicesCache = eventServicesCache.filter(s => s._id !== id);
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            } else {
+                btn.closest('.event-service-row').remove();
+            }
+        }
+
+        // Save the shared service catalogue (name + crew settings) from the modal rows,
+        // then return this event's per-service prices as [{ service, price }] so the
+        // caller can persist them onto the event (event.servicePricing).
+        async function saveEventServices() {
+            const listEl = document.getElementById('eventServicesList');
+            if (!listEl) return [];
+            const rows = Array.from(listEl.querySelectorAll('.event-service-row'));
+            const servicePricing = [];
+
+            for (const row of rows) {
+                const id = row.dataset.id;
+                const name = row.querySelector('.event-service-name').value.trim();
+                if (!name) {
+                    if (id) throw new Error('Every service needs a name.');
+                    continue; // skip blank new rows
+                }
+
+                const priceVal = row.querySelector('.event-service-price').value;
+                const isActive = row.querySelector('.event-service-active').checked;
+                const crewEnabled = row.querySelector('.event-service-crew-enabled').checked;
+                const crewLabel = row.querySelector('.event-service-crew').value.trim() || 'Photographers';
+                const description = row.querySelector('.event-service-description').value.trim();
+                const existing = eventServicesCache.find(s => s._id === id);
+
+                const data = {
+                    name,
+                    slug: row.dataset.slug || slugify(name),
+                    description,
+                    crewLabel,
+                    crewEnabled,
+                    sortOrder: existing?.sortOrder ?? rows.indexOf(row),
+                    isActive
+                };
+
+                // Upsert the shared service and capture its id
+                let serviceId = id;
+                if (id) {
+                    await apiCall(`/services/${id}`, 'PUT', data);
+                } else {
+                    const created = await apiCall('/services', 'POST', data);
+                    serviceId = created?.data?._id;
+                }
+
+                // A price means "offered for this event"; blank means "not offered"
+                if (serviceId && priceVal !== '') {
+                    servicePricing.push({ service: serviceId, price: parseFloat(priceVal) || 0 });
+                }
+            }
+
+            return servicePricing;
         }
 
         async function deleteEvent(id) {
@@ -10744,24 +11378,27 @@
         document.getElementById('eventForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('eventId').value;
-            const data = {
-                name: document.getElementById('eventName').value,
-                slug: document.getElementById('eventSlug').value,
-                icon: document.getElementById('eventIcon').value,
-                category: document.getElementById('eventCategory').value,
-                description: document.getElementById('eventDescription').value,
-                sortOrder: parseInt(document.getElementById('eventSortOrder').value) || 0,
-                isActive: document.getElementById('eventIsActive').checked
-            };
-            
+
             try {
+                // Upsert the shared services first so new ones get ids, and collect this event's prices
+                const servicePricing = await saveEventServices();
+
+                const data = {
+                    name: document.getElementById('eventName').value,
+                    slug: document.getElementById('eventSlug').value,
+                    icon: document.getElementById('eventIcon').value,
+                    description: document.getElementById('eventDescription').value,
+                    sortOrder: parseInt(document.getElementById('eventSortOrder').value) || 0,
+                    isActive: document.getElementById('eventIsActive').checked,
+                    servicePricing
+                };
+
                 if (id) {
                     await apiCall(`/events/${id}`, 'PUT', data);
-                    showToast('Event updated successfully');
                 } else {
                     await apiCall('/events', 'POST', data);
-                    showToast('Event created successfully');
                 }
+                showToast(id ? 'Event updated successfully' : 'Event created successfully');
                 closeModal('event');
                 loadEvents();
             } catch (error) {
@@ -10769,267 +11406,9 @@
             }
         });
 
-        // Services — Pricing Matrix (services as rows, categories as columns)
-        async function loadServices() {
-            const wrap = document.getElementById('servicesMatrixWrap');
-            try {
-                const result = await apiCall('/services');
-                renderServicesMatrix(result.data || []);
-            } catch (error) {
-                if (wrap) wrap.innerHTML = `<div style="padding:24px;color:var(--danger);">${error.message}</div>`;
-                showToast(error.message, 'error');
-            }
-        }
-
         function escAttr(str) {
             return (str || '').toString().replace(/"/g, '&quot;');
         }
-
-        function buildMatrixRow(service) {
-            const s = service || {};
-            const pricingByCat = {};
-            (s.pricing || []).forEach(p => { pricingByCat[p.category] = p.price; });
-
-            const priceCells = OFFERING_CATEGORIES.map(cat => {
-                const val = pricingByCat[cat.value];
-                const hasVal = val !== undefined && val !== null && val !== '';
-                return `
-                    <td class="matrix-price-col">
-                        <div class="matrix-price-wrap">
-                            <span class="currency">₹</span>
-                            <input type="number" min="0" step="1"
-                                   class="matrix-price-input ${hasVal ? '' : 'is-empty'}"
-                                   data-cat="${cat.value}"
-                                   placeholder="—"
-                                   value="${hasVal ? val : ''}"
-                                   oninput="this.classList.toggle('is-empty', this.value === '')">
-                        </div>
-                    </td>`;
-            }).join('');
-
-            const isNew = !s._id;
-            return `
-                <tr data-id="${s._id || ''}" data-slug="${escAttr(s.slug || '')}">
-                    <td class="matrix-service-cell">
-                        <input type="text" class="matrix-name-input" placeholder="Service name" value="${escAttr(s.name || '')}">
-                        <input type="text" class="matrix-desc-input" placeholder="Short description (optional)" value="${escAttr(s.description || '')}">
-                        ${s.slug ? `<span class="matrix-slug-hint">/${s.slug}</span>` : '<span class="matrix-slug-hint">slug auto-generated from name</span>'}
-                    </td>
-                    ${priceCells}
-                    <td style="text-align:center;">
-                        <input type="checkbox" class="matrix-active-input" ${s.isActive === false ? '' : 'checked'}>
-                    </td>
-                    <td style="text-align:center;">
-                        <button type="button" class="matrix-del-btn" title="Delete service"
-                                onclick="removeMatrixRow(this, '${s._id || ''}')">🗑️</button>
-                    </td>
-                </tr>`;
-        }
-
-        function renderServicesMatrix(services) {
-            const wrap = document.getElementById('servicesMatrixWrap');
-            const headCols = OFFERING_CATEGORIES.map(c => `<th class="matrix-price-col">${c.label}</th>`).join('');
-            const rows = (services || []).length
-                ? services.map(buildMatrixRow).join('')
-                : '';
-
-            wrap.innerHTML = `
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th style="min-width:240px;">Service</th>
-                            ${headCols}
-                            <th style="text-align:center;">Active</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="servicesMatrixBody">${rows}</tbody>
-                </table>
-                ${rows ? '' : '<div style="padding:24px;color:var(--text-light);text-align:center;">No services yet. Click “+ Add Service” to create your first one.</div>'}
-            `;
-        }
-
-        function addMatrixServiceRow() {
-            let body = document.getElementById('servicesMatrixBody');
-            // If the empty-state placeholder is showing, render an empty table first
-            if (!body) {
-                renderServicesMatrix([]);
-                body = document.getElementById('servicesMatrixBody');
-            }
-            body.insertAdjacentHTML('beforeend', buildMatrixRow({}));
-            const newRow = body.lastElementChild;
-            newRow.querySelector('.matrix-name-input').focus();
-            newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function removeMatrixRow(btn, id) {
-            if (id) {
-                deleteService(id); // existing service — delete via API + reload
-            } else {
-                btn.closest('tr').remove(); // unsaved new row — just drop it
-            }
-        }
-
-        async function saveServicesMatrix() {
-            const body = document.getElementById('servicesMatrixBody');
-            if (!body) return;
-
-            const rows = Array.from(body.querySelectorAll('tr'));
-            const payloads = [];
-
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                const id = row.dataset.id;
-                const name = row.querySelector('.matrix-name-input').value.trim();
-
-                // Skip blank brand-new rows; block blank existing rows
-                if (!name) {
-                    if (id) {
-                        showToast('Every service needs a name.', 'error');
-                        row.querySelector('.matrix-name-input').focus();
-                        return;
-                    }
-                    continue;
-                }
-
-                const pricing = [];
-                row.querySelectorAll('.matrix-price-input').forEach(inp => {
-                    if (inp.value !== '') {
-                        pricing.push({ category: inp.dataset.cat, price: parseFloat(inp.value) || 0 });
-                    }
-                });
-
-                payloads.push({
-                    id,
-                    data: {
-                        name,
-                        slug: row.dataset.slug || slugify(name),
-                        description: row.querySelector('.matrix-desc-input').value.trim(),
-                        pricing,
-                        sortOrder: i,
-                        isActive: row.querySelector('.matrix-active-input').checked
-                    }
-                });
-            }
-
-            if (payloads.length === 0) {
-                showToast('Nothing to save.', 'error');
-                return;
-            }
-
-            const saveBtn = document.getElementById('saveMatrixBtn');
-            const originalText = saveBtn.textContent;
-            saveBtn.disabled = true;
-            saveBtn.textContent = 'Saving…';
-
-            try {
-                for (const p of payloads) {
-                    if (p.id) {
-                        await apiCall(`/services/${p.id}`, 'PUT', p.data);
-                    } else {
-                        await apiCall('/services', 'POST', p.data);
-                    }
-                }
-                showToast('Services saved successfully');
-                await loadServices();
-            } catch (error) {
-                showToast(error.message, 'error');
-            } finally {
-                saveBtn.disabled = false;
-                saveBtn.textContent = originalText;
-            }
-        }
-
-        async function editService(id) {
-            try {
-                const result = await apiCall('/services');
-                const service = result.data.find(s => s._id === id);
-                if (!service) return showToast('Service not found', 'error');
-                
-                document.getElementById('serviceModalTitle').textContent = 'Edit Service';
-                document.getElementById('serviceId').value = service._id;
-                document.getElementById('serviceName').value = service.name;
-                document.getElementById('serviceSlug').value = service.slug;
-                document.getElementById('serviceDescription').value = service.description || '';
-                document.getElementById('serviceSortOrder').value = service.sortOrder || 0;
-                document.getElementById('serviceIsActive').checked = service.isActive;
-                
-                // Load pricing
-                const pricingList = document.getElementById('pricingList');
-                pricingList.innerHTML = '';
-                service.pricing.forEach(p => addPricingRow(p.category, p.price));
-                
-                openModal('service');
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
-        }
-
-        function addPricingRow(category = '', price = '') {
-            const pricingList = document.getElementById('pricingList');
-            const row = document.createElement('div');
-            row.className = 'pricing-item';
-            row.innerHTML = `
-                <select class="pricing-category">
-                    <option value="wedding" ${category === 'wedding' ? 'selected' : ''}>Wedding</option>
-                    <option value="reception-sangeet-engagement" ${category === 'reception-sangeet-engagement' ? 'selected' : ''}>Reception/Sangeet/Engagement</option>
-                    <option value="haldi-mehendi-house" ${category === 'haldi-mehendi-house' ? 'selected' : ''}>Haldi/Mehendi/House</option>
-                    <option value="prewedding" ${category === 'prewedding' ? 'selected' : ''}>Pre-Wedding</option>
-                </select>
-                <input type="number" class="pricing-price" placeholder="Price" value="${price}">
-                <button type="button" onclick="this.parentElement.remove()">✕</button>
-            `;
-            pricingList.appendChild(row);
-        }
-
-        async function deleteService(id) {
-            if (!confirm('Are you sure you want to delete this service?')) return;
-            try {
-                await apiCall(`/services/${id}`, 'DELETE');
-                showToast('Service deleted successfully');
-                loadServices();
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
-        }
-
-        document.getElementById('serviceForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const id = document.getElementById('serviceId').value;
-            
-            const pricingRows = document.querySelectorAll('.pricing-item');
-            const pricing = [];
-            pricingRows.forEach(row => {
-                const category = row.querySelector('.pricing-category').value;
-                const price = parseFloat(row.querySelector('.pricing-price').value) || 0;
-                if (category && price > 0) {
-                    pricing.push({ category, price });
-                }
-            });
-            
-            const data = {
-                name: document.getElementById('serviceName').value,
-                slug: document.getElementById('serviceSlug').value,
-                description: document.getElementById('serviceDescription').value,
-                pricing,
-                sortOrder: parseInt(document.getElementById('serviceSortOrder').value) || 0,
-                isActive: document.getElementById('serviceIsActive').checked
-            };
-            
-            try {
-                if (id) {
-                    await apiCall(`/services/${id}`, 'PUT', data);
-                    showToast('Service updated successfully');
-                } else {
-                    await apiCall('/services', 'POST', data);
-                    showToast('Service created successfully');
-                }
-                closeModal('service');
-                loadServices();
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
-        });
 
         // Additional Services
         async function loadAdditionalServices() {
@@ -11148,13 +11527,16 @@
                 document.getElementById('quotesTable').innerHTML = quotes.map(q => `
                     <tr>
                         <td>${q.quoteNumber}</td>
-                        <td>${q.customerName || '-'}<br><small>${q.customerEmail}</small></td>
+                        <td>${q.customerName || '-'}<br><small>${[q.customerEmail, q.customerPhone, q.customerInstagram].filter(Boolean).join(' · ') || 'No contact details'}</small></td>
                         <td>${q.items.length} items</td>
                         <td>${formatCurrency(q.total)}</td>
                         <td><span class="status-badge status-${q.status}">${q.status}</span></td>
                         <td>${formatDate(q.createdAt)}</td>
                         <td class="actions">
                             <button class="action-btn view" onclick="viewQuoteDetails('${q._id}')" title="View Details">👁️</button>
+                            <button class="action-btn edit" onclick="downloadQuotePdf('${q._id}', '${q.quoteNumber}')" title="Download PDF">⬇</button>
+                            <button class="action-btn edit" onclick="sendQuoteEmail('${q._id}', ${Boolean(q.customerEmail)})" title="${q.emailSentAt ? 'Resend email' : 'Send email'}">✉️</button>
+                            <button class="action-btn edit" onclick="editQuote('${q._id}')" title="Edit in the builder">✏️</button>
                             <button class="action-btn delete" onclick="deleteQuote('${q._id}')" title="Delete">🗑️</button>
                         </td>
                     </tr>
@@ -11263,7 +11645,7 @@
                     <hr style="margin: 15px 0; border-color: var(--gold-dark);">
                     <h4 style="color: var(--gold); margin-bottom: 10px;">Items</h4>
                     ${q.items.map(item => `
-                        <p>• ${item.eventName} - ${item.serviceName}${item.crew > 1 ? ` (×${item.crew} photographers)` : ''}: ${formatCurrency(item.price)}</p>
+                        <p>• ${item.eventName} - ${item.serviceName}${item.crew > 1 ? ` (×${item.crew} ${(item.crewLabel || 'photographers').toLowerCase()})` : ''}: ${formatCurrency(item.price)}</p>
                     `).join('')}
                     <hr style="margin: 15px 0; border-color: var(--gold-dark);">
                     <p><strong>Total:</strong> ${formatCurrency(q.total)}</p>
@@ -11383,15 +11765,19 @@
                         <div class="quote-invoice-parties">
                             <div class="quote-invoice-party">
                                 <h4>From</h4>
-                                <p><strong>WeddingClickz</strong></p>
-                                <p>Email: contact@weddingclickz.com</p>
-                                <p>Phone: +91 XXX XXX XXXX</p>
+                                <p><strong>WeddingClickz Photography</strong></p>
+                                <p>ClayWorks Shankaraa, Kanakapura Main Rd,</p>
+                                <p>Munireddy Layout, Konanakunte,</p>
+                                <p>Bengaluru, Karnataka 560062</p>
+                                <p>Phone: +91 97402 22927</p>
                             </div>
                             <div class="quote-invoice-party">
                                 <h4>To</h4>
                                 <p><strong>${quote.customerName || 'N/A'}</strong></p>
-                                <p>Email: ${quote.customerEmail}</p>
+                                ${quote.customerEmail ? `<p>Email: ${quote.customerEmail}</p>` : ''}
                                 ${quote.customerPhone ? `<p>Phone: ${quote.customerPhone}</p>` : ''}
+                                ${quote.customerInstagram ? `<p>Instagram: ${quote.customerInstagram}</p>` : ''}
+                                ${!quote.customerEmail && !quote.customerPhone && !quote.customerInstagram ? '<p>No contact details on file</p>' : ''}
                             </div>
                         </div>
                         
@@ -11421,7 +11807,7 @@
                     if (group.services && group.services.length > 0) {
                         group.services.forEach(service => {
                             const crewNote = service.crew > 1
-                                ? ` <span style="color: #C9A87C; font-size: 0.85em;">(${service.crew} photographers × ${formatCurrencyLocal(service.unitPrice)})</span>`
+                                ? ` <span style="color: #C9A87C; font-size: 0.85em;">(${service.crew} ${(service.crewLabel || 'photographers').toLowerCase()} × ${formatCurrencyLocal(service.unitPrice)})</span>`
                                 : '';
                             invoiceHTML += `
                                 <tr class="service-row">
@@ -11468,6 +11854,11 @@
                 `;
                 
                 content.innerHTML = invoiceHTML;
+
+                document.getElementById('quoteDetailsPdfBtn').onclick =
+                    () => downloadQuotePdf(quote._id, quote.quoteNumber);
+                document.getElementById('quoteDetailsEditBtn').onclick =
+                    () => { closeQuoteDetailsModal(); editQuote(quote._id); };
             } catch (error) {
                 content.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--error);">
                     <p>Failed to load quote details</p>
@@ -11479,6 +11870,567 @@
         function closeQuoteDetailsModal() {
             document.getElementById('quoteDetailsModal').classList.remove('active');
         }
+
+        // ============================================
+        // Quotation Builder
+        // ============================================
+        // Catalogue loaded from the public endpoints, which already join each
+        // event to its per-event service prices and filter to active entries.
+        let qbEvents = [];
+        let qbAddons = [];
+        let qbCatalogueLoaded = false;
+        let qbCatalogueLoading = null;
+
+        // Builder state, keyed by event slug.
+        //   qbSelection[slug] = { eventId, name, icon, date, services: { serviceId: crew }, addons: Set(addonId) }
+        let qbSelection = {};
+        let qbEditingId = null;
+        let qbEditingNumber = '';
+        let qbSaving = false;
+
+        function qbFormatMoney(amount) {
+            return `₹${Math.round(amount || 0).toLocaleString('en-IN')}`;
+        }
+
+        function qbEscape(value) {
+            return String(value == null ? '' : value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        async function loadQuoteBuilder() {
+            if (!qbCatalogueLoaded) {
+                // Share one in-flight fetch: opening the builder can trigger this
+                // from both the nav handler and an edit/new-quote entry point.
+                qbCatalogueLoading = qbCatalogueLoading || (async () => {
+                    const [eventsRes, addonsRes] = await Promise.all([
+                        fetch(`${BACKEND_URL}/api/events`).then(r => r.json()),
+                        fetch(`${BACKEND_URL}/api/additional-services`).then(r => r.json())
+                    ]);
+
+                    if (!eventsRes.success) throw new Error(eventsRes.error || 'Failed to load events');
+
+                    qbEvents = eventsRes.data || [];
+                    qbAddons = addonsRes.success ? (addonsRes.data || []) : [];
+                    qbCatalogueLoaded = true;
+                })();
+
+                try {
+                    await qbCatalogueLoading;
+                } catch (error) {
+                    qbCatalogueLoading = null;
+                    document.getElementById('qbEventsGrid').innerHTML =
+                        `<p class="qb-summary-empty">Could not load events: ${qbEscape(error.message)}</p>`;
+                    return;
+                }
+            }
+
+            renderQbEvents();
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        function renderQbEvents() {
+            const grid = document.getElementById('qbEventsGrid');
+
+            if (qbEvents.length === 0) {
+                grid.innerHTML = `<p class="qb-summary-empty">No active events yet. Add them under Offerings first.</p>`;
+                return;
+            }
+
+            grid.innerHTML = qbEvents.map(event => `
+                <button type="button" class="qb-event ${qbSelection[event.slug] ? 'selected' : ''}"
+                        onclick="toggleQbEvent('${qbEscape(event.slug)}')">
+                    <span class="qb-event-icon">${qbEscape(event.icon || '✨')}</span>
+                    <span class="qb-event-name">${qbEscape(event.name)}</span>
+                </button>
+            `).join('');
+        }
+
+        function toggleQbEvent(slug) {
+            const event = qbEvents.find(e => e.slug === slug);
+            if (!event) return;
+
+            if (qbSelection[slug]) {
+                delete qbSelection[slug];
+            } else {
+                qbSelection[slug] = {
+                    eventId: event._id,
+                    name: event.name,
+                    icon: event.icon || '✨',
+                    date: '',
+                    services: {},
+                    addons: new Set()
+                };
+            }
+
+            renderQbEvents();
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        function renderQbServices() {
+            const area = document.getElementById('qbServicesArea');
+            // Keep the event picker's order rather than insertion order.
+            const slugs = qbEvents.map(e => e.slug).filter(slug => qbSelection[slug]);
+
+            if (slugs.length === 0) {
+                area.innerHTML = `<p class="qb-summary-empty">Select an event above to choose its services.</p>`;
+                return;
+            }
+
+            area.innerHTML = slugs.map(slug => {
+                const event = qbEvents.find(e => e.slug === slug);
+                const state = qbSelection[slug];
+                const services = event.services || [];
+
+                const serviceRows = services.length === 0
+                    ? `<p class="qb-summary-empty" style="padding: 14px 18px;">No services priced for this event yet.</p>`
+                    : services.map(service => {
+                        const crew = state.services[service._id];
+                        const isOn = crew !== undefined;
+                        const crewEnabled = service.crewEnabled !== false;
+                        const lineTotal = isOn ? service.price * crew : service.price;
+
+                        return `
+                            <div class="qb-service-row ${isOn ? 'selected' : ''}">
+                                <button type="button" class="qb-check ${isOn ? 'on' : ''}"
+                                        onclick="toggleQbService('${qbEscape(slug)}', '${service._id}')"
+                                        aria-label="${isOn ? 'Remove' : 'Add'} ${qbEscape(service.name)}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </button>
+                                <span class="qb-service-label" onclick="toggleQbService('${qbEscape(slug)}', '${service._id}')">
+                                    <strong>${qbEscape(service.name)}</strong>
+                                    <small>${qbFormatMoney(service.price)}${crewEnabled ? ` per ${qbEscape((service.crewLabel || 'photographer').replace(/s$/i, '').toLowerCase())}` : ''}</small>
+                                </span>
+                                ${isOn && crewEnabled ? `
+                                    <span class="qb-crew">
+                                        <span class="qb-crew-label">${qbEscape(service.crewLabel || 'Photographers')}</span>
+                                        <button type="button" onclick="changeQbCrew('${qbEscape(slug)}', '${service._id}', -1)" ${crew <= 1 ? 'disabled' : ''} aria-label="Fewer">−</button>
+                                        <span>${crew}</span>
+                                        <button type="button" onclick="changeQbCrew('${qbEscape(slug)}', '${service._id}', 1)" aria-label="More">+</button>
+                                    </span>
+                                ` : ''}
+                                <span class="qb-service-price">${isOn ? qbFormatMoney(lineTotal) : '—'}</span>
+                            </div>
+                        `;
+                    }).join('');
+
+                const addonRows = qbAddons.length === 0 ? '' : `
+                    <div class="qb-addons-head">Add-ons for ${qbEscape(event.name)}</div>
+                    <div class="qb-addons">
+                        ${qbAddons.map(addon => {
+                            const isOn = state.addons.has(addon._id);
+                            return `
+                                <div class="qb-service-row ${isOn ? 'selected' : ''}">
+                                    <button type="button" class="qb-check ${isOn ? 'on' : ''}"
+                                            onclick="toggleQbAddon('${qbEscape(slug)}', '${addon._id}')"
+                                            aria-label="${isOn ? 'Remove' : 'Add'} ${qbEscape(addon.name)}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                    </button>
+                                    <span class="qb-service-label" onclick="toggleQbAddon('${qbEscape(slug)}', '${addon._id}')">
+                                        <strong>${qbEscape(addon.name)}</strong>
+                                    </span>
+                                    <span class="qb-service-price">${qbFormatMoney(addon.price)}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+
+                return `
+                    <div class="qb-event-block">
+                        <div class="qb-event-block-head">
+                            <h4>${qbEscape(state.icon)} ${qbEscape(event.name)}</h4>
+                            <span class="qb-event-date">
+                                <label for="qbDate-${qbEscape(slug)}">Event date</label>
+                                <input type="date" id="qbDate-${qbEscape(slug)}" value="${qbEscape(state.date)}"
+                                       onchange="setQbEventDate('${qbEscape(slug)}', this.value)">
+                            </span>
+                        </div>
+                        ${serviceRows}
+                        ${addonRows}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleQbService(slug, serviceId) {
+            const state = qbSelection[slug];
+            if (!state) return;
+
+            if (state.services[serviceId] !== undefined) {
+                delete state.services[serviceId];
+            } else {
+                state.services[serviceId] = 1;
+            }
+
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        function changeQbCrew(slug, serviceId, delta) {
+            const state = qbSelection[slug];
+            if (!state || state.services[serviceId] === undefined) return;
+
+            state.services[serviceId] = Math.max(1, state.services[serviceId] + delta);
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        function toggleQbAddon(slug, addonId) {
+            const state = qbSelection[slug];
+            if (!state) return;
+
+            if (state.addons.has(addonId)) {
+                state.addons.delete(addonId);
+            } else {
+                state.addons.add(addonId);
+            }
+
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        function setQbEventDate(slug, value) {
+            if (qbSelection[slug]) qbSelection[slug].date = value;
+            renderQbSummary();
+        }
+
+        /**
+         * Flatten the builder state into the payload the API expects, alongside
+         * the display lines and total used by the summary rail.
+         */
+        function buildQbPayload() {
+            const items = [];
+            const additionalServices = [];
+            const groups = [];
+            let total = 0;
+
+            qbEvents.forEach(event => {
+                const state = qbSelection[event.slug];
+                if (!state) return;
+
+                const lines = [];
+
+                (event.services || []).forEach(service => {
+                    const crew = state.services[service._id];
+                    if (crew === undefined) return;
+
+                    const price = service.price * crew;
+                    total += price;
+
+                    items.push({
+                        eventId: state.eventId,
+                        serviceId: service._id,
+                        eventDate: state.date || null,
+                        crew
+                    });
+
+                    lines.push({
+                        label: crew > 1
+                            ? `${service.name} × ${crew}`
+                            : service.name,
+                        price
+                    });
+                });
+
+                state.addons.forEach(addonId => {
+                    const addon = qbAddons.find(a => a._id === addonId);
+                    if (!addon) return;
+
+                    total += addon.price;
+
+                    additionalServices.push({
+                        additionalServiceId: addon._id,
+                        eventSlug: event.slug,
+                        event: event.name
+                    });
+
+                    lines.push({ label: `${addon.name} (add-on)`, price: addon.price });
+                });
+
+                if (lines.length > 0) {
+                    groups.push({ name: event.name, date: state.date, lines });
+                }
+            });
+
+            return { items, additionalServices, groups, total };
+        }
+
+        function renderQbSummary() {
+            const name = document.getElementById('qbClientName').value.trim();
+            const email = document.getElementById('qbClientEmail').value.trim();
+            const phone = document.getElementById('qbClientPhone').value.trim();
+            const instagram = document.getElementById('qbClientInstagram').value.trim();
+
+            const clientBits = [email, phone, instagram].filter(Boolean);
+            document.getElementById('qbSummaryClient').innerHTML = name
+                ? `<strong style="color: var(--text-bright);">${qbEscape(name)}</strong>${clientBits.length ? `<br>${qbEscape(clientBits.join(' · '))}` : ''}`
+                : 'No client details yet';
+
+            const { groups, total, items } = buildQbPayload();
+
+            document.getElementById('qbSummaryLines').innerHTML = groups.length === 0
+                ? '<p class="qb-summary-empty">Nothing selected yet.</p>'
+                : groups.map(group => `
+                    <div class="qb-summary-event">${qbEscape(group.name)}${group.date ? ` · ${formatDate(group.date)}` : ''}</div>
+                    ${group.lines.map(line => `
+                        <div class="qb-summary-line">
+                            <span>${qbEscape(line.label)}</span>
+                            <span>${qbFormatMoney(line.price)}</span>
+                        </div>
+                    `).join('')}
+                `).join('');
+
+            document.getElementById('qbSummaryTotal').textContent = qbFormatMoney(total);
+
+            const ready = Boolean(name) && items.length > 0 && !qbSaving;
+            const sendBtn = document.getElementById('qbSendBtn');
+            const draftBtn = document.getElementById('qbDraftBtn');
+
+            sendBtn.disabled = !ready;
+            draftBtn.disabled = !ready;
+            sendBtn.textContent = qbEditingId
+                ? (email ? 'Update & Email' : 'Update & Email Team')
+                : (email ? 'Save & Email' : 'Save & Email Team');
+            draftBtn.textContent = qbEditingId ? 'Update Draft' : 'Save as Draft';
+
+            document.getElementById('qbNoteText').textContent = email
+                ? 'The client gets the quotation with the PDF attached, and a copy goes to every address under Email Notifications. Download the PDF from the Quotes list any time.'
+                : 'No client email entered, so emailing sends the quotation to the admin addresses only. Download the PDF from the Quotes list and share it however you like.';
+        }
+
+        async function saveQuote(sendEmail) {
+            if (qbSaving) return;
+
+            const payload = buildQbPayload();
+            const name = document.getElementById('qbClientName').value.trim();
+
+            if (!name) {
+                showToast('Client name is required', 'error');
+                document.getElementById('qbClientName').focus();
+                return;
+            }
+            if (payload.items.length === 0) {
+                showToast('Add at least one service to the quotation', 'error');
+                return;
+            }
+
+            const email = document.getElementById('qbClientEmail').value.trim();
+            if (sendEmail && !email && !confirm('No client email was entered. Send this quotation to the admin addresses only?')) {
+                return;
+            }
+
+            const body = {
+                customerName: name,
+                customerEmail: email,
+                customerPhone: document.getElementById('qbClientPhone').value.trim(),
+                customerInstagram: document.getElementById('qbClientInstagram').value.trim(),
+                notes: document.getElementById('qbNotes').value.trim(),
+                validUntil: document.getElementById('qbValidUntil').value || null,
+                items: payload.items,
+                additionalServices: payload.additionalServices,
+                sendEmail: Boolean(sendEmail)
+            };
+
+            qbSaving = true;
+            renderQbSummary();
+            const activeBtn = document.getElementById(sendEmail ? 'qbSendBtn' : 'qbDraftBtn');
+            const originalLabel = activeBtn.textContent;
+            activeBtn.textContent = sendEmail ? 'Sending…' : 'Saving…';
+
+            try {
+                const result = qbEditingId
+                    ? await apiCall(`/quotes/${qbEditingId}`, 'PUT', body)
+                    : await apiCall('/quotes', 'POST', body);
+
+                const quote = result.data;
+
+                if (result.warning) {
+                    showToast(result.warning, 'warning');
+                } else if (sendEmail) {
+                    showToast(result.emailSentToCustomer
+                        ? `Quote ${quote.quoteNumber} emailed to ${email}, copy sent to the admin team`
+                        : `Quote ${quote.quoteNumber} emailed to the admin team`);
+                } else {
+                    showToast(`Quote ${quote.quoteNumber} saved as a draft`);
+                }
+
+                resetQuoteBuilder();
+                navigateToSection('quotes');
+            } catch (error) {
+                showToast(error.message, 'error');
+            } finally {
+                qbSaving = false;
+                activeBtn.textContent = originalLabel;
+                renderQbSummary();
+            }
+        }
+
+        /**
+         * Open the builder with a clean slate (from the Quotes list).
+         */
+        function startNewQuotation() {
+            navigateToSection('quoteBuilder');
+            resetQuoteBuilder();
+        }
+
+        function resetQuoteBuilder() {
+            qbSelection = {};
+            qbEditingId = null;
+            qbEditingNumber = '';
+
+            ['qbClientName', 'qbClientEmail', 'qbClientPhone', 'qbClientInstagram', 'qbNotes', 'qbValidUntil']
+                .forEach(id => { document.getElementById(id).value = ''; });
+
+            document.getElementById('qbEditingBanner').style.display = 'none';
+
+            renderQbEvents();
+            renderQbServices();
+            renderQbSummary();
+        }
+
+        /**
+         * Load an existing quote back into the builder. Selections are matched by
+         * id against the live catalogue, so a service that has since been retired
+         * or repriced simply drops out and the admin is told.
+         */
+        async function editQuote(id) {
+            navigateToSection('quoteBuilder');
+            await loadQuoteBuilder();
+
+            try {
+                const result = await apiCall(`/quotes/${id}`);
+                const quote = result.data;
+
+                qbSelection = {};
+                let dropped = 0;
+
+                const ensureEvent = (slug) => {
+                    const event = qbEvents.find(e => e.slug === slug);
+                    if (!event) return null;
+                    if (!qbSelection[slug]) {
+                        qbSelection[slug] = {
+                            eventId: event._id,
+                            name: event.name,
+                            icon: event.icon || '✨',
+                            date: '',
+                            services: {},
+                            addons: new Set()
+                        };
+                    }
+                    return event;
+                };
+
+                (quote.items || []).forEach(item => {
+                    const event = ensureEvent(item.eventSlug);
+                    // item.service is populated by the API, so read the id off either shape.
+                    const serviceId = String(item.service && item.service._id ? item.service._id : item.service);
+                    const available = event && (event.services || []).some(s => s._id === serviceId);
+
+                    if (!available) { dropped++; return; }
+
+                    qbSelection[item.eventSlug].services[serviceId] = item.crew || 1;
+                    if (item.eventDate) {
+                        qbSelection[item.eventSlug].date = new Date(item.eventDate).toISOString().slice(0, 10);
+                    }
+                });
+
+                (quote.additionalServices || []).forEach(addon => {
+                    const addonId = String(addon.additionalService && addon.additionalService._id
+                        ? addon.additionalService._id
+                        : addon.additionalService);
+                    const slug = addon.eventSlug;
+
+                    if (!slug || !qbSelection[slug] || !qbAddons.some(a => a._id === addonId)) { dropped++; return; }
+                    qbSelection[slug].addons.add(addonId);
+                });
+
+                document.getElementById('qbClientName').value = quote.customerName || '';
+                document.getElementById('qbClientEmail').value = quote.customerEmail || '';
+                document.getElementById('qbClientPhone').value = quote.customerPhone || '';
+                document.getElementById('qbClientInstagram').value = quote.customerInstagram || '';
+                document.getElementById('qbNotes').value = quote.notes || '';
+                document.getElementById('qbValidUntil').value = quote.validUntil
+                    ? new Date(quote.validUntil).toISOString().slice(0, 10)
+                    : '';
+
+                qbEditingId = quote._id;
+                qbEditingNumber = quote.quoteNumber;
+                document.getElementById('qbEditingNumber').textContent = quote.quoteNumber;
+                document.getElementById('qbEditingBanner').style.display = 'flex';
+
+                renderQbEvents();
+                renderQbServices();
+                renderQbSummary();
+
+                if (dropped > 0) {
+                    showToast(`${dropped} line(s) were dropped — those events, services or add-ons are no longer active`, 'warning');
+                }
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        /**
+         * Download the quote PDF. The endpoint needs the bearer token, so fetch
+         * the bytes and hand the browser a blob rather than following a link.
+         */
+        async function downloadQuotePdf(id, quoteNumber) {
+            try {
+                showToast('Preparing the PDF…', 'info');
+
+                const response = await fetch(`${API_BASE}/quotes/${id}/pdf`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({}));
+                    throw new Error(error.error || 'Failed to generate the PDF');
+                }
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `WeddingClickz_Quote_${quoteNumber || id}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                window.URL.revokeObjectURL(url);
+
+                showToast('PDF downloaded');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        async function sendQuoteEmail(id, hasEmail) {
+            const message = hasEmail
+                ? 'Email this quotation to the client, with a copy to the admin team?'
+                : 'This client has no email on file. Send the quotation to the admin team only?';
+            if (!confirm(message)) return;
+
+            try {
+                const result = await apiCall(`/quotes/${id}/send`, 'POST');
+                showToast(result.message || 'Quotation sent');
+                loadQuotes();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        // Keep the summary rail live as client details are typed
+        ['qbClientName', 'qbClientEmail', 'qbClientPhone', 'qbClientInstagram']
+            .forEach(id => document.getElementById(id).addEventListener('input', renderQbSummary));
+
 
         // Users
         async function loadUsers() {
@@ -11908,11 +12860,8 @@
                 document.getElementById('eventModalTitle').textContent = document.getElementById('eventId').value ? 'Edit Event' : 'Add Event';
                 if (!document.getElementById('eventId').value) {
                     document.getElementById('eventSlug').dataset.touched = ''; // allow auto-slug for new event
-                }
-            } else if (type === 'service') {
-                document.getElementById('serviceModalTitle').textContent = document.getElementById('serviceId').value ? 'Edit Service' : 'Add Service';
-                if (!document.getElementById('serviceId').value) {
-                    document.getElementById('pricingList').innerHTML = '';
+                    currentEventPricing = {}; // new event has no prices yet
+                    loadEventServices(); // edit flow loads these itself; handle the "Add Event" case here
                 }
             } else if (type === 'additionalService') {
                 document.getElementById('additionalServiceModalTitle').textContent = document.getElementById('additionalServiceId').value ? 'Edit Additional Service' : 'Add Additional Service';
@@ -11930,10 +12879,6 @@
             if (type === 'event') {
                 document.getElementById('eventForm').reset();
                 document.getElementById('eventId').value = '';
-            } else if (type === 'service') {
-                document.getElementById('serviceForm').reset();
-                document.getElementById('serviceId').value = '';
-                document.getElementById('pricingList').innerHTML = '';
             } else if (type === 'additionalService') {
                 document.getElementById('additionalServiceForm').reset();
                 document.getElementById('additionalServiceId').value = '';
@@ -11992,15 +12937,6 @@
         document.getElementById('eventName').addEventListener('input', (e) => {
             if (!document.getElementById('eventId').value) {
                 document.getElementById('eventSlug').value = e.target.value
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/(^-|-$)/g, '');
-            }
-        });
-
-        document.getElementById('serviceName').addEventListener('input', (e) => {
-            if (!document.getElementById('serviceId').value) {
-                document.getElementById('serviceSlug').value = e.target.value
                     .toLowerCase()
                     .replace(/[^a-z0-9]+/g, '-')
                     .replace(/(^-|-$)/g, '');
